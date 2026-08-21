@@ -128,16 +128,6 @@
             color: #fff;
         }
 
-        .error {
-            display: none;
-            padding: 12px;
-            margin-bottom: 20px;
-            background: #ffe8e8;
-            color: #a00000;
-            border-radius: 7px;
-            text-align: center;
-        }
-
         @media (max-width: 600px) {
             .container {
                 margin: 25px auto;
@@ -173,14 +163,7 @@
             Please review your selected fund amount before continuing.
         </p>
 
-        <div id="error" class="error"></div>
-
         <div class="details">
-
-            <div class="row">
-                <span class="label">Application ID</span>
-                <span class="value" id="applicationId">—</span>
-            </div>
 
             <div class="row">
                 <span class="label">Full Name</span>
@@ -199,7 +182,7 @@
 
             <div class="row">
                 <span class="label">Status</span>
-                <span class="value" id="status">—</span>
+                <span class="value">Pending</span>
             </div>
 
         </div>
@@ -218,87 +201,33 @@
 
 <script>
 
-    /*
-       Read the application returned by the backend.
-    */
+    const applicantName =
+        localStorage.getItem("nyotaApplicantName");
 
-    const backendApplication =
-        JSON.parse(
-            localStorage.getItem("nyotaBackendApplication")
-        );
+    const selectedAmount =
+        localStorage.getItem("nyotaSelectedAmount");
 
-    /*
-       Also read the original application details.
-    */
+    const processingFee =
+        localStorage.getItem("nyotaProcessingFee");
 
-    const application =
-        JSON.parse(
-            localStorage.getItem("nyotaApplication")
-        );
 
-    /*
-       Display backend application if available.
-    */
-
-    if (backendApplication) {
-
-        document.getElementById("applicationId").textContent =
-            backendApplication.id || "—";
-
+    if (applicantName) {
         document.getElementById("fullName").textContent =
-            backendApplication.fullName || "—";
-
-        document.getElementById("fundAmount").textContent =
-            "KSh " +
-            Number(backendApplication.fundAmount).toLocaleString();
-
-        document.getElementById("processingFee").textContent =
-            "KSh " +
-            Number(backendApplication.processingFee).toLocaleString();
-
-        document.getElementById("status").textContent =
-            backendApplication.status || "pending";
-
+            applicantName;
     }
 
-    /*
-       Fallback for the existing localStorage data.
-    */
 
-    else {
+    if (selectedAmount) {
+        document.getElementById("fundAmount").textContent =
+            "KSh " +
+            Number(selectedAmount).toLocaleString();
+    }
 
-        const fundAmount =
-            localStorage.getItem("nyotaFundAmount");
 
-        const processingFee =
-            localStorage.getItem("nyotaProcessingFee");
-
-        if (application) {
-
-            document.getElementById("fullName").textContent =
-                application.fullName || "—";
-
-        }
-
-        if (fundAmount) {
-
-            document.getElementById("fundAmount").textContent =
-                "KSh " +
-                Number(fundAmount).toLocaleString();
-
-        }
-
-        if (processingFee) {
-
-            document.getElementById("processingFee").textContent =
-                "KSh " +
-                Number(processingFee).toLocaleString();
-
-        }
-
-        document.getElementById("status").textContent =
-            "Pending";
-
+    if (processingFee) {
+        document.getElementById("processingFee").textContent =
+            "KSh " +
+            Number(processingFee).toLocaleString();
     }
 
 
