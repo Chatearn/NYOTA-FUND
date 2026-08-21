@@ -1,1 +1,72 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b7a3b;
+    color: white;
+}
 
+.home-page {
+    min-height: 100vh;
+    background: #0b7a3b;
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+}
+
+.logo {
+    width: 100px;
+}
+
+.header h2 {
+    margin: 10px 0;
+    font-size: 24px;
+}
+
+.home-content {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.home-content h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.home-content h1 span {
+    color: white;
+}
+
+.application-card {
+    max-width: 450px;
+    margin: 40px auto;
+    padding: 35px 20px;
+    background: white;
+    border-radius: 15px;
+    color: #111;
+}
+
+.application-card h3 {
+    font-size: 22px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 18px 35px;
+    background: #000;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.btn span {
+    margin-left: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+}
