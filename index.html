@@ -4,115 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NYOTA FUNDS</title>
+    <title>NYOTA Funds Kenya</title>
 
-    <link rel="stylesheet" href="style.css">
-</head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<body>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background:
+                linear-gradient(rgba(0, 95, 55, 0.88), rgba(0, 45, 30, 0.94)),
+                url("nyota-wallpaper.jpg") center/cover no-repeat;
+            color: white;
+        }
 
-    <!-- HEADER -->
-    <header class="header">
-        <div class="logo">NYOTA <span>FUNDS</span></div>
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-        <div class="menu">
-            <a href="index.html">Home</a>
-            <a href="application.html">Apply</a>
-        </div>
-    </header>
+        /* TOP BAR */
+        .top-bar {
+            width: 100%;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.18);
+        }
 
+        /* LOGO */
+        .logo-container {
+            text-align: center;
+        }
 
-    <!-- HERO SECTION -->
-    <main class="hero">
+        .logo {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: white;
+            padding: 6px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
 
-        <div class="hero-content">
+        .brand-name {
+            margin-top: 10px;
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
 
-            <div class="badge">
-                NYOTA FUNDS
-            </div>
+        .brand-subtitle {
+            margin-top: 4px;
+            font-size: 13px;
+            opacity: 0.9;
+        }
 
-            <h1>
-                Welcome to<br>
-                <span>NYOTA FUNDS</span>
-            </h1>
+        /* MAIN CONTENT */
+        .content {
+            width: 92%;
+            max-width: 600px;
+            text-align: center;
+            margin-top: 55px;
+        }
 
-            <p>
-                Access the NYOTA Funds application portal and
-                complete your application through our simple
-                online process.
-            </p>
+        .welcome {
+            font-size: 38px;
+            line-height: 1.15;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+        }
 
-            <a href="application.html" class="apply-btn">
-                APPLY NOW
-            </a>
+        .description {
+            margin-top: 18px;
+            font-size: 17px;
+            line-height: 1.6;
+            color: #f1fff7;
+        }
 
-        </div>
+        /* APPLICATION CARD */
+        .application-card {
+            margin-top: 40px;
+            padding: 30px 24px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.97);
+            color: #111;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.28);
+        }
 
-    </main>
+        .application-card h2 {
+            color: #006b3c;
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
 
+        .application-card p {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
 
-    <!-- INFORMATION SECTION -->
-    <section class="info">
+        /* BUTTONS */
+        .btn {
+            display: block;
+            width: 100%;
+            border: none;
+            padding: 17px;
+            margin-top: 14px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.25s ease;
+        }
 
-        <h2>How It Works</h2>
+        .apply-now {
+            background: #00843d;
+            color: white;
+            box-shadow: 0 6px 15px rgba(0, 132, 61, 0.3);
+        }
 
-        <div class="steps">
+        .apply-now:hover {
+            background: #006b32;
+            transform: translateY(-2px);
+        }
 
-            <div class="step">
-                <div class="step-number">1</div>
-                <h3>Apply</h3>
-                <p>
-                    Complete the application form with your
-                    required information.
-                </p>
-            </div>
-
-            <div class="step">
-                <div class="step-number">2</div>
-                <h3>Select Funds</h3>
-                <p>
-                    Select the fund option available to you.
-                </p>
-            </div>
-
-            <div class="step">
-                <div class="step-number">3</div>
-                <h3>Payment</h3>
-                <p>
-                    Complete any clearly disclosed payment
-                    required for your application.
-                </p>
-            </div>
-
-            <div class="step">
-                <div class="step-number">4</div>
-                <h3>Confirmation</h3>
-                <p>
-                    Receive confirmation after the payment
-                    and application have been successfully verified.
-                </p>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-    <footer class="footer">
-
-        <div class="logo">
-            NYOTA <span>FUNDS</span>
-        </div>
-
-        <p>
-            © 2026 NYOTA FUNDS. All rights reserved.
-        </p>
-
-    </footer>
-
-
-    <script src="script.js"></script>
-
-</body>
-</html>
+        .apply-later {
+            background: white;
+            color: #006b3c;
+            border: 2px
