@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NYOTA Funds - Payment</title>
+    <title>NYUTAA Funds - Payment</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -61,14 +61,15 @@
         ================================= */
 
         const BACKEND_URL =
-            "https://YOUR-RENDER-URL";
+            "https://nyota-backed1.onrender.com";
+
 
         /* ================================
            SELECTED AMOUNT
         ================================= */
 
         const selectedAmount =
-            localStorage.getItem("selectedAmount");
+            localStorage.getItem("nyutaSelectedAmount");
 
         const amountElement =
             document.getElementById("selectedAmount");
@@ -79,16 +80,23 @@
         const continueButton =
             document.getElementById("continueButton");
 
+
+        /* ================================
+           DISPLAY AMOUNT
+        ================================= */
+
         if (selectedAmount) {
 
             amountElement.textContent =
-                "KSh " + Number(selectedAmount).toLocaleString();
+                "KSh " +
+                Number(selectedAmount).toLocaleString();
 
         } else {
 
             amountElement.textContent =
                 "No amount selected";
         }
+
 
         /* ================================
            CONTINUE
@@ -106,24 +114,22 @@
                 return;
             }
 
+
             continueButton.disabled = true;
-            continueButton.textContent = "PROCESSING...";
+
+            continueButton.textContent =
+                "PROCESSING...";
 
             statusMessage.textContent =
                 "Connecting to the payment server...";
 
-            try {
 
-                /*
-                 * Test phone number.
-                 * We will replace this with the
-                 * applicant phone from localStorage
-                 * after the connection is confirmed.
-                 */
+            try {
 
                 const phone =
                     localStorage.getItem("phone") ||
                     "254700000000";
+
 
                 const response = await fetch(
                     BACKEND_URL + "/api/test-stk",
@@ -141,10 +147,16 @@
                     }
                 );
 
+
                 const data =
                     await response.json();
 
-                console.log("Backend response:", data);
+
+                console.log(
+                    "Backend response:",
+                    data
+                );
+
 
                 if (!response.ok || !data.success) {
 
@@ -154,18 +166,26 @@
                     );
                 }
 
+
                 statusMessage.textContent =
                     "Test STK request was accepted successfully.";
+
 
                 continueButton.textContent =
                     "REQUEST SENT";
 
+
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Payment error:",
+                    error
+                );
+
 
                 statusMessage.textContent =
                     "Unable to connect to the payment server.";
+
 
                 continueButton.disabled = false;
 
