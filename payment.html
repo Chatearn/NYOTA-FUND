@@ -28,14 +28,15 @@
 
             <div class="notice">
                 <p>
-                    Your application has been received. Review the
-                    information above before continuing.
+                    Your application has been received.
+                    Review the information above before continuing.
                 </p>
             </div>
 
             <button
                 type="button"
                 class="continue-btn"
+                id="continueButton"
                 onclick="continueApplication()">
                 CONTINUE
             </button>
@@ -47,35 +48,132 @@
                 BACK
             </button>
 
+            <p id="statusMessage"></p>
+
         </div>
 
     </div>
 
     <script>
+
+        /* ================================
+           BACKEND
+        ================================= */
+
+        const BACKEND_URL =
+            "https://YOUR-RENDER-URL";
+
+        /* ================================
+           SELECTED AMOUNT
+        ================================= */
+
         const selectedAmount =
             localStorage.getItem("selectedAmount");
 
         const amountElement =
             document.getElementById("selectedAmount");
 
+        const statusMessage =
+            document.getElementById("statusMessage");
+
+        const continueButton =
+            document.getElementById("continueButton");
+
         if (selectedAmount) {
+
             amountElement.textContent =
-                selectedAmount + "/=";
+                "KSh " + Number(selectedAmount).toLocaleString();
+
         } else {
+
             amountElement.textContent =
                 "No amount selected";
         }
 
-        function continueApplication() {
+        /* ================================
+           CONTINUE
+        ================================= */
+
+        async function continueApplication() {
+
             if (!selectedAmount) {
+
                 alert("Please select a fund amount first.");
-                window.location.href = "funds.html";
+
+                window.location.href =
+                    "funds.html";
+
                 return;
             }
 
-            // Continue to the next legitimate application step.
-            window.location.href = "confirmation.html";
+            continueButton.disabled = true;
+            continueButton.textContent = "PROCESSING...";
+
+            statusMessage.textContent =
+                "Connecting to the payment server...";
+
+            try {
+
+                /*
+                 * Test phone number.
+                 * We will replace this with the
+                 * applicant phone from localStorage
+                 * after the connection is confirmed.
+                 */
+
+                const phone =
+                    localStorage.getItem("phone") ||
+                    "254700000000";
+
+                const response = await fetch(
+                    BACKEND_URL + "/api/test-stk",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            phone: phone,
+                            amount: Number(selectedAmount)
+                        })
+                    }
+                );
+
+                const data =
+                    await response.json();
+
+                console.log("Backend response:", data);
+
+                if (!response.ok || !data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Payment server rejected the request."
+                    );
+                }
+
+                statusMessage.textContent =
+                    "Test STK request was accepted successfully.";
+
+                continueButton.textContent =
+                    "REQUEST SENT";
+
+            } catch (error) {
+
+                console.error(error);
+
+                statusMessage.textContent =
+                    "Unable to connect to the payment server.";
+
+                continueButton.disabled = false;
+
+                continueButton.textContent =
+                    "TRY AGAIN";
+            }
         }
+
     </script>
 
 </body>
