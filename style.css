@@ -1,3 +1,7 @@
+/* ================================
+   NYOTA FUNDS APPLICATION
+================================ */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,127 +10,188 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #0b5d1e;
-    color: white;
+    background: #f3f6f4;
+    color: #111;
+}
+
+/* PAGE */
+
+.application-page {
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 20px;
+}
+
+/* MAIN CARD */
+
+.application-card {
+    width: 100%;
+    max-width: 850px;
+    background: #fff;
+    padding: 40px 45px;
+    border-radius: 12px;
+    border-top: 6px solid #087a3d;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 /* HEADER */
-.header {
-    background: #ffffff;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    padding: 0 6%;
-    border-bottom: 4px solid #111111;
-}
 
-.logo-area {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.logo-area img {
-    width: 55px;
-    height: 55px;
-    object-fit: contain;
-}
-
-.logo-area span {
-    color: #111111;
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-/* HERO */
-.hero {
-    min-height: calc(100vh - 130px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.application-header {
     text-align: center;
-    padding: 40px 20px;
-    background: linear-gradient(
-        135deg,
-        #0b5d1e,
-        #087f23
-    );
+    margin-bottom: 35px;
 }
 
-.hero-content {
-    max-width: 800px;
-}
-
-.hero h1 {
-    font-size: 52px;
-    font-weight: 900;
-    color: #ffffff;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-}
-
-.hero p {
-    font-size: 20px;
-    color: #ffffff;
-    margin-bottom: 40px;
-}
-
-/* BUTTONS */
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.buttons a {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 18px;
+.application-header h1 {
+    color: #087a3d;
+    font-size: 28px;
     font-weight: 800;
-    padding: 16px 38px;
+    margin-bottom: 8px;
+}
+
+.application-header p {
+    color: #666;
+    font-size: 15px;
+}
+
+/* FORM SECTIONS */
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.form-section h2 {
+    color: #222;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e1e5e2;
+}
+
+/* FORM GRID */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px 25px;
+}
+
+/* FORM GROUP */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 8px;
+}
+
+/* INPUTS + SELECT */
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid #d0d5d2;
     border-radius: 6px;
-    min-width: 180px;
+    background: #fff;
+    font-size: 15px;
+    color: #111;
+    outline: none;
     transition: 0.2s ease;
 }
 
-.apply-now {
-    background: #111111;
-    color: #ffffff;
+.form-group input::placeholder {
+    color: #999;
 }
 
-.apply-later {
-    background: #ffffff;
-    color: #111111;
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #087a3d;
+    box-shadow: 0 0 0 3px rgba(8, 122, 61, 0.10);
 }
 
-.buttons a:hover {
-    transform: translateY(-2px);
-    opacity: 0.9;
-}
+/* CHECKBOX */
 
-/* FOOTER */
-.footer {
-    height: 50px;
-    background: #111111;
+.consent {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #444;
+    cursor: pointer;
 }
 
-.footer p {
-    font-size: 14px;
-    color: #ffffff;
+.consent input {
+    width: 17px;
+    height: 17px;
+    accent-color: #087a3d;
+}
+
+/* CONTINUE BUTTON */
+
+.continue-btn {
+    width: 100%;
+    height: 52px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 6px;
+    background: #087a3d;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.continue-btn:hover {
+    background: #065f2f;
+}
+
+.continue-btn:active {
+    transform: scale(0.99);
 }
 
 /* MOBILE */
-@media (max-width: 600px) {
 
-    .header {
-        height: 70px;
-        padding: 0 20px;
+@media (max-width: 650px) {
+
+    .application-page {
+        padding: 20px 14px;
+        align-items: flex-start;
     }
 
-    .
+    .application-card {
+        padding: 28px 20px;
+        margin-top: 20px;
+    }
+
+    .application-header h1 {
+        font-size: 23px;
+    }
+
+    .form-section h2 {
+        font-size: 18px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .form-group input,
+    .form-group select {
+        height: 47px;
+    }
+
+    .continue-btn {
+        height: 50px;
+    }
+}
