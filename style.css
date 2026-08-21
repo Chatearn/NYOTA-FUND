@@ -1,134 +1,132 @@
-/* ================================
-   FUND SELECTION PAGE
-================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-.funds-page {
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0b5d1e;
+    color: white;
     min-height: 100vh;
-    background: #0b6b3a;
+}
+
+/* HEADER */
+.header {
+    background: #ffffff;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 0 6%;
+    border-bottom: 4px solid #111111;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-area img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+}
+
+.logo-area span {
+    color: #111111;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* HERO */
+.hero {
+    min-height: calc(100vh - 130px);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px 15px;
-    box-sizing: border-box;
-}
-
-.funds-card {
-    width: 100%;
-    max-width: 650px;
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 35px 25px;
-    box-sizing: border-box;
     text-align: center;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+    padding: 40px 20px;
+    background: linear-gradient(
+        135deg,
+        #0b5d1e,
+        #087f23
+    );
 }
 
-.funds-card h1 {
-    margin: 0;
-    color: #075c32;
-    font-size: 30px;
-    font-weight: 800;
+.hero-content {
+    max-width: 800px;
 }
 
-.funds-card .applicant {
-    margin: 8px 0 25px;
-    color: #333;
-    font-size: 19px;
-    font-weight: 600;
-}
-
-.funds-card h2 {
-    margin-bottom: 22px;
-    color: #111;
-    font-size: 21px;
-    font-weight: 800;
-}
-
-/* Amount buttons */
-
-.amount-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+.hero h1 {
+    font-size: 52px;
+    font-weight: 900;
+    color: #ffffff;
     margin-bottom: 20px;
+    letter-spacing: 1px;
 }
 
-.amount-grid button {
-    border: 2px solid #0b6b3a;
-    background: #ffffff;
-    color: #075c32;
-    border-radius: 12px;
-    padding: 18px 10px;
+.hero p {
     font-size: 20px;
-    font-weight: 800;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-.amount-grid button:hover {
-    background: #e9f7ef;
-    transform: translateY(-2px);
-}
-
-.amount-grid button.selected {
-    background: #0b6b3a;
     color: #ffffff;
-    border-color: #0b6b3a;
-    box-shadow: 0 5px 15px rgba(11, 107, 58, 0.3);
+    margin-bottom: 40px;
 }
 
-/* Selected amount text */
-
-#selectedText {
-    min-height: 24px;
-    margin: 18px 0;
-    color: #075c32;
-    font-size: 17px;
-    font-weight: 700;
+/* BUTTONS */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-/* Continue button */
-
-.continue-btn {
-    width: 100%;
-    border: none;
-    border-radius: 12px;
-    padding: 17px;
-    background: #111111;
-    color: #ffffff;
+.buttons a {
+    display: inline-block;
+    text-decoration: none;
     font-size: 18px;
     font-weight: 800;
-    cursor: pointer;
+    padding: 16px 38px;
+    border-radius: 6px;
+    min-width: 180px;
     transition: 0.2s ease;
 }
 
-.continue-btn:hover {
-    background: #333333;
-    transform: translateY(-1px);
+.apply-now {
+    background: #111111;
+    color: #ffffff;
 }
 
-/* Mobile */
-
-@media (max-width: 500px) {
-
-    .funds-card {
-        padding: 28px 18px;
-    }
-
-    .funds-card h1 {
-        font-size: 25px;
-    }
-
-    .funds-card h2 {
-        font-size: 18px;
-    }
-
-    .amount-grid {
-        gap: 10px;
-    }
-
-    .amount-grid button {
-        padding: 16px 5px;
-        font-size: 17px;
-    }
+.apply-later {
+    background: #ffffff;
+    color: #111111;
 }
+
+.buttons a:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* FOOTER */
+.footer {
+    height: 50px;
+    background: #111111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer p {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+    .header {
+        height: 70px;
+        padding: 0 20px;
+    }
+
+    .
