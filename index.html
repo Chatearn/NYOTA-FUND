@@ -3,141 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>NYOTA Funds Kenya</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<body>
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            min-height: 100vh;
-            background:
-                linear-gradient(rgba(0, 95, 55, 0.88), rgba(0, 45, 30, 0.94)),
-                url("nyota-wallpaper.jpg") center/cover no-repeat;
-            color: white;
-        }
+    <div class="home-page">
 
-        .page {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        <header class="header">
 
-        /* TOP BAR */
-        .top-bar {
-            width: 100%;
-            padding: 18px 25px;
-            display: flex;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.18);
-        }
+            <img
+                src="nyota-logo.png"
+                alt="NYOTA Funds Logo"
+                class="logo"
+            >
 
-        /* LOGO */
-        .logo-container {
-            text-align: center;
-        }
+            <h2>NYOTA FUNDS KENYA</h2>
 
-        .logo {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: white;
-            padding: 6px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
+            <p>Application Portal</p>
 
-        .brand-name {
-            margin-top: 10px;
-            font-size: 25px;
-            font-weight: 900;
-            letter-spacing: 1px;
-        }
+        </header>
 
-        .brand-subtitle {
-            margin-top: 4px;
-            font-size: 13px;
-            opacity: 0.9;
-        }
 
-        /* MAIN CONTENT */
-        .content {
-            width: 92%;
-            max-width: 600px;
-            text-align: center;
-            margin-top: 55px;
-        }
+        <main class="home-content">
 
-        .welcome {
-            font-size: 38px;
-            line-height: 1.15;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
-        }
+            <h1>
+                WELCOME TO<br>
+                NYOTA FUNDS KENYA
+            </h1>
 
-        .description {
-            margin-top: 18px;
-            font-size: 17px;
-            line-height: 1.6;
-            color: #f1fff7;
-        }
+            <p class="intro">
+                Welcome to the NYOTA Funds application portal.
+                Select an option below to continue.
+            </p>
 
-        /* APPLICATION CARD */
-        .application-card {
-            margin-top: 40px;
-            padding: 30px 24px;
-            border-radius: 22px;
-            background: rgba(255, 255, 255, 0.97);
-            color: #111;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.28);
-        }
 
-        .application-card h2 {
-            color: #006b3c;
-            font-size: 23px;
-            margin-bottom: 10px;
-        }
+            <div class="application-card">
 
-        .application-card p {
-            color: #555;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
+                <h3>START YOUR APPLICATION</h3>
 
-        /* BUTTONS */
-        .btn {
-            display: block;
-            width: 100%;
-            border: none;
-            padding: 17px;
-            margin-top: 14px;
-            border-radius: 12px;
-            font-size: 17px;
-            font-weight: 800;
-            cursor: pointer;
-            text-decoration: none;
-            transition: 0.25s ease;
-        }
+                <p>
+                    Choose an option below to proceed.
+                </p>
 
-        .apply-now {
-            background: #00843d;
-            color: white;
-            box-shadow: 0 6px 15px rgba(0, 132, 61, 0.3);
-        }
+                <a href="application.html" class="btn btn-primary">
+                    APPLY NOW
+                </a>
 
-        .apply-now:hover {
-            background: #006b32;
-            transform: translateY(-2px);
-        }
+                <a href="application.html" class="btn btn-secondary">
+                    APPLY LATER
+                </a>
 
-        .apply-later {
-            background: white;
-            color: #006b3c;
-            border: 2px
+            </div>
+
+        </main>
+
+
+        <footer>
+            <p>© 2026 NYOTA Funds Kenya</p>
+            <small>Unofficial demonstration portal</small>
+        </footer>
+
+    </div>
+
+</body>
+</html>
