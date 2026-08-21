@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NYOTA Funds - Demo Fund Selection</title>
+    <title>NYOTA Funds Kenya - Fund Selection</title>
 
     <style>
         * {
@@ -31,32 +31,24 @@
             color: #fff;
             font-size: 25px;
             font-weight: 800;
+            letter-spacing: .5px;
         }
 
         .container {
             width: 100%;
-            max-width: 650px;
+            max-width: 700px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
-        .card {
+        .funds-card {
             background: #fff;
             padding: 35px;
             border-radius: 12px;
             box-shadow: 0 5px 20px rgba(0,0,0,.08);
         }
 
-        .demo-notice {
-            background: #f1f1f1;
-            border-left: 4px solid #111;
-            padding: 12px 14px;
-            margin-bottom: 25px;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        h2 {
+        .funds-card h2 {
             text-align: center;
             font-size: 25px;
             margin-bottom: 10px;
@@ -66,52 +58,68 @@
         .subtitle {
             text-align: center;
             color: #666;
-            margin-bottom: 28px;
             font-size: 15px;
+            margin-bottom: 28px;
         }
 
-        .amount-option {
+        .fund-option {
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border: 1px solid #d0d6d2;
-            border-radius: 8px;
-            padding: 17px 18px;
+            padding: 18px;
             margin-bottom: 12px;
+            border: 1px solid #d1d8d4;
+            border-radius: 8px;
+            background: #fff;
             cursor: pointer;
-            transition: .2s;
+            transition: .2s ease;
         }
 
-        .amount-option:hover {
+        .fund-option:hover {
             border-color: #00843d;
+            background: #f8fbf9;
         }
 
-        .amount-option.selected {
+        .fund-option.selected {
             border: 2px solid #00843d;
-            background: #f1faf5;
+            background: #f0faf4;
         }
 
-        .amount-left {
+        .fund-left {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .amount-left input {
+        .fund-left input {
             width: 19px;
             height: 19px;
             accent-color: #00843d;
         }
 
-        .amount {
+        .fund-amount {
             font-size: 18px;
             font-weight: 800;
+        }
+
+        .fee {
+            text-align: right;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .fee strong {
+            display: block;
+            color: #111;
+            font-size: 15px;
+            margin-top: 3px;
         }
 
         .continue-btn {
             width: 100%;
             height: 52px;
-            margin-top: 18px;
+            margin-top: 15px;
             border: none;
             border-radius: 7px;
             background: #00843d;
@@ -125,18 +133,39 @@
             background: #006b31;
         }
 
+        .continue-btn:active {
+            transform: scale(.99);
+        }
+
         @media (max-width: 600px) {
+
             .container {
                 margin: 25px auto;
                 padding: 0 15px;
             }
 
-            .card {
-                padding: 25px 20px;
+            .funds-card {
+                padding: 25px 18px;
             }
 
-            h2 {
+            .funds-card h2 {
                 font-size: 22px;
+            }
+
+            .fund-option {
+                padding: 16px 14px;
+            }
+
+            .fund-amount {
+                font-size: 16px;
+            }
+
+            .fee {
+                font-size: 12px;
+            }
+
+            .fee strong {
+                font-size: 14px;
             }
         }
     </style>
@@ -150,76 +179,144 @@
 
 <main class="container">
 
-    <div class="card">
-
-        <div class="demo-notice">
-            <strong>DEMO PAGE:</strong>
-            This page is for website testing and demonstration purposes.
-        </div>
+    <div class="funds-card">
 
         <h2>Select Fund Amount</h2>
 
         <p class="subtitle">
-            Choose one amount to continue.
+            Select your preferred fund amount to continue.
         </p>
 
         <form id="fundsForm">
 
-            <label class="amount-option">
-                <div class="amount-left">
-                    <input type="radio" name="fundAmount" value="22000" required>
-                    <span class="amount">KSh 22,000</span>
+            <label class="fund-option">
+                <div class="fund-left">
+                    <input type="radio"
+                           name="fundAmount"
+                           value="22000"
+                           data-fee="350"
+                           required>
+                    <span class="fund-amount">KSh 22,000</span>
+                </div>
+
+                <div class="fee">
+                    Processing Fee
+                    <strong>KSh 350</strong>
                 </div>
             </label>
 
-            <label class="amount-option">
-                <div class="amount-left">
-                    <input type="radio" name="fundAmount" value="30000">
-                    <span class="amount">KSh 30,000</span>
+
+            <label class="fund-option">
+                <div class="fund-left">
+                    <input type="radio"
+                           name="fundAmount"
+                           value="30000"
+                           data-fee="400">
+                    <span class="fund-amount">KSh 30,000</span>
+                </div>
+
+                <div class="fee">
+                    Processing Fee
+                    <strong>KSh 400</strong>
                 </div>
             </label>
 
-            <label class="amount-option">
-                <div class="amount-left">
-                    <input type="radio" name="fundAmount" value="40000">
-                    <span class="amount">KSh 40,000</span>
+
+            <label class="fund-option">
+                <div class="fund-left">
+                    <input type="radio"
+                           name="fundAmount"
+                           value="40000"
+                           data-fee="550">
+                    <span class="fund-amount">KSh 40,000</span>
+                </div>
+
+                <div class="fee">
+                    Processing Fee
+                    <strong>KSh 550</strong>
                 </div>
             </label>
 
-            <label class="amount-option">
-                <div class="amount-left">
-                    <input type="radio" name="fundAmount" value="50000">
-                    <span class="amount">KSh 50,000</span>
+
+            <label class="fund-option">
+                <div class="fund-left">
+                    <input type="radio"
+                           name="fundAmount"
+                           value="50000"
+                           data-fee="600">
+                    <span class="fund-amount">KSh 50,000</span>
+                </div>
+
+                <div class="fee">
+                    Processing Fee
+                    <strong>KSh 600</strong>
                 </div>
             </label>
 
-            <label class="amount-option">
-                <div class="amount-left">
-                    <input type="radio" name="fundAmount" value="80000">
-                    <span class="amount">KSh 80,000</span>
+
+            <label class="fund-option">
+                <div class="fund-left">
+                    <input type="radio"
+                           name="fundAmount"
+                           value="80000"
+                           data-fee="750">
+                    <span class="fund-amount">KSh 80,000</span>
+                </div>
+
+                <div class="fee">
+                    Processing Fee
+                    <strong>KSh 750</strong>
                 </div>
             </label>
 
-            <label class="amount-option">
-                <div class="amount-left">
-                    <input type="radio" name="fundAmount" value="90000">
-                    <span class="amount">KSh 90,000</span>
+
+            <label class="fund-option">
+                <div class="fund-left">
+                    <input type="radio"
+                           name="fundAmount"
+                           value="90000"
+                           data-fee="850">
+                    <span class="fund-amount">KSh 90,000</span>
+                </div>
+
+                <div class="fee">
+                    Processing Fee
+                    <strong>KSh 850</strong>
                 </div>
             </label>
 
-            <label class="amount-option">
-                <div class="amount-left">
-                    <input type="radio" name="fundAmount" value="100000">
-                    <span class="amount">KSh 100,000</span>
+
+            <label class="fund-option">
+                <div class="fund-left">
+                    <input type="radio"
+                           name="fundAmount"
+                           value="100000"
+                           data-fee="900">
+                    <span class="fund-amount">KSh 100,000</span>
+                </div>
+
+                <div class="fee">
+                    Processing Fee
+                    <strong>KSh 900</strong>
                 </div>
             </label>
 
-            <label class="amount-option">
-                <div class="amount-left">
-                    <input type="radio" name="fundAmount" value="150000">
-                    <span class="amount">KSh 150,000</span>
+
+            <label class="fund-option">
+                <div class="fund-left">
+                    <input type="radio"
+                           name="fundAmount"
+                           value="150000"
+                           data-fee="1500">
+                    <span class="fund-amount">KSh 150,000</span>
+                </div>
+
+                <div class="fee">
+                    Processing Fee
+                    <strong>KSh 1,500</strong>
                 </div>
             </label>
+
 
             <button type="submit" class="continue-btn">
                 CONTINUE
@@ -232,10 +329,12 @@
 </main>
 
 <script>
-    const options = document.querySelectorAll(".amount-option");
+
+    const options = document.querySelectorAll(".fund-option");
 
     options.forEach(option => {
-        option.addEventListener("click", function () {
+
+        option.addEventListener("click", function() {
 
             options.forEach(item => {
                 item.classList.remove("selected");
@@ -244,11 +343,15 @@
             this.classList.add("selected");
 
             const radio = this.querySelector("input");
+
             radio.checked = true;
         });
+
     });
 
+
     document.getElementById("fundsForm").addEventListener("submit", function(event) {
+
         event.preventDefault();
 
         const selected = document.querySelector(
@@ -256,14 +359,27 @@
         );
 
         if (!selected) {
-            alert("Please select an amount.");
+            alert("Please select a fund amount.");
             return;
         }
 
-        localStorage.setItem("nyotaFundAmount", selected.value);
+        const fundAmount = selected.value;
+        const processingFee = selected.dataset.fee;
+
+        localStorage.setItem(
+            "nyotaFundAmount",
+            fundAmount
+        );
+
+        localStorage.setItem(
+            "nyotaProcessingFee",
+            processingFee
+        );
 
         window.location.href = "confirmation.html";
+
     });
+
 </script>
 
 </body>
