@@ -4,122 +4,260 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NYOTA Funds - Application</title>
+    <title>NYOTA Funds Kenya - Application Form</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7f5;
+            color: #111;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: #00843d;
+            padding: 22px 20px;
+            text-align: center;
+            border-bottom: 5px solid #111;
+        }
+
+        .header h1 {
+            color: #fff;
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main */
+        .container {
+            width: 100%;
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .application-card {
+            background: #fff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .application-card h2 {
+            text-align: center;
+            font-size: 25px;
+            margin-bottom: 30px;
+            color: #111;
+            font-weight: 800;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #00843d;
+            margin-bottom: 22px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #00843d;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            height: 50px;
+            padding: 0 14px;
+            border: 1px solid #cfd6d2;
+            border-radius: 7px;
+            background: #fff;
+            color: #111;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #00843d;
+            box-shadow: 0 0 0 2px rgba(0, 132, 61, 0.12);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        /* Button */
+        .continue-btn {
+            width: 100%;
+            height: 52px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 7px;
+            background: #00843d;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .continue-btn:hover {
+            background: #006b31;
+        }
+
+        .continue-btn:active {
+            transform: scale(0.99);
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .header {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 21px;
+            }
+
+            .container {
+                margin: 25px auto;
+                padding: 0 15px;
+            }
+
+            .application-card {
+                padding: 25px 20px;
+                border-radius: 10px;
+            }
+
+            .application-card h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <main class="application-page">
+    <header class="header">
+        <h1>NYOTA FUNDS KENYA</h1>
+    </header>
 
-        <section class="application-card">
+    <main class="container">
 
-            <div class="application-header">
-                <h1>NYOTA FUNDS KENYA</h1>
-                <p>Application Form</p>
+        <div class="application-card">
+
+            <h2>Application Form</h2>
+
+            <div class="section-title">
+                Personal Information
             </div>
 
             <form id="applicationForm">
 
-                <div class="form-section">
-                    <h2>Personal Information</h2>
-
-                    <div class="form-grid">
-
-                        <div class="form-group">
-                            <label for="fullName">Full Names</label>
-                            <input
-                                type="text"
-                                id="fullName"
-                                name="fullName"
-                                placeholder="Enter your full names"
-                                required
-                            >
-                        </div>
-
-                        <div class="form-group">
-                            <label for="idNumber">National ID Number</label>
-                            <input
-                                type="text"
-                                id="idNumber"
-                                name="idNumber"
-                                placeholder="Enter your ID number"
-                                required
-                            >
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input
-                                type="tel"
-                                id="phone"
-                                name="phone"
-                                placeholder="07XXXXXXXX"
-                                required
-                            >
-                        </div>
-
-                        <div class="form-group">
-                            <label for="county">County</label>
-                            <select id="county" name="county" required>
-                                <option value="">Select your county</option>
-                                <option>Nairobi</option>
-                                <option>Nakuru</option>
-                                <option>Kiambu</option>
-                                <option>Mombasa</option>
-                                <option>Kisumu</option>
-                                <option>Uasin Gishu</option>
-                                <option>Machakos</option>
-                                <option>Kajiado</option>
-                                <option>Meru</option>
-                                <option>Nyeri</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
-
-                    </div>
+                <div class="form-group">
+                    <label for="fullName">Full Names</label>
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="Enter your full names"
+                        required
+                    >
                 </div>
 
-                <div class="form-section">
-                    <h2>Next of Kin</h2>
-
-                    <div class="form-grid">
-
-                        <div class="form-group">
-                            <label for="nextOfKin">Next of Kin Full Name</label>
-                            <input
-                                type="text"
-                                id="nextOfKin"
-                                name="nextOfKin"
-                                placeholder="Enter full name"
-                                required
-                            >
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nextOfKinPhone">Next of Kin Phone</label>
-                            <input
-                                type="tel"
-                                id="nextOfKinPhone"
-                                name="nextOfKinPhone"
-                                placeholder="07XXXXXXXX"
-                                required
-                            >
-                        </div>
-
-                    </div>
+                <div class="form-group">
+                    <label for="idNumber">National ID Number</label>
+                    <input
+                        type="text"
+                        id="idNumber"
+                        name="idNumber"
+                        placeholder="Enter your ID number"
+                        inputmode="numeric"
+                        required
+                    >
                 </div>
 
-                <div class="form-section">
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="07XXXXXXXX"
+                        inputmode="tel"
+                        required
+                    >
+                </div>
 
-                    <label class="consent">
-                        <input type="checkbox" id="agree" required>
-                        <span>
-                            I confirm that the information provided is correct.
-                        </span>
-                    </label>
-
+                <div class="form-group">
+                    <label for="county">County</label>
+                    <select id="county" name="county" required>
+                        <option value="">Select your county</option>
+                        <option>Nairobi</option>
+                        <option>Mombasa</option>
+                        <option>Kiambu</option>
+                        <option>Nakuru</option>
+                        <option>Kisumu</option>
+                        <option>Uasin Gishu</option>
+                        <option>Machakos</option>
+                        <option>Nyeri</option>
+                        <option>Meru</option>
+                        <option>Kakamega</option>
+                        <option>Bungoma</option>
+                        <option>Kericho</option>
+                        <option>Laikipia</option>
+                        <option>Murang'a</option>
+                        <option>Kirinyaga</option>
+                        <option>Embu</option>
+                        <option>Tharaka-Nithi</option>
+                        <option>Isiolo</option>
+                        <option>Garissa</option>
+                        <option>Wajir</option>
+                        <option>Mandera</option>
+                        <option>Marsabit</option>
+                        <option>Samburu</option>
+                        <option>Trans Nzoia</option>
+                        <option>West Pokot</option>
+                        <option>Turkana</option>
+                        <option>Elgeyo-Marakwet</option>
+                        <option>Nandi</option>
+                        <option>Bomet</option>
+                        <option>Nyamira</option>
+                        <option>Kisii</option>
+                        <option>Homa Bay</option>
+                        <option>Siaya</option>
+                        <option>Busia</option>
+                        <option>Vihiga</option>
+                        <option>Kitui</option>
+                        <option>Makueni</option>
+                        <option>Kajiado</option>
+                        <option>Narok</option>
+                        <option>Baringo</option>
+                        <option>Taita-Taveta</option>
+                        <option>Kwale</option>
+                        <option>Kilifi</option>
+                        <option>Lamu</option>
+                        <option>Tana River</option>
+                        <option>Nyandarua</option>
+                    </select>
                 </div>
 
                 <button type="submit" class="continue-btn">
@@ -128,27 +266,24 @@
 
             </form>
 
-        </section>
+        </div>
 
     </main>
 
     <script>
         document.getElementById("applicationForm").addEventListener("submit", function(event) {
-
             event.preventDefault();
 
-            const application = {
+            const applicationData = {
                 fullName: document.getElementById("fullName").value.trim(),
                 idNumber: document.getElementById("idNumber").value.trim(),
                 phone: document.getElementById("phone").value.trim(),
-                county: document.getElementById("county").value,
-                nextOfKin: document.getElementById("nextOfKin").value.trim(),
-                nextOfKinPhone: document.getElementById("nextOfKinPhone").value.trim()
+                county: document.getElementById("county").value
             };
 
             localStorage.setItem(
                 "nyotaApplication",
-                JSON.stringify(application)
+                JSON.stringify(applicationData)
             );
 
             window.location.href = "funds.html";
