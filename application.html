@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>NYOTA Funds Kenya - Application</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,204 +11,75 @@
 
 <div class="application-page">
 
-    <!-- HEADER -->
-    <header class="application-header">
-
-        <img
-            src="nyota-logo.png"
-            alt="NYOTA Funds Kenya Logo"
-            class="logo"
-        >
-
-        <div>
-            <h1>NYOTA FUNDS KENYA</h1>
-            <p>Application Portal</p>
-        </div>
-
+    <header class="header">
+        <img src="nyota-logo.png" alt="NYOTA Funds Logo" class="logo">
+        <h2>NYOTA FUNDS KENYA</h2>
     </header>
 
-
-    <!-- PROGRESS -->
-    <div class="progress-container">
-
-        <div class="progress-step active">
-            <span>1</span>
-            <p>Application</p>
-        </div>
-
-        <div class="progress-line"></div>
-
-        <div class="progress-step">
-            <span>2</span>
-            <p>Fund Selection</p>
-        </div>
-
-        <div class="progress-line"></div>
-
-        <div class="progress-step">
-            <span>3</span>
-            <p>Confirmation</p>
-        </div>
-
-    </div>
-
-
-    <!-- MAIN CONTENT -->
     <main class="application-container">
 
         <div class="application-card">
 
-            <div class="card-header">
-                <h2>Application Form</h2>
-                <p>Please provide your details below.</p>
-            </div>
-
+            <h1>APPLICATION FORM</h1>
 
             <form id="applicationForm">
 
-                <!-- PERSONAL INFORMATION -->
-                <section class="form-section">
+                <div class="form-grid">
 
-                    <h3>Personal Information</h3>
-
-                    <div class="form-grid">
-
-                        <div class="form-group">
-                            <label for="fullName">
-                                Full Name
-                            </label>
-
-                            <input
-                                type="text"
-                                id="fullName"
-                                name="fullName"
-                                placeholder="Enter your full name"
-                                required
-                            >
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="idNumber">
-                                ID Number
-                            </label>
-
-                            <input
-                                type="text"
-                                id="idNumber"
-                                name="idNumber"
-                                placeholder="Enter your ID number"
-                                maxlength="8"
-                                required
-                            >
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="phone">
-                                Phone Number
-                            </label>
-
-                            <input
-                                type="tel"
-                                id="phone"
-                                name="phone"
-                                placeholder="07XXXXXXXX"
-                                maxlength="10"
-                                required
-                            >
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="email">
-                                Email Address
-                            </label>
-
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="Enter your email"
-                                required
-                            >
-                        </div>
-
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input
+                            type="text"
+                            id="fullName"
+                            placeholder="Enter full name"
+                            required
+                        >
                     </div>
 
-                </section>
-
-
-                <!-- NEXT OF KIN -->
-                <section class="form-section">
-
-                    <h3>Next of Kin</h3>
-
-                    <div class="form-grid">
-
-                        <div class="form-group">
-
-                            <label for="nextOfKin">
-                                Full Name
-                            </label>
-
-                            <input
-                                type="text"
-                                id="nextOfKin"
-                                name="nextOfKin"
-                                placeholder="Next of kin full name"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="kinPhone">
-                                Phone Number
-                            </label>
-
-                            <input
-                                type="tel"
-                                id="kinPhone"
-                                name="kinPhone"
-                                placeholder="07XXXXXXXX"
-                                maxlength="10"
-                                required
-                            >
-
-                        </div>
-
+                    <div class="form-group">
+                        <label for="idNumber">ID Number</label>
+                        <input
+                            type="text"
+                            id="idNumber"
+                            placeholder="Enter ID number"
+                            required
+                        >
                     </div>
 
-                </section>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="07XXXXXXXX"
+                            required
+                        >
+                    </div>
 
+                    <div class="form-group">
+                        <label for="nextOfKin">Next of Kin</label>
+                        <input
+                            type="text"
+                            id="nextOfKin"
+                            placeholder="Enter full name"
+                            required
+                        >
+                    </div>
 
-                <!-- DECLARATION -->
-                <div class="declaration">
-
-                    <input
-                        type="checkbox"
-                        id="agreement"
-                        required
-                    >
-
-                    <label for="agreement">
-                        I confirm that the information provided is
-                        accurate and complete.
-                    </label>
+                    <div class="form-group">
+                        <label for="kinPhone">Next of Kin Phone</label>
+                        <input
+                            type="tel"
+                            id="kinPhone"
+                            placeholder="07XXXXXXXX"
+                            required
+                        >
+                    </div>
 
                 </div>
 
-
-                <!-- BUTTON -->
-                <button
-                    type="submit"
-                    class="continue-btn"
-                >
-                    CONTINUE
-                    <span>→</span>
+                <button type="submit" class="continue-btn">
+                    CONTINUE →
                 </button>
 
             </form>
@@ -219,54 +88,31 @@
 
     </main>
 
-
-    <!-- FOOTER -->
-    <footer class="application-footer">
-
+    <footer>
         <p>© 2026 NYOTA Funds Kenya</p>
-
-        <small>
-            NYOTA Funds Application Portal
-        </small>
-
     </footer>
 
 </div>
 
-
 <script>
-
-document.getElementById("applicationForm").addEventListener("submit", function(event) {
-
-    event.preventDefault();
+document.getElementById("applicationForm").addEventListener("submit", function(e) {
+    e.preventDefault();
 
     const applicant = {
-
         fullName: document.getElementById("fullName").value.trim(),
-
         idNumber: document.getElementById("idNumber").value.trim(),
-
         phone: document.getElementById("phone").value.trim(),
-
-        email: document.getElementById("email").value.trim(),
-
         nextOfKin: document.getElementById("nextOfKin").value.trim(),
-
         kinPhone: document.getElementById("kinPhone").value.trim()
-
     };
-
 
     localStorage.setItem(
         "nyotaApplicant",
         JSON.stringify(applicant)
     );
 
-
     window.location.href = "funds.html";
-
 });
-
 </script>
 
 </body>
