@@ -4,132 +4,185 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NYOTA Funds - Fund Selection</title>
+    <title>NYOTA Funds Kenya - Fund Selection</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7f5;
+            color: #111;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: #00843d;
+            padding: 22px 20px;
+            text-align: center;
+            border-bottom: 5px solid #111;
+        }
+
+        .header h1 {
+            color: #fff;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        /* Main */
+        .container {
+            width: 100%;
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .funds-card {
+            background: #fff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Congratulations */
+        .congratulations {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .congratulations h2 {
+            font-size: 27px;
+            font-weight: 800;
+            color: #00843d;
+            margin-bottom: 10px;
+        }
+
+        .client-name {
+            font-size: 21px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 8px;
+        }
+
+        .message {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* Section */
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #00843d;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #00843d;
+        }
+
+        /* Fund options */
+        .fund-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #d5dcd7;
+            border-radius: 8px;
+            padding: 17px 18px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .fund-option:hover {
+            border-color: #00843d;
+            background: #f7faf8;
+        }
+
+        .fund-option input {
+            width: 18px;
+            height: 18px;
+            accent-color: #00843d;
+        }
+
+        .amount {
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        /* Button */
+        .continue-btn {
+            width: 100%;
+            height: 52px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 7px;
+            background: #00843d;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .continue-btn:hover {
+            background: #006b31;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            .container {
+                margin: 25px auto;
+                padding: 0 15px;
+            }
+
+            .funds-card {
+                padding: 25px 20px;
+            }
+
+            .congratulations h2 {
+                font-size: 24px;
+            }
+
+            .client-name {
+                font-size: 19px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="funds-page">
+    <header class="header">
+        <h1>NYOTA FUNDS KENYA</h1>
+    </header>
+
+    <main class="container">
 
         <div class="funds-card">
 
-            <h1>APPLICATION RECEIVED 🎊🎊</h1>
+            <div class="congratulations">
+                <h2>Congratulations!</h2>
 
-            <p class="applicant">
-                <span id="applicantName">Applicant</span>
-            </p>
+                <div class="client-name" id="clientName">
+                    Applicant
+                </div>
 
-            <h2>SELECT YOUR FUND AMOUNT</h2>
-
-            <div class="amount-grid">
-
-                <button type="button" onclick="selectAmount(22000, this)">
-                    22,000/=
-                </button>
-
-                <button type="button" onclick="selectAmount(30000, this)">
-                    30,000/=
-                </button>
-
-                <button type="button" onclick="selectAmount(40000, this)">
-                    40,000/=
-                </button>
-
-                <button type="button" onclick="selectAmount(50000, this)">
-                    50,000/=
-                </button>
-
-                <button type="button" onclick="selectAmount(80000, this)">
-                    80,000/=
-                </button>
-
-                <button type="button" onclick="selectAmount(90000, this)">
-                    90,000/=
-                </button>
-
-                <button type="button" onclick="selectAmount(100000, this)">
-                    100,000/=
-                </button>
-
-                <button type="button" onclick="selectAmount(120000, this)">
-                    120,000/=
-                </button>
-
-                <button type="button" onclick="selectAmount(130000, this)">
-                    130,000/=
-                </button>
-
-                <button type="button" onclick="selectAmount(150000, this)">
-                    150,000/=
-                </button>
-
+                <p class="message">
+                    Your application has been received successfully.
+                </p>
             </div>
 
-            <p id="selectedText">
-                Select an amount to continue
-            </p>
+            <div class="section-title">
+                Select Fund Amount
+            </div>
 
-            <button
-                type="button"
-                class="continue-btn"
-                onclick="continueToNextPage()">
-                CONTINUE
-            </button>
+            <form id="fundForm">
 
-        </div>
-
-    </div>
-
-    <script>
-
-        let selectedAmount = null;
-
-        function selectAmount(amount, button) {
-
-            selectedAmount = amount;
-
-            localStorage.setItem(
-                "selectedAmount",
-                amount
-            );
-
-            document.getElementById("selectedText").textContent =
-                "Selected: KSh " +
-                amount.toLocaleString() +
-                "/=";
-
-            document
-                .querySelectorAll(".amount-grid button")
-                .forEach(function(btn) {
-                    btn.classList.remove("selected");
-                });
-
-            button.classList.add("selected");
-        }
-
-
-        function continueToNextPage() {
-
-            if (selectedAmount === null) {
-                alert("Please select a fund amount.");
-                return;
-            }
-
-            window.location.href = "payment.html";
-        }
-
-
-        const savedName =
-            localStorage.getItem("applicantName");
-
-        if (savedName) {
-            document.getElementById("applicantName").textContent =
-                savedName;
-        }
-
-    </script>
-
-</body>
-</html>
+                <label class="fund-option">
+                    <span class="amount">KSh 22,000</span>
+                    <input type="radio" name="amount" value="22000
