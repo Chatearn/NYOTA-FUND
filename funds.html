@@ -15,7 +15,7 @@
 
         <div class="funds-card">
 
-            <h1>CONGRATULATIONS 🎊🎊</h1>
+            <h1>APPLICATION RECEIVED 🎊🎊</h1>
 
             <p class="applicant">
                 <span id="applicantName">Applicant</span>
@@ -25,20 +25,45 @@
 
             <div class="amount-grid">
 
-                <button onclick="selectAmount(22000)">22,000/=</button>
-                <button onclick="selectAmount(30000)">30,000/=</button>
+                <button type="button" onclick="selectAmount(22000, this)">
+                    22,000/=
+                </button>
 
-                <button onclick="selectAmount(40000)">40,000/=</button>
-                <button onclick="selectAmount(50000)">50,000/=</button>
+                <button type="button" onclick="selectAmount(30000, this)">
+                    30,000/=
+                </button>
 
-                <button onclick="selectAmount(80000)">80,000/=</button>
-                <button onclick="selectAmount(90000)">90,000/=</button>
+                <button type="button" onclick="selectAmount(40000, this)">
+                    40,000/=
+                </button>
 
-                <button onclick="selectAmount(100000)">100,000/=</button>
-                <button onclick="selectAmount(120000)">120,000/=</button>
+                <button type="button" onclick="selectAmount(50000, this)">
+                    50,000/=
+                </button>
 
-                <button onclick="selectAmount(130000)">130,000/=</button>
-                <button onclick="selectAmount(150000)">150,000/=</button>
+                <button type="button" onclick="selectAmount(80000, this)">
+                    80,000/=
+                </button>
+
+                <button type="button" onclick="selectAmount(90000, this)">
+                    90,000/=
+                </button>
+
+                <button type="button" onclick="selectAmount(100000, this)">
+                    100,000/=
+                </button>
+
+                <button type="button" onclick="selectAmount(120000, this)">
+                    120,000/=
+                </button>
+
+                <button type="button" onclick="selectAmount(130000, this)">
+                    130,000/=
+                </button>
+
+                <button type="button" onclick="selectAmount(150000, this)">
+                    150,000/=
+                </button>
 
             </div>
 
@@ -47,6 +72,7 @@
             </p>
 
             <button
+                type="button"
                 class="continue-btn"
                 onclick="continueToNextPage()">
                 CONTINUE
@@ -57,9 +83,10 @@
     </div>
 
     <script>
+
         let selectedAmount = null;
 
-        function selectAmount(amount) {
+        function selectAmount(amount, button) {
 
             selectedAmount = amount;
 
@@ -73,17 +100,19 @@
                 amount.toLocaleString() +
                 "/=";
 
-            document.querySelectorAll(".amount-grid button")
-                .forEach(button => {
-                    button.classList.remove("selected");
+            document
+                .querySelectorAll(".amount-grid button")
+                .forEach(function(btn) {
+                    btn.classList.remove("selected");
                 });
 
-            event.currentTarget.classList.add("selected");
+            button.classList.add("selected");
         }
+
 
         function continueToNextPage() {
 
-            if (!selectedAmount) {
+            if (selectedAmount === null) {
                 alert("Please select a fund amount.");
                 return;
             }
@@ -91,13 +120,15 @@
             window.location.href = "payment.html";
         }
 
+
         const savedName =
             localStorage.getItem("applicantName");
 
         if (savedName) {
-            document.getElementById("applicantName")
-                .textContent = savedName;
+            document.getElementById("applicantName").textContent =
+                savedName;
         }
+
     </script>
 
 </body>
