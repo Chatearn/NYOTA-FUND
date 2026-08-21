@@ -1,1 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>NYOTA Funds - Fund Selection</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="funds-page">
+
+        <div class="funds-card">
+
+            <h1>CONGRATULATIONS 🎊🎊</h1>
+
+            <p class="applicant">
+                <span id="applicantName">Applicant</span>
+            </p>
+
+            <h2>SELECT YOUR FUND AMOUNT</h2>
+
+            <div class="amount-grid">
+
+                <button onclick="selectAmount(22000)">22,000/=</button>
+                <button onclick="selectAmount(30000)">30,000/=</button>
+
+                <button onclick="selectAmount(40000)">40,000/=</button>
+                <button onclick="selectAmount(50000)">50,000/=</button>
+
+                <button onclick="selectAmount(80000)">80,000/=</button>
+                <button onclick="selectAmount(90000)">90,000/=</button>
+
+                <button onclick="selectAmount(100000)">100,000/=</button>
+                <button onclick="selectAmount(120000)">120,000/=</button>
+
+                <button onclick="selectAmount(130000)">130,000/=</button>
+                <button onclick="selectAmount(150000)">150,000/=</button>
+
+            </div>
+
+            <p id="selectedText">
+                Select an amount to continue
+            </p>
+
+            <button
+                class="continue-btn"
+                onclick="continueToNextPage()">
+                CONTINUE
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+        let selectedAmount = null;
+
+        function selectAmount(amount) {
+
+            selectedAmount = amount;
+
+            localStorage.setItem(
+                "selectedAmount",
+                amount
+            );
+
+            document.getElementById("selectedText").textContent =
+                "Selected: KSh " +
+                amount.toLocaleString() +
+                "/=";
+
+            document.querySelectorAll(".amount-grid button")
+                .forEach(button => {
+                    button.classList.remove("selected");
+                });
+
+            event.currentTarget.classList.add("selected");
+        }
+
+        function continueToNextPage() {
+
+            if (!selectedAmount) {
+                alert("Please select a fund amount.");
+                return;
+            }
+
+            window.location.href = "payment.html";
+        }
+
+        const savedName =
+            localStorage.getItem("applicantName");
+
+        if (savedName) {
+            document.getElementById("applicantName")
+                .textContent = savedName;
+        }
+    </script>
+
+</body>
+</html>
