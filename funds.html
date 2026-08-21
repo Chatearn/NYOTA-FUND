@@ -1,275 +1,221 @@
-// ========================================
-// NYOTA FUNDS KENYA
-// APPLICATION SUBMISSION
-// ========================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-const BACKEND_URL = "https://nyota-backed1-1.onrender.com";
+    <title>Funds Application</title>
 
-
-// ========================================
-// SUBMIT APPLICATION
-// ========================================
-
-async function submitApplication() {
-
-    try {
-
-        // Get selected fund amount
-        const selected = document.querySelector(
-            'input[name="fundAmount"]:checked'
-        );
-
-        if (!selected) {
-            alert("Please select a fund amount.");
-            return;
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-
-        // Get applicant information
-        const fullNameInput = document.getElementById("fullName");
-        const idNumberInput = document.getElementById("idNumber");
-        const phoneInput = document.getElementById("phone");
-        const countyInput = document.getElementById("county");
-
-
-        // Make sure fields exist
-        if (
-            !fullNameInput ||
-            !idNumberInput ||
-            !phoneInput ||
-            !countyInput
-        ) {
-            alert("Application form fields could not be found.");
-            return;
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7f5;
+            color: #111;
         }
 
-
-        // Read values
-        const fullName = fullNameInput.value.trim();
-        const idNumber = idNumberInput.value.trim();
-        const phone = phoneInput.value.trim();
-        const county = countyInput.value;
-
-
-        // Validate
-        if (!fullName) {
-            alert("Please enter your full name.");
-            fullNameInput.focus();
-            return;
+        .funds-page {
+            min-height: 100vh;
+            padding: 35px 20px;
         }
 
-        if (!idNumber) {
-            alert("Please enter your ID number.");
-            idNumberInput.focus();
-            return;
+        .funds-container {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        if (!phone) {
-            alert("Please enter your phone number.");
-            phoneInput.focus();
-            return;
+        .funds-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         }
 
-        if (!county) {
-            alert("Please select your county.");
-            countyInput.focus();
-            return;
+        .funds-header {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
-
-        // Create application data
-        const applicationData = {
-
-            fullName: fullName,
-
-            idNumber: idNumber,
-
-            phone: phone,
-
-            county: county,
-
-            fundAmount: Number(selected.value)
-
-        };
-
-
-        // Disable submit button while sending
-        const submitButton =
-            document.querySelector(
-                'button[type="submit"], #submitApplication'
-            );
-
-        if (submitButton) {
-            submitButton.disabled = true;
-            submitButton.textContent = "Submitting...";
+        .funds-header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
         }
 
-
-        // ========================================
-        // SEND DATA TO BACKEND
-        // ========================================
-
-        const response = await fetch(
-            BACKEND_URL + "/api/applications",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify(applicationData)
-            }
-        );
-
-
-        // Try to read backend response
-        let result;
-
-        try {
-            result = await response.json();
-        } catch (jsonError) {
-
-            throw new Error(
-                "The server returned an invalid response."
-            );
+        .funds-header p {
+            color: #666;
+            font-size: 15px;
         }
 
-
-        // ========================================
-        // CHECK RESPONSE
-        // ========================================
-
-        if (!response.ok || !result.success) {
-
-            throw new Error(
-                result.message ||
-                "Application submission failed."
-            );
-
+        .amount-list {
+            display: grid;
+            gap: 14px;
         }
 
-
-        // ========================================
-        // SAVE APPLICATION
-        // ========================================
-
-        if (result.application) {
-
-            localStorage.setItem(
-                "nyotaBackendApplication",
-                JSON.stringify(result.application)
-            );
-
-
-            if (result.application.fundAmount !== undefined) {
-
-                localStorage.setItem(
-                    "nyotaFundAmount",
-                    result.application.fundAmount
-                );
-
-            }
-
-
-            if (result.application.processingFee !== undefined) {
-
-                localStorage.setItem(
-                    "nyotaProcessingFee",
-                    result.application.processingFee
-                );
-
-            }
-
+        .amount-option {
+            display: block;
+            cursor: pointer;
         }
 
-
-        // ========================================
-        // SAVE APPLICANT NAME
-        // ========================================
-
-        localStorage.setItem(
-            "nyotaApplicantName",
-            fullName
-        );
-
-
-        // ========================================
-        // SAVE SELECTED AMOUNT
-        // ========================================
-
-        localStorage.setItem(
-            "nyotaSelectedAmount",
-            selected.value
-        );
-
-
-        // ========================================
-        // GO TO CONFIRMATION PAGE
-        // ========================================
-
-        window.location.href = "confirmation.html";
-
-
-    } catch (error) {
-
-        console.error(
-            "Application submission error:",
-            error
-        );
-
-
-        alert(
-            error.message ||
-            "Unable to submit application. Please try again."
-        );
-
-
-        // Enable button again
-        const submitButton =
-            document.querySelector(
-                'button[type="submit"], #submitApplication'
-            );
-
-        if (submitButton) {
-
-            submitButton.disabled = false;
-
-            submitButton.textContent =
-                "Submit Application";
-
+        .amount-option input {
+            display: none;
         }
 
-    }
-
-}
-
-
-// ========================================
-// OPTIONAL FORM SUBMISSION HANDLER
-// ========================================
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        const form =
-            document.getElementById("applicationForm");
-
-        if (form) {
-
-            form.addEventListener(
-                "submit",
-                function (event) {
-
-                    event.preventDefault();
-
-                    submitApplication();
-
-                }
-            );
-
+        .amount-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: #fff;
+            transition: 0.2s;
         }
 
-    }
-);
+        .amount-option input:checked + .amount-box {
+            border-color: #16823a;
+            background: #eef8f1;
+        }
+
+        .amount {
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .fee {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            background: #16823a;
+            color: white;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #11672e;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="funds-page">
+
+    <div class="funds-container">
+
+        <div class="funds-card">
+
+            <div class="funds-header">
+                <h1>Select Your Fund Amount</h1>
+                <p>Choose the amount you would like to apply for.</p>
+            </div>
+
+            <form id="applicationForm">
+
+                <div class="amount-list">
+
+                    <label class="amount-option">
+                        <input type="radio" name="fundAmount" value="22000">
+                        <div class="amount-box">
+                            <span class="amount">KSh 22,000</span>
+                            <span class="fee">Fee: KSh 350</span>
+                        </div>
+                    </label>
+
+                    <label class="amount-option">
+                        <input type="radio" name="fundAmount" value="30000">
+                        <div class="amount-box">
+                            <span class="amount">KSh 30,000</span>
+                            <span class="fee">Fee: KSh 400</span>
+                        </div>
+                    </label>
+
+                    <label class="amount-option">
+                        <input type="radio" name="fundAmount" value="40000">
+                        <div class="amount-box">
+                            <span class="amount">KSh 40,000</span>
+                            <span class="fee">Fee: KSh 450</span>
+                        </div>
+                    </label>
+
+                    <label class="amount-option">
+                        <input type="radio" name="fundAmount" value="50000">
+                        <div class="amount-box">
+                            <span class="amount">KSh 50,000</span>
+                            <span class="fee">Fee: KSh 500</span>
+                        </div>
+                    </label>
+
+                    <label class="amount-option">
+                        <input type="radio" name="fundAmount" value="80000">
+                        <div class="amount-box">
+                            <span class="amount">KSh 80,000</span>
+                            <span class="fee">Fee: KSh 550</span>
+                        </div>
+                    </label>
+
+                    <label class="amount-option">
+                        <input type="radio" name="fundAmount" value="90000">
+                        <div class="amount-box">
+                            <span class="amount">KSh 90,000</span>
+                            <span class="fee">Fee: KSh 600</span>
+                        </div>
+                    </label>
+
+                    <label class="amount-option">
+                        <input type="radio" name="fundAmount" value="100000">
+                        <div class="amount-box">
+                            <span class="amount">KSh 100,000</span>
+                            <span class="fee">Fee: KSh 650</span>
+                        </div>
+                    </label>
+
+                    <label class="amount-option">
+                        <input type="radio" name="fundAmount" value="150000">
+                        <div class="amount-box">
+                            <span class="amount">KSh 150,000</span>
+                            <span class="fee">Fee: KSh 890</span>
+                        </div>
+                    </label>
+
+                </div>
+
+                <button
+                    type="submit"
+                    id="submitApplication"
+                    class="submit-btn">
+                    Continue
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="funds.js" defer></script>
+
+</body>
+</html>
