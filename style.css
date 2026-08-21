@@ -1,28 +1,49 @@
-body {
+* {
+    box-sizing: border-box;
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0b7a3b;
-    color: white;
+    padding: 0;
 }
 
-.home-page {
+body {
+    font-family: Arial, sans-serif;
+    background: #0b7a3b;
+    color: #111;
+}
+
+/* =========================
+   HOME & APPLICATION PAGE
+========================= */
+
+.home-page,
+.application-page {
     min-height: 100vh;
     background: #0b7a3b;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 .header {
     text-align: center;
     padding: 20px;
+    color: white;
 }
 
 .logo {
     width: 100px;
+    height: auto;
 }
 
 .header h2 {
-    margin: 10px 0;
+    margin-top: 10px;
     font-size: 24px;
+    font-weight: 800;
 }
+
+/* =========================
+   HOME PAGE
+========================= */
 
 .home-content {
     text-align: center;
@@ -31,23 +52,22 @@ body {
 
 .home-content h1 {
     font-size: 36px;
-    font-weight: bold;
-}
-
-.home-content h1 span {
+    line-height: 1.2;
+    font-weight: 800;
     color: white;
 }
 
 .application-card {
-    max-width: 450px;
+    width: 90%;
+    max-width: 600px;
     margin: 40px auto;
-    padding: 35px 20px;
+    padding: 35px;
     background: white;
     border-radius: 15px;
-    color: #111;
 }
 
 .application-card h3 {
+    margin-bottom: 25px;
     font-size: 22px;
 }
 
@@ -62,11 +82,122 @@ body {
     font-weight: bold;
 }
 
-.btn span {
-    margin-left: 10px;
+/* =========================
+   APPLICATION PAGE
+========================= */
+
+.application-container {
+    width: 100%;
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 20px;
 }
+
+.application-card h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #111;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #0b7a3b;
+}
+
+/* =========================
+   CONTINUE BUTTON
+========================= */
+
+.continue-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 16px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.continue-btn:hover {
+    background: #222;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
     text-align: center;
     padding: 20px;
+    color: white;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .home-content {
+        padding: 35px 15px;
+    }
+
+    .home-content h1 {
+        font-size: 30px;
+    }
+
+    .application-container {
+        padding: 15px;
+    }
+
+    .application-card {
+        width: 100%;
+        padding: 25px 20px;
+    }
+
+    .application-card h1 {
+        font-size: 24px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .btn {
+        font-size: 22px;
+    }
 }
