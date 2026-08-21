@@ -1,1 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>NYOTA Funds - Payment</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="payment-page">
+
+        <div class="payment-card">
+
+            <h1>Application Summary</h1>
+
+            <p class="subtitle">
+                Please review your selected fund amount.
+            </p>
+
+            <div class="amount-box">
+                <span>Selected Amount</span>
+                <strong id="selectedAmount">Loading...</strong>
+            </div>
+
+            <div class="notice">
+                <p>
+                    Your application has been received. Review the
+                    information above before continuing.
+                </p>
+            </div>
+
+            <button
+                type="button"
+                class="continue-btn"
+                onclick="continueApplication()">
+                CONTINUE
+            </button>
+
+            <button
+                type="button"
+                class="back-btn"
+                onclick="history.back()">
+                BACK
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+        const selectedAmount =
+            localStorage.getItem("selectedAmount");
+
+        const amountElement =
+            document.getElementById("selectedAmount");
+
+        if (selectedAmount) {
+            amountElement.textContent =
+                selectedAmount + "/=";
+        } else {
+            amountElement.textContent =
+                "No amount selected";
+        }
+
+        function continueApplication() {
+            if (!selectedAmount) {
+                alert("Please select a fund amount first.");
+                window.location.href = "funds.html";
+                return;
+            }
+
+            // Continue to the next legitimate application step.
+            window.location.href = "confirmation.html";
+        }
+    </script>
+
+</body>
+</html>
