@@ -1,232 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+/* ================================
+   FUNDS SELECTION
+================================ */
 
-    <title>Fund Selection</title>
+.funds-section {
+    min-height: 100vh;
+    background: #f4f7f5;
+    padding: 45px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-    <link rel="stylesheet" href="style.css">
-</head>
+.funds-container {
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+}
 
-<body>
+.funds-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
 
-    <main class="funds-page">
+.funds-header h1 {
+    margin: 0;
+    color: #111;
+    font-size: 32px;
+    font-weight: 800;
+}
 
-        <div class="funds-card">
-
-            <div class="funds-header">
-                <div class="brand-mark">N</div>
-
-                <h1>Fund Selection</h1>
-
-                <p>
-                    Select your preferred fund amount below.
-                </p>
-            </div>
-
-
-            <form id="fundForm">
-
-                <div class="funds-grid">
-
-                    <label class="fund-option">
-                        <input
-                            type="radio"
-                            name="fundAmount"
-                            value="22000"
-                            data-fee="350"
-                        >
-
-                        <div class="fund-box">
-                            <div>
-                                <span class="amount">KSh 22,000</span>
-                                <span class="fee">
-                                    Processing Fee: KSh 350
-                                </span>
-                            </div>
-
-                            <span class="radio"></span>
-                        </div>
-                    </label>
+.funds-header p {
+    margin-top: 8px;
+    color: #666;
+    font-size: 15px;
+}
 
 
-                    <label class="fund-option">
-                        <input
-                            type="radio"
-                            name="fundAmount"
-                            value="30000"
-                            data-fee="400"
-                        >
+/* FUND CARDS */
 
-                        <div class="fund-box">
-                            <div>
-                                <span class="amount">KSh 30,000</span>
-                                <span class="fee">
-                                    Processing Fee: KSh 400
-                                </span>
-                            </div>
+.funds-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
 
-                            <span class="radio"></span>
-                        </div>
-                    </label>
+.fund-card {
+    display: block;
+    cursor: pointer;
+}
 
+.fund-card input {
+    display: none;
+}
 
-                    <label class="fund-option">
-                        <input
-                            type="radio"
-                            name="fundAmount"
-                            value="40000"
-                            data-fee="450"
-                        >
+.fund-content {
+    background: #fff;
+    border: 2px solid #e1e6e3;
+    border-radius: 12px;
+    padding: 22px 24px;
+    transition: 0.2s ease;
+}
 
-                        <div class="fund-box">
-                            <div>
-                                <span class="amount">KSh 40,000</span>
-                                <span class="fee">
-                                    Processing Fee: KSh 450
-                                </span>
-                            </div>
+.fund-content:hover {
+    border-color: #087f3e;
+}
 
-                            <span class="radio"></span>
-                        </div>
-                    </label>
+.fund-content h2 {
+    margin: 0 0 8px;
+    color: #111;
+    font-size: 24px;
+    font-weight: 800;
+}
 
+.fund-content p {
+    margin: 0;
+    color: #666;
+    font-size: 15px;
+}
 
-                    <label class="fund-option">
-                        <input
-                            type="radio"
-                            name="fundAmount"
-                            value="50000"
-                            data-fee="600"
-                        >
-
-                        <div class="fund-box">
-                            <div>
-                                <span class="amount">KSh 50,000</span>
-                                <span class="fee">
-                                    Processing Fee: KSh 600
-                                </span>
-                            </div>
-
-                            <span class="radio"></span>
-                        </div>
-                    </label>
+.fund-content strong {
+    color: #087f3e;
+    font-weight: 700;
+}
 
 
-                    <label class="fund-option">
-                        <input
-                            type="radio"
-                            name="fundAmount"
-                            value="80000"
-                            data-fee="650"
-                        >
+/* SELECTED FUND */
 
-                        <div class="fund-box">
-                            <div>
-                                <span class="amount">KSh 80,000</span>
-                                <span class="fee">
-                                    Processing Fee: KSh 650
-                                </span>
-                            </div>
-
-                            <span class="radio"></span>
-                        </div>
-                    </label>
+.fund-card input:checked + .fund-content {
+    border-color: #087f3e;
+    background: #f7fcf8;
+    box-shadow: 0 0 0 2px rgba(8, 127, 62, 0.12);
+}
 
 
-                    <label class="fund-option">
-                        <input
-                            type="radio"
-                            name="fundAmount"
-                            value="90000"
-                            data-fee="850"
-                        >
+/* CONTINUE BUTTON */
 
-                        <div class="fund-box">
-                            <div>
-                                <span class="amount">KSh 90,000</span>
-                                <span class="fee">
-                                    Processing Fee: KSh 850
-                                </span>
-                            </div>
+.continue-btn {
+    width: 100%;
+    margin-top: 28px;
+    padding: 16px;
 
-                            <span class="radio"></span>
-                        </div>
-                    </label>
+    border: none;
+    border-radius: 10px;
 
+    background: #087f3e;
+    color: #fff;
 
-                    <label class="fund-option">
-                        <input
-                            type="radio"
-                            name="fundAmount"
-                            value="100000"
-                            data-fee="950"
-                        >
+    font-size: 17px;
+    font-weight: 700;
 
-                        <div class="fund-box">
-                            <div>
-                                <span class="amount">KSh 100,000</span>
-                                <span class="fee">
-                                    Processing Fee: KSh 950
-                                </span>
-                            </div>
+    cursor: pointer;
+}
 
-                            <span class="radio"></span>
-                        </div>
-                    </label>
+.continue-btn:hover {
+    background: #066b34;
+}
 
 
-                    <label class="fund-option">
-                        <input
-                            type="radio"
-                            name="fundAmount"
-                            value="150000"
-                            data-fee="1490"
-                        >
+/* MOBILE */
 
-                        <div class="fund-box">
-                            <div>
-                                <span class="amount">KSh 150,000</span>
-                                <span class="fee">
-                                    Processing Fee: KSh 1,490
-                                </span>
-                            </div>
+@media (max-width: 650px) {
 
-                            <span class="radio"></span>
-                        </div>
-                    </label>
+    .funds-section {
+        padding: 30px 15px;
+    }
 
-                </div>
+    .funds-header h1 {
+        font-size: 27px;
+    }
 
+    .funds-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
 
-                <button type="submit" class="continue-btn">
-                    Continue
-                </button>
+    .fund-content {
+        padding: 20px;
+    }
 
-            </form>
-
-        </div>
-
-    </main>
-
-
-    <script>
-
-        document
-            .getElementById("fundForm")
-            .addEventListener("submit", function(event) {
-
-                event.preventDefault();
-
-                const selected = document.querySelector(
-                    'input[name="fundAmount"]:checked'
-                );
-
-                if (!selected) {
-                    alert("Please select a fund amount.");
-                    return;
-                }
-
-                const amount = selected.value;
-                const fee =
+    .fund-content h2 {
+        font-size: 22px;
+    }
+}
