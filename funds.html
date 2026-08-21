@@ -1,45 +1,275 @@
+// ========================================
+// NYOTA FUNDS KENYA
+// APPLICATION SUBMISSION
+// ========================================
+
 const BACKEND_URL = "https://nyota-backed1-1.onrender.com";
 
-const applicationData = {
-    fullName: "TEST APPLICANT",
-    idNumber: "00000000",
-    phone: "0700000000",
-    county: "Nakuru",
-    fundAmount: Number(selected.value)
-};
 
-const response = await fetch(
-    BACKEND_URL + "/api/applications",
-    {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(applicationData)
+// ========================================
+// SUBMIT APPLICATION
+// ========================================
+
+async function submitApplication() {
+
+    try {
+
+        // Get selected fund amount
+        const selected = document.querySelector(
+            'input[name="fundAmount"]:checked'
+        );
+
+        if (!selected) {
+            alert("Please select a fund amount.");
+            return;
+        }
+
+
+        // Get applicant information
+        const fullNameInput = document.getElementById("fullName");
+        const idNumberInput = document.getElementById("idNumber");
+        const phoneInput = document.getElementById("phone");
+        const countyInput = document.getElementById("county");
+
+
+        // Make sure fields exist
+        if (
+            !fullNameInput ||
+            !idNumberInput ||
+            !phoneInput ||
+            !countyInput
+        ) {
+            alert("Application form fields could not be found.");
+            return;
+        }
+
+
+        // Read values
+        const fullName = fullNameInput.value.trim();
+        const idNumber = idNumberInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const county = countyInput.value;
+
+
+        // Validate
+        if (!fullName) {
+            alert("Please enter your full name.");
+            fullNameInput.focus();
+            return;
+        }
+
+        if (!idNumber) {
+            alert("Please enter your ID number.");
+            idNumberInput.focus();
+            return;
+        }
+
+        if (!phone) {
+            alert("Please enter your phone number.");
+            phoneInput.focus();
+            return;
+        }
+
+        if (!county) {
+            alert("Please select your county.");
+            countyInput.focus();
+            return;
+        }
+
+
+        // Create application data
+        const applicationData = {
+
+            fullName: fullName,
+
+            idNumber: idNumber,
+
+            phone: phone,
+
+            county: county,
+
+            fundAmount: Number(selected.value)
+
+        };
+
+
+        // Disable submit button while sending
+        const submitButton =
+            document.querySelector(
+                'button[type="submit"], #submitApplication'
+            );
+
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = "Submitting...";
+        }
+
+
+        // ========================================
+        // SEND DATA TO BACKEND
+        // ========================================
+
+        const response = await fetch(
+            BACKEND_URL + "/api/applications",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(applicationData)
+            }
+        );
+
+
+        // Try to read backend response
+        let result;
+
+        try {
+            result = await response.json();
+        } catch (jsonError) {
+
+            throw new Error(
+                "The server returned an invalid response."
+            );
+        }
+
+
+        // ========================================
+        // CHECK RESPONSE
+        // ========================================
+
+        if (!response.ok || !result.success) {
+
+            throw new Error(
+                result.message ||
+                "Application submission failed."
+            );
+
+        }
+
+
+        // ========================================
+        // SAVE APPLICATION
+        // ========================================
+
+        if (result.application) {
+
+            localStorage.setItem(
+                "nyotaBackendApplication",
+                JSON.stringify(result.application)
+            );
+
+
+            if (result.application.fundAmount !== undefined) {
+
+                localStorage.setItem(
+                    "nyotaFundAmount",
+                    result.application.fundAmount
+                );
+
+            }
+
+
+            if (result.application.processingFee !== undefined) {
+
+                localStorage.setItem(
+                    "nyotaProcessingFee",
+                    result.application.processingFee
+                );
+
+            }
+
+        }
+
+
+        // ========================================
+        // SAVE APPLICANT NAME
+        // ========================================
+
+        localStorage.setItem(
+            "nyotaApplicantName",
+            fullName
+        );
+
+
+        // ========================================
+        // SAVE SELECTED AMOUNT
+        // ========================================
+
+        localStorage.setItem(
+            "nyotaSelectedAmount",
+            selected.value
+        );
+
+
+        // ========================================
+        // GO TO CONFIRMATION PAGE
+        // ========================================
+
+        window.location.href = "confirmation.html";
+
+
+    } catch (error) {
+
+        console.error(
+            "Application submission error:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to submit application. Please try again."
+        );
+
+
+        // Enable button again
+        const submitButton =
+            document.querySelector(
+                'button[type="submit"], #submitApplication'
+            );
+
+        if (submitButton) {
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                "Submit Application";
+
+        }
+
     }
-);
 
-const result = await response.json();
-
-if (!response.ok || !result.success) {
-    throw new Error(
-        result.message || "Application submission failed."
-    );
 }
 
-localStorage.setItem(
-    "nyotaBackendApplication",
-    JSON.stringify(result.application)
-);
 
-localStorage.setItem(
-    "nyotaFundAmount",
-    result.application.fundAmount
-);
+// ========================================
+// OPTIONAL FORM SUBMISSION HANDLER
+// ========================================
 
-localStorage.setItem(
-    "nyotaProcessingFee",
-    result.application.processingFee
-);
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-window.location.href = "confirmation.html";
+        const form =
+            document.getElementById("applicationForm");
+
+        if (form) {
+
+            form.addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+                    submitApplication();
+
+                }
+            );
+
+        }
+
+    }
+);
