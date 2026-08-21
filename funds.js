@@ -37,6 +37,12 @@ document.addEventListener("DOMContentLoaded", function () {
             "150000": 890
         };
 
+        // Check that the selected amount has a fee
+        if (fees[amount] === undefined) {
+            alert("Invalid fund amount selected.");
+            return;
+        }
+
         // Save selected amount
         localStorage.setItem(
             "nyotaSelectedAmount",
@@ -49,8 +55,11 @@ document.addEventListener("DOMContentLoaded", function () {
             fees[amount]
         );
 
-        // Continue to confirmation page
-        window.location.href = "confirmation.html";
+        console.log("Selected amount:", amount);
+        console.log("Processing fee:", fees[amount]);
+
+        // Confirmation page removed.
+        // No redirect to confirmation.html.
 
     });
 
