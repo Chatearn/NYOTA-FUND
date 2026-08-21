@@ -1,203 +1,134 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* ================================
+   FUND SELECTION PAGE
+================================ */
 
-body {
-    font-family: Arial, sans-serif;
-    background: #0b7a3b;
-    color: #111;
-}
-
-/* =========================
-   HOME & APPLICATION PAGE
-========================= */
-
-.home-page,
-.application-page {
+.funds-page {
     min-height: 100vh;
-    background: #0b7a3b;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.header {
-    text-align: center;
-    padding: 20px;
-    color: white;
-}
-
-.logo {
-    width: 100px;
-    height: auto;
-}
-
-.header h2 {
-    margin-top: 10px;
-    font-size: 24px;
-    font-weight: 800;
-}
-
-/* =========================
-   HOME PAGE
-========================= */
-
-.home-content {
-    text-align: center;
-    padding: 50px 20px;
-}
-
-.home-content h1 {
-    font-size: 36px;
-    line-height: 1.2;
-    font-weight: 800;
-    color: white;
-}
-
-.application-card {
-    width: 90%;
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 35px;
-    background: white;
-    border-radius: 15px;
-}
-
-.application-card h3 {
-    margin-bottom: 25px;
-    font-size: 22px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 18px 35px;
-    background: #000;
-    color: white;
-    text-decoration: none;
-    border-radius: 10px;
-    font-size: 26px;
-    font-weight: bold;
-}
-
-/* =========================
-   APPLICATION PAGE
-========================= */
-
-.application-container {
-    width: 100%;
-    max-width: 850px;
-    margin: 30px auto;
-    padding: 20px;
-}
-
-.application-card h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 28px;
-    color: #111;
-}
-
-/* =========================
-   FORM
-========================= */
-
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.form-group {
+    background: #0b6b3a;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 15px;
+    box-sizing: border-box;
 }
 
-.form-group label {
-    margin-bottom: 8px;
-    font-weight: bold;
-    font-size: 15px;
-}
-
-.form-group input {
+.funds-card {
     width: 100%;
-    padding: 14px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
+    max-width: 650px;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 35px 25px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
 }
 
-.form-group input:focus {
-    border-color: #0b7a3b;
+.funds-card h1 {
+    margin: 0;
+    color: #075c32;
+    font-size: 30px;
+    font-weight: 800;
 }
 
-/* =========================
-   CONTINUE BUTTON
-========================= */
+.funds-card .applicant {
+    margin: 8px 0 25px;
+    color: #333;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.funds-card h2 {
+    margin-bottom: 22px;
+    color: #111;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+/* Amount buttons */
+
+.amount-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.amount-grid button {
+    border: 2px solid #0b6b3a;
+    background: #ffffff;
+    color: #075c32;
+    border-radius: 12px;
+    padding: 18px 10px;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.amount-grid button:hover {
+    background: #e9f7ef;
+    transform: translateY(-2px);
+}
+
+.amount-grid button.selected {
+    background: #0b6b3a;
+    color: #ffffff;
+    border-color: #0b6b3a;
+    box-shadow: 0 5px 15px rgba(11, 107, 58, 0.3);
+}
+
+/* Selected amount text */
+
+#selectedText {
+    min-height: 24px;
+    margin: 18px 0;
+    color: #075c32;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+/* Continue button */
 
 .continue-btn {
     width: 100%;
-    margin-top: 25px;
-    padding: 16px;
-    background: #000;
-    color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 20px;
-    font-weight: bold;
+    border-radius: 12px;
+    padding: 17px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 800;
     cursor: pointer;
+    transition: 0.2s ease;
 }
 
 .continue-btn:hover {
-    background: #222;
+    background: #333333;
+    transform: translateY(-1px);
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* Mobile */
 
-footer {
-    text-align: center;
-    padding: 20px;
-    color: white;
-}
+@media (max-width: 500px) {
 
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-    .home-content {
-        padding: 35px 15px;
+    .funds-card {
+        padding: 28px 18px;
     }
 
-    .home-content h1 {
-        font-size: 30px;
+    .funds-card h1 {
+        font-size: 25px;
     }
 
-    .application-container {
-        padding: 15px;
+    .funds-card h2 {
+        font-size: 18px;
     }
 
-    .application-card {
-        width: 100%;
-        padding: 25px 20px;
+    .amount-grid {
+        gap: 10px;
     }
 
-    .application-card h1 {
-        font-size: 24px;
-    }
-
-    .form-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-
-    .btn {
-        font-size: 22px;
+    .amount-grid button {
+        padding: 16px 5px;
+        font-size: 17px;
     }
 }
