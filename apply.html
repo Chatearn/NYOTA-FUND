@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NYOTA Fund Kenya - Application</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(255, 193, 7, 0.08) 0%,
+            rgba(60, 170, 30, 0.035) 25%,
+            transparent 60%
+        ),
+        linear-gradient(
+            180deg,
+            #050608 0%,
+            #0a0c0d 50%,
+            #030405 100%
+        );
+
+    color: #fff;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+
+    min-height: 100vh;
+
+    margin: auto;
+
+    padding: 10px 16px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    width: 100%;
+
+    padding: 20px 18px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.075),
+            rgba(255,255,255,0.025)
+        );
+
+    border: 1px solid rgba(255,205,70,0.16);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.65),
+        0 0 35px rgba(255,193,7,0.035),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+/* =================================
+   HEADING
+================================= */
+
+h1 {
+    text-align: center;
+
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 700;
+
+    margin-bottom: 6px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff3ad 0%,
+            #ffd54f 25%,
+            #e0a51c 55%,
+            #9a6509 100%
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow:
+        0 4px 12px rgba(0,0,0,0.6);
+}
+
+p {
+    text-align: center;
+
+    font-size: 16px;
+    line-height: 1.35;
+    font-weight: 400;
+
+    color: rgba(255,255,255,0.72);
+
+    margin-bottom: 12px;
+}
+
+/* =================================
+   LABELS
+================================= */
+
+label {
+    display: block;
+
+    margin-top: 10px;
+    margin-bottom: 5px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    color: rgba(255,255,255,0.90);
+}
+
+/* =================================
+   INPUTS / SELECTS
+================================= */
+
+input,
+select {
+    width: 100%;
+
+    height: 45px;
+
+    padding: 0 13px;
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    border-radius: 11px;
+
+    outline: none;
+
+    background: rgba(255,255,255,0.055);
+
+    color: #fff;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+input::placeholder {
+    color: rgba(255,255,255,0.42);
+}
+
+input:focus,
+select:focus {
+    border-color: rgba(255,197,45,0.85);
+
+    background: rgba(255,255,255,0.075);
+
+    box-shadow:
+        0 0 0 3px rgba(255,193,7,0.10),
+        0 0 18px rgba(255,193,7,0.06);
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+
+    cursor: pointer;
+}
+
+select option {
+    background: #0b0d0e;
+    color: #fff;
+}
+
+/* =================================
+   CONTINUE BUTTON
+================================= */
+
+button {
+    width: 100%;
+
+    min-height: 50px;
+
+    padding: 10px;
+
+    margin-top: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff0a0 0%,
+            #ffd34f 25%,
+            #e2a91e 60%,
+            #a96d08 100%
+        );
+
+    color: #171100;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(255,193,7,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.55);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 35px rgba(255,193,7,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width:480px) {
+
+    .container {
+        padding: 8px 14px;
+    }
+
+    .card {
+        padding: 18px 16px;
+        border-radius: 18px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    p {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    label {
+        font-size: 15px;
+        margin-top: 9px;
+        margin-bottom: 4px;
+    }
+
+    input,
+    select {
+        height: 43px;
+        font-size: 14px;
+    }
+
+    button {
+        min-height: 49px;
+        font-size: 19px;
+        margin-top: 13px;
+    }
+}
+
+/* =================================
+   SMALL PHONES
+================================= */
+
+@media (max-width:360px) {
+
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .card {
+        padding: 17px 13px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input,
+    select {
+        height: 41px;
+        font-size: 13px;
+    }
+
+    button {
+        font-size: 18px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>NYOTA Fund Application</h1>
+
+<p>Please complete all fields below.</p>
+
+<form onsubmit="submitApplication(event)">
+
+<label>Full Name</label>
+
+<input
+type="text"
+id="applicantName"
+placeholder="Enter your full name"
+required
+>
+
+<label>National ID Number</label>
+
+<input
+type="number"
+placeholder="Enter your ID Number"
+required
+>
+
+<label>Phone Number</label>
+
+<input
+type="tel"
+placeholder="07XXXXXXXX"
+required
+>
+
+<label>County</label>
+
+<select required>
+
+<option value="">Select County</option>
+
+<option>Baringo</option>
+<option>Bomet</option>
+<option>Bungoma</option>
+<option>Busia</option>
+<option>Elgeyo-Marakwet</option>
+<option>Embu</option>
+<option>Garissa</option>
+<option>Homa Bay</option>
+<option>Isiolo</option>
+<option>Kajiado</option>
+<option>Kakamega</option>
+<option>Kericho</option>
+<option>Kiambu</option>
+<option>Kilifi</option>
+<option>Kirinyaga</option>
+<option>Kisii</option>
+<option>Kisumu</option>
+<option>Kitui</option>
+<option>Kwale</option>
+<option>Laikipia</option>
+<option>Lamu</option>
+<option>Machakos</option>
+<option>Makueni</option>
+<option>Mandera</option>
+<option>Marsabit</option>
+<option>Meru</option>
+<option>Migori</option>
+<option>Mombasa</option>
+<option>Murang'a</option>
+<option>Nairobi</option>
+<option>Nakuru</option>
+<option>Nandi</option>
+<option>Narok</option>
+<option>Nyamira</option>
+<option>Nyandarua</option>
+<option>Nyeri</option>
+<option>Samburu</option>
+<option>Siaya</option>
+<option>Taita Taveta</option>
+<option>Tana River</option>
+<option>Tharaka-Nithi</option>
+<option>Trans Nzoia</option>
+<option>Turkana</option>
+<option>Uasin Gishu</option>
+<option>Vihiga</option>
+<option>Wajir</option>
+<option>West Pokot</option>
+
+</select>
+
+<label>Occupation</label>
+
+<select required>
+
+<option value="">Select Occupation</option>
+
+<option>Student</option>
+<option>Business Owner</option>
+<option>Self Employed</option>
+<option>Employed</option>
+<option>Farmer</option>
+<option>Teacher</option>
+<option>Doctor</option>
+<option>Nurse</option>
+<option>Engineer</option>
+<option>Software Developer</option>
+<option>Accountant</option>
+<option>Lawyer</option>
+<option>Driver</option>
+<option>Mechanic</option>
+<option>Electrician</option>
+<option>Plumber</option>
+<option>Carpenter</option>
+<option>Welder</option>
+<option>Tailor</option>
+<option>Hairdresser / Barber</option>
+<option>Trader</option>
+<option>Salesperson</option>
+<option>Hotel Attendant</option>
+<option>Chef / Cook</option>
+<option>Security Guard</option>
+<option>Police Officer</option>
+<option>Military Officer</option>
+<option>Journalist</option>
+<option>Graphic Designer</option>
+<option>Photographer</option>
+<option>Freelancer</option>
+<option>Content Creator</option>
+<option>Casual Worker</option>
+<option>Unemployed</option>
+<option>Retired</option>
+<option>Other</option>
+
+</select>
+
+<button type="submit" id="continueBtn">
+Continue
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<script>
+
+function submitApplication(event){
+
+    event.preventDefault();
+
+    const button =
+        document.getElementById("continueBtn");
+
+    button.textContent =
+        "Processing...";
+
+    button.disabled = true;
+
+    let name =
+        document.getElementById("applicantName").value;
+
+    localStorage.setItem(
+        "applicantName",
+        name
+    );
+
+    setTimeout(function(){
+
+        window.location.href =
+            "purpose.html";
+
+    }, 500);
+
+}
+
+</script>
+
+</body>
+
+</html>
