@@ -1,534 +1,256 @@
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
+/* =========================================
+   NYOTA FUNDS KENYA
+   HOMEPAGE STYLE
+   Colors: Green, Black & White
+========================================= */
 
-const app = express();
-const PORT = process.env.PORT || 10000;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-app.use(cors());
-app.use(express.json());
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
 
-/* =================================
-   PAYMENT STORAGE
-================================= */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7f5;
+    color: #111111;
+}
 
-const payments = new Map();
+/* =========================================
+   PAGE BACKGROUND
+========================================= */
 
-/* =================================
-   HOME
-================================= */
+.page {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 18px;
 
-app.get("/", (req, res) => {
-    res.json({
-        success: true,
-        message: "Private payment backend is running successfully"
-    });
-});
+    background:
+        linear-gradient(
+            135deg,
+            #064d2b 0%,
+            #087a42 50%,
+            #0b5d35 100%
+        );
+}
 
-/* =================================
-   PAYLOR CONFIG CHECK
-================================= */
+/* =========================================
+   MAIN CARD
+========================================= */
 
-app.get("/api/paylor-config", (req, res) => {
-    res.json({
-        success: true,
-        apiKeyConfigured: Boolean(process.env.PAYLOR_API_KEY),
-        channelConfigured: Boolean(process.env.PAYLOR_CHANNEL_ID),
-        webhookConfigured: Boolean(process.env.PAYLOR_WEBHOOK_SECRET),
-        backendConfigured: Boolean(process.env.BACKEND_URL)
-    });
-});
+.card {
+    width: 100%;
+    max-width: 560px;
 
-/* =================================
-   APPLICATION
-================================= */
+    background: #ffffff;
 
-app.post("/api/applications", (req, res) => {
+    padding: 45px 35px 40px;
 
-    const {
-        fullName,
-        idNumber,
-        phone,
-        county,
-        fundAmount
-    } = req.body;
+    border-radius: 18px;
 
-    if (
-        !fullName ||
-        !idNumber ||
-        !phone ||
-        !county ||
-        !fundAmount
-    ) {
-        return res.status(400).json({
-            success: false,
-            message: "All required fields must be provided."
-        });
+    text-align: center;
+
+    border: 2px solid #111111;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo {
+    display: block;
+
+    width: 145px;
+    max-width: 75%;
+
+    height: auto;
+
+    margin: 0 auto 22px;
+}
+
+/* =========================================
+   DIVIDER
+========================================= */
+
+.divider {
+    width: 75px;
+    height: 4px;
+
+    background: #087a42;
+
+    margin: 0 auto 25px;
+
+    border-radius: 20px;
+}
+
+/* =========================================
+   MAIN HEADING
+========================================= */
+
+h1 {
+    font-size: 31px;
+    line-height: 1.2;
+
+    font-weight: 900;
+
+    color: #111111;
+
+    letter-spacing: 0.5px;
+
+    margin-bottom: 15px;
+}
+
+/* =========================================
+   WELCOME TEXT
+========================================= */
+
+.welcome {
+    font-size: 17px;
+
+    line-height: 1.6;
+
+    color: #444444;
+
+    margin: 0 auto 32px;
+
+    max-width: 420px;
+}
+
+/* =========================================
+   APPLY BUTTON
+========================================= */
+
+.apply-btn {
+    display: block;
+
+    width: 100%;
+
+    padding: 17px 20px;
+
+    background: #087a42;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.5px;
+
+    border-radius: 10px;
+
+    border: 2px solid #087a42;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* =========================================
+   BUTTON HOVER
+========================================= */
+
+.apply-btn:hover {
+    background: #111111;
+
+    border-color: #111111;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.20);
+}
+
+/* =========================================
+   BUTTON ACTIVE
+========================================= */
+
+.apply-btn:active {
+    transform: translateY(0);
+
+    box-shadow: none;
+}
+
+/* =========================================
+   MOBILE DESIGN
+========================================= */
+
+@media (max-width: 600px) {
+
+    .page {
+        padding: 20px 15px;
     }
 
-    const application = {
-        id: Date.now().toString(),
-        fullName,
-        idNumber,
-        phone,
-        county,
-        fundAmount: Number(fundAmount),
-        status: "PENDING",
-        createdAt: new Date().toISOString()
-    };
+    .card {
+        padding: 35px 22px 30px;
 
-    console.log("NEW APPLICATION:");
-    console.log(application);
-
-    res.status(201).json({
-        success: true,
-        message: "Application received successfully.",
-        application
-    });
-});
-
-/* =================================
-   PAYLOR STK PUSH
-================================= */
-
-app.post("/api/stk-push", async (req, res) => {
-
-    console.log("=================================");
-    console.log("PAYLOR STK REQUEST");
-    console.log("=================================");
-
-    try {
-
-        const {
-            phone,
-            amount,
-            reference
-        } = req.body;
-
-        /* -----------------------------
-           VALIDATION
-        ----------------------------- */
-
-        if (!phone) {
-            return res.status(400).json({
-                success: false,
-                message: "Phone number is required."
-            });
-        }
-
-        if (!amount || Number(amount) <= 0) {
-            return res.status(400).json({
-                success: false,
-                message: "A valid payment amount is required."
-            });
-        }
-
-        if (!reference) {
-            return res.status(400).json({
-                success: false,
-                message: "Payment reference is required."
-            });
-        }
-
-        /* -----------------------------
-           API KEY
-        ----------------------------- */
-
-        if (!process.env.PAYLOR_API_KEY) {
-            return res.status(500).json({
-                success: false,
-                message: "Paylor API key is not configured."
-            });
-        }
-
-        /* -----------------------------
-           CALLBACK
-        ----------------------------- */
-
-        const backendUrl =
-            process.env.BACKEND_URL;
-
-        if (!backendUrl) {
-            return res.status(500).json({
-                success: false,
-                message: "BACKEND_URL is not configured."
-            });
-        }
-
-        const callbackUrl =
-            `${backendUrl}/api/paylor-callback`;
-
-        /* -----------------------------
-           SAVE PENDING PAYMENT
-        ----------------------------- */
-
-        payments.set(reference, {
-            reference,
-            phone,
-            amount: Number(amount),
-            status: "PENDING",
-            createdAt: new Date().toISOString()
-        });
-
-        /* -----------------------------
-           PAYLOR PAYLOAD
-        ----------------------------- */
-
-        const paylorPayload = {
-            phone: phone,
-            amount: Number(amount),
-            reference: reference,
-            description: "Private business payment",
-            callbackUrl: callbackUrl
-        };
-
-        if (process.env.PAYLOR_CHANNEL_ID) {
-            paylorPayload.channelId =
-                process.env.PAYLOR_CHANNEL_ID;
-        }
-
-        console.log(
-            "PAYLOR REQUEST:",
-            paylorPayload
-        );
-
-        /* -----------------------------
-           SEND TO PAYLOR
-        ----------------------------- */
-
-        const response = await fetch(
-            "https://api.paylorke.com/api/v1/merchants/payments/stk-push",
-            {
-                method: "POST",
-
-                headers: {
-                    "Authorization":
-                        `Bearer ${process.env.PAYLOR_API_KEY}`,
-
-                    "Content-Type":
-                        "application/json",
-
-                    "Accept":
-                        "application/json",
-
-                    "Idempotency-Key":
-                        reference
-                },
-
-                body:
-                    JSON.stringify(paylorPayload)
-            }
-        );
-
-        const text =
-            await response.text();
-
-        let data;
-
-        try {
-            data = JSON.parse(text);
-        } catch {
-            data = {
-                message: text
-            };
-        }
-
-        console.log(
-            "PAYLOR HTTP STATUS:",
-            response.status
-        );
-
-        console.log(
-            "PAYLOR RESPONSE:",
-            data
-        );
-
-        /* -----------------------------
-           PAYLOR ERROR
-        ----------------------------- */
-
-        if (!response.ok) {
-
-            payments.set(reference, {
-                reference,
-                phone,
-                amount: Number(amount),
-                status: "FAILED",
-                error:
-                    data.message ||
-                    data.error ||
-                    "Paylor rejected the STK request.",
-                updatedAt:
-                    new Date().toISOString()
-            });
-
-            return res.status(response.status).json({
-                success: false,
-                message:
-                    data.message ||
-                    data.error ||
-                    "Paylor rejected the STK request.",
-                paylor: data
-            });
-        }
-
-        /* -----------------------------
-           STK SENT
-        ----------------------------- */
-
-        payments.set(reference, {
-            reference,
-            phone,
-            amount: Number(amount),
-            status: "STK_SENT",
-            transactionId:
-                data.transactionId || null,
-            paylor: data,
-            updatedAt:
-                new Date().toISOString()
-        });
-
-        return res.json({
-            success: true,
-            message: "STK Push sent successfully.",
-            reference,
-            transactionId:
-                data.transactionId || null,
-            status:
-                data.status || "SENT"
-        });
-
-    } catch (error) {
-
-        console.error(
-            "STK ERROR:",
-            error
-        );
-
-        return res.status(500).json({
-            success: false,
-            message:
-                error.message ||
-                "Unable to connect to Paylor."
-        });
+        border-radius: 15px;
     }
-});
 
-/* =================================
-   PAYLOR CALLBACK
-================================= */
+    .logo {
+        width: 125px;
 
-app.post("/api/paylor-callback", (req, res) => {
-
-    console.log("=================================");
-    console.log("PAYLOR CALLBACK RECEIVED");
-    console.log("=================================");
-
-    console.log(
-        JSON.stringify(
-            req.body,
-            null,
-            2
-        )
-    );
-
-    try {
-
-        const body = req.body || {};
-
-        const reference =
-            body.reference ||
-            body.external_reference ||
-            body.externalReference ||
-            body.transaction?.reference ||
-            body.data?.reference;
-
-        if (!reference) {
-
-            console.log(
-                "Callback received without reference."
-            );
-
-            return res.json({
-                received: true
-            });
-        }
-
-        const existing =
-            payments.get(reference) || {};
-
-        const status =
-            String(
-                body.status ||
-                body.transaction?.status ||
-                body.data?.status ||
-                ""
-            ).toUpperCase();
-
-        console.log(
-            "REFERENCE:",
-            reference
-        );
-
-        console.log(
-            "STATUS:",
-            status
-        );
-
-        /* -----------------------------
-           SUCCESS
-        ----------------------------- */
-
-        if (
-            status === "COMPLETED" ||
-            status === "SUCCESS" ||
-            status === "SUCCESSFUL" ||
-            status === "PAID"
-        ) {
-
-            payments.set(reference, {
-                ...existing,
-
-                status: "COMPLETED",
-
-                transactionId:
-                    body.transactionId ||
-                    body.transaction?.id ||
-                    body.data?.transactionId ||
-                    body.data?.id ||
-                    existing.transactionId ||
-                    null,
-
-                callback:
-                    body,
-
-                updatedAt:
-                    new Date().toISOString()
-            });
-
-            console.log(
-                "PAYMENT COMPLETED:",
-                reference
-            );
-        }
-
-        /* -----------------------------
-           FAILED
-        ----------------------------- */
-
-        else if (
-            status === "FAILED" ||
-            status === "CANCELLED" ||
-            status === "CANCELED" ||
-            status === "REJECTED" ||
-            status === "DECLINED"
-        ) {
-
-            payments.set(reference, {
-                ...existing,
-
-                status: "FAILED",
-
-                callback:
-                    body,
-
-                updatedAt:
-                    new Date().toISOString()
-            });
-
-            console.log(
-                "PAYMENT FAILED:",
-                reference
-            );
-        }
-
-        /* -----------------------------
-           OTHER STATUS
-        ----------------------------- */
-
-        else {
-
-            payments.set(reference, {
-                ...existing,
-
-                status:
-                    status || "CALLBACK_RECEIVED",
-
-                callback:
-                    body,
-
-                updatedAt:
-                    new Date().toISOString()
-            });
-
-            console.log(
-                "PAYMENT STATUS UPDATED:",
-                status
-            );
-        }
-
-        return res.json({
-            received: true,
-            reference
-        });
-
-    } catch (error) {
-
-        console.error(
-            "CALLBACK ERROR:",
-            error
-        );
-
-        return res.status(500).json({
-            received: false,
-            message: error.message
-        });
+        margin-bottom: 18px;
     }
-});
 
-/* =================================
-   PAYMENT STATUS
-================================= */
-
-app.get(
-    "/api/payment-status/:reference",
-    (req, res) => {
-
-        const reference =
-            req.params.reference;
-
-        const payment =
-            payments.get(reference);
-
-        if (!payment) {
-
-            return res.json({
-                success: true,
-                status: "NOT_FOUND",
-                reference
-            });
-        }
-
-        return res.json({
-            success: true,
-            status: payment.status,
-            reference: payment.reference,
-            amount: payment.amount,
-            phone: payment.phone,
-            transactionId:
-                payment.transactionId || null
-        });
+    .divider {
+        margin-bottom: 21px;
     }
-);
 
-/* =================================
-   SERVER
-================================= */
+    h1 {
+        font-size: 25px;
+    }
 
-app.listen(PORT, () => {
+    .welcome {
+        font-size: 15px;
 
-    console.log(
-        `NYOTA backend running on port ${PORT}`
-    );
+        margin-bottom: 27px;
+    }
 
-});
+    .apply-btn {
+        padding: 16px;
+
+        font-size: 17px;
+    }
+}
+
+/* =========================================
+   VERY SMALL PHONES
+========================================= */
+
+@media (max-width: 360px) {
+
+    .card {
+        padding: 30px 18px;
+    }
+
+    .logo {
+        width: 110px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .welcome {
+        font-size: 14px;
+    }
+}
