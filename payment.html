@@ -11,190 +11,271 @@
 
 <body>
 
-    <div class="payment-page">
+<div class="payment-page">
 
-        <div class="payment-card">
+    <div class="payment-card">
 
-            <h1>Application Summary</h1>
+        <h1>Application Summary</h1>
 
-            <p class="subtitle">
-                Please review your selected fund amount.
-            </p>
+        <p class="subtitle">
+            Please review your selected fund amount.
+        </p>
 
-            <div class="amount-box">
-                <span>Selected Amount</span>
-                <strong id="selectedAmount">Loading...</strong>
-            </div>
-
-            <div class="notice">
-                <p>
-                    Your application has been received.
-                    Review the information above before continuing.
-                </p>
-            </div>
-
-            <button
-                type="button"
-                class="continue-btn"
-                id="continueButton"
-                onclick="continueApplication()">
-                CONTINUE
-            </button>
-
-            <button
-                type="button"
-                class="back-btn"
-                onclick="history.back()">
-                BACK
-            </button>
-
-            <p id="statusMessage"></p>
-
+        <div class="amount-box">
+            <span>Selected Amount</span>
+            <strong id="selectedAmount">Loading...</strong>
         </div>
+
+        <div class="notice">
+            <p>
+                Your application has been received.
+                Continue to request the payment prompt.
+            </p>
+        </div>
+
+        <button
+            type="button"
+            class="continue-btn"
+            id="continueButton"
+            onclick="continueApplication()">
+            CONTINUE
+        </button>
+
+        <button
+            type="button"
+            class="back-btn"
+            onclick="history.back()">
+            BACK
+        </button>
+
+        <p id="statusMessage"></p>
 
     </div>
 
-    <script>
-
-        /* ================================
-           BACKEND
-        ================================= */
-
-        const BACKEND_URL =
-            "https://nyota-backed1.onrender.com";
+</div>
 
 
-        /* ================================
-           SELECTED AMOUNT
-        ================================= */
+<script>
 
-        const selectedAmount =
-            localStorage.getItem("nyutaSelectedAmount");
+/* =========================================
+   RENDER BACKEND
+========================================= */
 
-        const amountElement =
-            document.getElementById("selectedAmount");
-
-        const statusMessage =
-            document.getElementById("statusMessage");
-
-        const continueButton =
-            document.getElementById("continueButton");
+const BACKEND_URL =
+    "https://nyota-backed1.onrender.com";
 
 
-        /* ================================
-           DISPLAY AMOUNT
-        ================================= */
+/* =========================================
+   GET DATA
+========================================= */
 
-        if (selectedAmount) {
+const selectedAmount =
+    localStorage.getItem("nyutaSelectedAmount");
 
-            amountElement.textContent =
-                "KSh " +
-                Number(selectedAmount).toLocaleString();
+const phone =
+    localStorage.getItem("phone");
 
-        } else {
 
-            amountElement.textContent =
-                "No amount selected";
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const amountElement =
+    document.getElementById("selectedAmount");
+
+const statusMessage =
+    document.getElementById("statusMessage");
+
+const continueButton =
+    document.getElementById("continueButton");
+
+
+/* =========================================
+   DISPLAY AMOUNT
+========================================= */
+
+if (selectedAmount) {
+
+    amountElement.textContent =
+        "KSh " +
+        Number(selectedAmount).toLocaleString();
+
+} else {
+
+    amountElement.textContent =
+        "No amount selected";
+}
+
+
+/* =========================================
+   CONTINUE
+========================================= */
+
+async function continueApplication() {
+
+    /* -----------------------------
+       CHECK AMOUNT
+    ----------------------------- */
+
+    if (!selectedAmount) {
+
+        statusMessage.textContent =
+            "Please select a fund amount first.";
+
+        return;
+    }
+
+
+    /* -----------------------------
+       CHECK PHONE
+    ----------------------------- */
+
+    if (!phone) {
+
+        statusMessage.textContent =
+            "M-Pesa phone number is missing.";
+
+        return;
+    }
+
+
+    /* -----------------------------
+       DISABLE BUTTON
+    ----------------------------- */
+
+    continueButton.disabled = true;
+
+    continueButton.textContent =
+        "PROCESSING...";
+
+    statusMessage.textContent =
+        "Sending payment request...";
+
+
+    try {
+
+        /* -----------------------------
+           SEND TO RENDER
+        ----------------------------- */
+
+        const response = await fetch(
+
+            BACKEND_URL + "/api/stkpush",
+
+            {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    phone: phone,
+
+                    amount:
+                        Number(selectedAmount),
+
+                    reference:
+                        "NYOTA-" + Date.now(),
+
+                    description:
+                        "NYOTA Payment"
+
+                })
+
+            }
+        );
+
+
+        /* -----------------------------
+           READ RESPONSE
+        ----------------------------- */
+
+        const data =
+            await response.json();
+
+        console.log(
+            "NYOTA SERVER RESPONSE:",
+            data
+        );
+
+
+        /* -----------------------------
+           SERVER ERROR
+        ----------------------------- */
+
+        if (!response.ok || !data.success) {
+
+            throw new Error(
+
+                data.message ||
+                "STK Push request failed."
+
+            );
+
         }
 
 
-        /* ================================
-           CONTINUE
-        ================================= */
+        /* -----------------------------
+           SUCCESS
+        ----------------------------- */
 
-        async function continueApplication() {
+        statusMessage.textContent =
+            "STK Push sent. Please check your M-Pesa phone.";
 
-            if (!selectedAmount) {
-
-                alert("Please select a fund amount first.");
-
-                window.location.href =
-                    "funds.html";
-
-                return;
-            }
+        continueButton.textContent =
+            "PROMPT SENT";
 
 
-            continueButton.disabled = true;
+        /* -----------------------------
+           SAVE TRANSACTION
+        ----------------------------- */
 
-            continueButton.textContent =
-                "PROCESSING...";
+        if (data.transactionId) {
 
-            statusMessage.textContent =
-                "Connecting to the payment server...";
+            localStorage.setItem(
+                "nyotaTransactionId",
+                data.transactionId
+            );
 
-
-            try {
-
-                const phone =
-                    localStorage.getItem("phone") ||
-                    "254700000000";
-
-
-                const response = await fetch(
-                    BACKEND_URL + "/api/test-stk",
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-
-                        body: JSON.stringify({
-                            phone: phone,
-                            amount: Number(selectedAmount)
-                        })
-                    }
-                );
-
-
-                const data =
-                    await response.json();
-
-
-                console.log(
-                    "Backend response:",
-                    data
-                );
-
-
-                if (!response.ok || !data.success) {
-
-                    throw new Error(
-                        data.message ||
-                        "Payment server rejected the request."
-                    );
-                }
-
-
-                statusMessage.textContent =
-                    "Test STK request was accepted successfully.";
-
-
-                continueButton.textContent =
-                    "REQUEST SENT";
-
-
-            } catch (error) {
-
-                console.error(
-                    "Payment error:",
-                    error
-                );
-
-
-                statusMessage.textContent =
-                    "Unable to connect to the payment server.";
-
-
-                continueButton.disabled = false;
-
-                continueButton.textContent =
-                    "TRY AGAIN";
-            }
         }
 
-    </script>
+        if (data.reference) {
+
+            localStorage.setItem(
+                "nyotaPaymentReference",
+                data.reference
+            );
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "NYOTA PAYMENT ERROR:",
+            error
+        );
+
+
+        statusMessage.textContent =
+            error.message ||
+            "Unable to send STK Push.";
+
+
+        continueButton.disabled =
+            false;
+
+        continueButton.textContent =
+            "TRY AGAIN";
+
+    }
+
+}
+
+</script>
 
 </body>
 </html>
