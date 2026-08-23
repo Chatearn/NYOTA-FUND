@@ -28,7 +28,6 @@ body{
 body{
     min-height:100vh;
 
-    /* GREEN BACKGROUND */
     background:
         radial-gradient(
             circle at 50% 20%,
@@ -43,7 +42,6 @@ body{
             #00A651 100%
         );
 
-    /* PURE WHITE */
     color:#FFFFFF;
 }
 
@@ -67,7 +65,6 @@ body{
             rgba(255,255,255,0.025)
         );
 
-    /* BLACK FRAME */
     border:1px solid #000000;
 
     box-shadow:
@@ -77,10 +74,7 @@ body{
 
 h1{
     text-align:center;
-
-    /* BLACK LETTERS */
     color:#000000;
-
     font-size:30px;
     font-weight:700;
     margin-bottom:10px;
@@ -91,22 +85,16 @@ h1{
     font-size:16px;
     line-height:1.5;
     margin-bottom:18px;
-
-    /* PURE WHITE */
     color:#FFFFFF;
 }
 
 .message b{
-    /* BLACK LETTERS */
     color:#000000;
 }
 
 h2{
     text-align:center;
-
-    /* BLACK LETTERS */
     color:#000000;
-
     font-size:21px;
     font-weight:700;
     margin-bottom:12px;
@@ -122,13 +110,9 @@ h2{
     width:100%;
 
     background:rgba(0,0,0,0.10);
-
-    /* PURE WHITE */
     color:#FFFFFF;
 
-    /* BLACK FRAME */
     border:1px solid #000000;
-
     border-radius:13px;
 
     padding:13px 8px;
@@ -145,22 +129,13 @@ h2{
 }
 
 .amount-btn:hover{
-
-    /* BLACK FRAME */
     border-color:#000000;
-
     transform:translateY(-1px);
 }
 
 .amount-btn.selected{
-
-    /* PURE YELLOW */
     background:#FFD400;
-
-    /* BLACK LETTERS */
     color:#000000;
-
-    /* BLACK FRAME */
     border-color:#000000;
 }
 
@@ -173,24 +148,18 @@ h2{
     font-size:15px;
     line-height:1.4;
 
-    /* PURE WHITE */
     color:#FFFFFF;
 
     background:rgba(0,0,0,0.10);
 
-    /* BLACK FRAME */
     border:1px solid #000000;
-
     border-radius:11px;
 
     min-height:48px;
 }
 
 #feeDisplay span{
-
-    /* BLACK LETTERS */
     color:#000000;
-
     font-size:20px;
     font-weight:700;
 }
@@ -199,15 +168,10 @@ h2{
     width:100%;
     padding:14px;
 
-    /* PURE YELLOW */
     background:#FFD400;
-
-    /* BLACK LETTERS */
     color:#000000;
 
-    /* BLACK FRAME */
     border:1px solid #000000;
-
     border-radius:13px;
 
     font-size:19px;
@@ -240,8 +204,6 @@ h2{
     text-align:center;
 
     font-size:13px;
-
-    /* BLACK LETTERS */
     color:#000000;
 }
 
@@ -328,3 +290,289 @@ review the applicable service fee before continuing.
     data-amount="40000"
     onclick="selectAmount(40000,this)">
     KSh 40,000
+</button>
+
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="50000"
+    onclick="selectAmount(50000,this)">
+    KSh 50,000
+</button>
+
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="65000"
+    onclick="selectAmount(65000,this)">
+    KSh 65,000
+</button>
+
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="75000"
+    onclick="selectAmount(75000,this)">
+    KSh 75,000
+</button>
+
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="85000"
+    onclick="selectAmount(85000,this)">
+    KSh 85,000
+</button>
+
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="110000"
+    onclick="selectAmount(110000,this)">
+    KSh 110,000
+</button>
+
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="150000"
+    onclick="selectAmount(150000,this)">
+    KSh 150,000
+</button>
+
+</div>
+
+<div id="feeDisplay">
+Select an amount to see the applicable service fee.
+</div>
+
+<button
+    type="button"
+    class="continue-btn"
+    id="continueBtn"
+    onclick="continueNext">
+
+    Continue
+
+</button>
+
+<div id="flowMessage"></div>
+
+</div>
+
+</div>
+
+<script>
+
+/* =========================================
+   FEE TABLE
+========================================= */
+
+const fees = {
+
+    22000: 350,
+
+    30000: 400,
+
+    40000: 460,
+
+    50000: 520,
+
+    65000: 660,
+
+    75000: 780,
+
+    85000: 910,
+
+    110000: 1240,
+
+    150000: 1500
+
+};
+
+
+/* =========================================
+   APPLICANT
+========================================= */
+
+const applicant =
+    localStorage.getItem("applicantName");
+
+document.getElementById(
+    "applicantName"
+).textContent =
+    applicant || "Applicant";
+
+
+/* =========================================
+   CURRENT SELECTION
+========================================= */
+
+let selectedAmount = null;
+
+
+/* =========================================
+   RESTORE PREVIOUS SELECTION
+========================================= */
+
+const savedAmount =
+    Number(
+        localStorage.getItem(
+            "selectedAmount"
+        )
+    );
+
+if(
+    savedAmount &&
+    fees[savedAmount]
+){
+
+    const savedButton =
+        document.querySelector(
+            `[data-amount="${savedAmount}"]`
+        );
+
+    if(savedButton){
+
+        selectAmount(
+            savedAmount,
+            savedButton
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   SELECT AMOUNT
+========================================= */
+
+function selectAmount(amount, button){
+
+    if(!fees[amount]){
+        return;
+    }
+
+    selectedAmount =
+        Number(amount);
+
+    document
+        .querySelectorAll(".amount-btn")
+        .forEach(function(item){
+
+            item.classList.remove(
+                "selected"
+            );
+
+        });
+
+    button.classList.add(
+        "selected"
+    );
+
+    const processingFee =
+        fees[selectedAmount];
+
+    document.getElementById(
+        "feeDisplay"
+    ).innerHTML =
+
+        "Service Fee: " +
+
+        "<span>KSh " +
+
+        processingFee
+            .toLocaleString() +
+
+        "</span>";
+
+    localStorage.setItem(
+        "selectedAmount",
+        String(selectedAmount)
+    );
+
+    localStorage.setItem(
+        "processingFee",
+        String(processingFee)
+    );
+
+    localStorage.setItem(
+        "selectedAmountFormatted",
+        "KSh " +
+        selectedAmount.toLocaleString()
+    );
+
+}
+
+
+/* =========================================
+   CONTINUE
+========================================= */
+
+function continueNext(){
+
+    const button =
+        document.getElementById(
+            "continueBtn"
+        );
+
+    const message =
+        document.getElementById(
+            "flowMessage"
+        );
+
+    if(
+        selectedAmount === null
+    ){
+
+        message.textContent =
+            "Please select an amount first.";
+
+        return;
+
+    }
+
+    const processingFee =
+        fees[selectedAmount];
+
+    if(!processingFee){
+
+        message.textContent =
+            "Unable to determine the service fee.";
+
+        return;
+
+    }
+
+    localStorage.setItem(
+        "selectedAmount",
+        String(selectedAmount)
+    );
+
+    localStorage.setItem(
+        "processingFee",
+        String(processingFee)
+    );
+
+    button.disabled = true;
+
+    button.textContent =
+        "Continue...";
+
+    message.textContent =
+        "Preparing your payment page...";
+
+    setTimeout(function(){
+
+        window.location.href =
+            "payment.html";
+
+    },500);
+
+}
+
+</script>
+
+</body>
+</html>
