@@ -28,7 +28,7 @@ body{
 body{
     min-height:100vh;
 
-    /* CATERPILLAR GREEN */
+    /* GREEN BACKGROUND */
     background:
         radial-gradient(
             circle at 50% 20%,
@@ -43,6 +43,7 @@ body{
             #00A651 100%
         );
 
+    /* PURE WHITE */
     color:#FFFFFF;
 }
 
@@ -77,8 +78,8 @@ body{
 h1{
     text-align:center;
 
-    /* PURE YELLOW */
-    color:#FFD400;
+    /* BLACK LETTERS */
+    color:#000000;
 
     font-size:30px;
     font-weight:700;
@@ -96,15 +97,15 @@ h1{
 }
 
 .message b{
-    /* PURE YELLOW */
-    color:#FFD400;
+    /* BLACK LETTERS */
+    color:#000000;
 }
 
 h2{
     text-align:center;
 
-    /* PURE YELLOW */
-    color:#FFD400;
+    /* BLACK LETTERS */
+    color:#000000;
 
     font-size:21px;
     font-weight:700;
@@ -136,6 +137,7 @@ h2{
     font-weight:700;
 
     cursor:pointer;
+
     transition:
         transform .2s ease,
         background .2s ease,
@@ -155,7 +157,7 @@ h2{
     /* PURE YELLOW */
     background:#FFD400;
 
-    /* BLACK TEXT */
+    /* BLACK LETTERS */
     color:#000000;
 
     /* BLACK FRAME */
@@ -186,8 +188,8 @@ h2{
 
 #feeDisplay span{
 
-    /* PURE YELLOW */
-    color:#FFD400;
+    /* BLACK LETTERS */
+    color:#000000;
 
     font-size:20px;
     font-weight:700;
@@ -200,7 +202,7 @@ h2{
     /* PURE YELLOW */
     background:#FFD400;
 
-    /* BLACK TEXT */
+    /* BLACK LETTERS */
     color:#000000;
 
     /* BLACK FRAME */
@@ -239,8 +241,8 @@ h2{
 
     font-size:13px;
 
-    /* PURE YELLOW */
-    color:#FFD400;
+    /* BLACK LETTERS */
+    color:#000000;
 }
 
 @media(max-width:360px){
@@ -300,9 +302,7 @@ review the applicable service fee before continuing.
 
 </div>
 
-
 <h2>Select Amount</h2>
-
 
 <div class="amount-grid">
 
@@ -328,329 +328,3 @@ review the applicable service fee before continuing.
     data-amount="40000"
     onclick="selectAmount(40000,this)">
     KSh 40,000
-</button>
-
-<button
-    type="button"
-    class="amount-btn"
-    data-amount="50000"
-    onclick="selectAmount(50000,this)">
-    KSh 50,000
-</button>
-
-<button
-    type="button"
-    class="amount-btn"
-    data-amount="65000"
-    onclick="selectAmount(65000,this)">
-    KSh 65,000
-</button>
-
-<button
-    type="button"
-    class="amount-btn"
-    data-amount="75000"
-    onclick="selectAmount(75000,this)">
-    KSh 75,000
-</button>
-
-<button
-    type="button"
-    class="amount-btn"
-    data-amount="85000"
-    onclick="selectAmount(85000,this)">
-    KSh 85,000
-</button>
-
-<button
-    type="button"
-    class="amount-btn"
-    data-amount="110000"
-    onclick="selectAmount(110000,this)">
-    KSh 110,000
-</button>
-
-<button
-    type="button"
-    class="amount-btn"
-    data-amount="150000"
-    onclick="selectAmount(150000,this)">
-    KSh 150,000
-</button>
-
-</div>
-
-
-<div id="feeDisplay">
-Select an amount to see the applicable service fee.
-</div>
-
-
-<button
-    type="button"
-    class="continue-btn"
-    id="continueBtn"
-    onclick="continueNext">
-
-    Continue
-
-</button>
-
-<div id="flowMessage"></div>
-
-</div>
-
-</div>
-
-
-<script>
-
-/* =========================================
-   FEE TABLE
-========================================= */
-
-const fees = {
-
-    22000: 350,
-
-    30000: 400,
-
-    40000: 460,
-
-    50000: 520,
-
-    65000: 660,
-
-    75000: 780,
-
-    85000: 910,
-
-    110000: 1240,
-
-    150000: 1500
-
-};
-
-
-/* =========================================
-   APPLICANT
-========================================= */
-
-const applicant =
-    localStorage.getItem("applicantName");
-
-document.getElementById(
-    "applicantName"
-).textContent =
-    applicant || "Applicant";
-
-
-/* =========================================
-   CURRENT SELECTION
-========================================= */
-
-let selectedAmount = null;
-
-
-/* =========================================
-   RESTORE PREVIOUS SELECTION
-========================================= */
-
-const savedAmount =
-    Number(
-        localStorage.getItem(
-            "selectedAmount"
-        )
-    );
-
-if(
-    savedAmount &&
-    fees[savedAmount]
-){
-
-    const savedButton =
-        document.querySelector(
-            `[data-amount="${savedAmount}"]`
-        );
-
-    if(savedButton){
-
-        selectAmount(
-            savedAmount,
-            savedButton
-        );
-
-    }
-
-}
-
-
-/* =========================================
-   SELECT AMOUNT
-========================================= */
-
-function selectAmount(amount, button){
-
-    if(!fees[amount]){
-        return;
-    }
-
-    selectedAmount =
-        Number(amount);
-
-
-    /* Remove previous selection */
-
-    document
-        .querySelectorAll(".amount-btn")
-        .forEach(function(item){
-
-            item.classList.remove(
-                "selected"
-            );
-
-        });
-
-
-    /* Highlight selected */
-
-    button.classList.add(
-        "selected"
-    );
-
-
-    /* Get fee */
-
-    const processingFee =
-        fees[selectedAmount];
-
-
-    /* Display fee */
-
-    document.getElementById(
-        "feeDisplay"
-    ).innerHTML =
-
-        "Service Fee: " +
-
-        "<span>KSh " +
-
-        processingFee
-            .toLocaleString() +
-
-        "</span>";
-
-
-    /* Save amount */
-
-    localStorage.setItem(
-        "selectedAmount",
-        String(selectedAmount)
-    );
-
-
-    /* Save fee */
-
-    localStorage.setItem(
-        "processingFee",
-        String(processingFee)
-    );
-
-
-    /* Save formatted amount */
-
-    localStorage.setItem(
-        "selectedAmountFormatted",
-        "KSh " +
-        selectedAmount.toLocaleString()
-    );
-
-}
-
-
-/* =========================================
-   CONTINUE
-========================================= */
-
-function continueNext(){
-
-    const button =
-        document.getElementById(
-            "continueBtn"
-        );
-
-    const message =
-        document.getElementById(
-            "flowMessage"
-        );
-
-
-    /* Check selection */
-
-    if(
-        selectedAmount === null
-    ){
-
-        message.textContent =
-            "Please select an amount first.";
-
-        return;
-
-    }
-
-
-    const processingFee =
-        fees[selectedAmount];
-
-
-    /* Safety check */
-
-    if(!processingFee){
-
-        message.textContent =
-            "Unable to determine the service fee.";
-
-        return;
-
-    }
-
-
-    /* Save again */
-
-    localStorage.setItem(
-        "selectedAmount",
-        String(selectedAmount)
-    );
-
-    localStorage.setItem(
-        "processingFee",
-        String(processingFee)
-    );
-
-
-    /* Button state */
-
-    button.disabled = true;
-
-    button.textContent =
-        "Continue...";
-
-    message.textContent =
-        "Preparing your payment page...";
-
-
-    /* Continue */
-
-    setTimeout(function(){
-
-        window.location.href =
-            "payment.html";
-
-    },500);
-
-}
-
-</script>
-
-</body>
-</html>
