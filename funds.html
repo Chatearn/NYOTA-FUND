@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NYOTA FUNDS KENYA</title>
+<title>NYOTA Funds</title>
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family:'Poppins',sans-serif;
 }
-    
 
 html,
 body{
@@ -24,47 +26,62 @@ body{
 }
 
 body{
+    min-height:100vh;
     background:#0B0217;
     color:#fff;
-    font-family:'Poppins',sans-serif;
-    min-height:100vh;
 }
 
 .container{
+    width:100%;
     max-width:500px;
+    min-height:100vh;
     margin:auto;
-    height:100vh;
-    padding:10px 16px;
-    display:flex;
-    flex-direction:column;
-} 
+    padding:12px 16px;
+}
+
+.card{
+    width:100%;
+    padding:20px 16px;
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.075),
+            rgba(255,255,255,0.025)
+        );
+
+    border:1px solid rgba(212,175,55,0.16);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.65),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+}
 
 h1{
     text-align:center;
     color:#D4AF37;
-    font-size:36px;
+    font-size:30px;
     font-weight:700;
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 
 .message{
     text-align:center;
-    font-size:27px;
-    font-weight:400;
-    line-height:1.35;
-    margin-bottom:14px;
+    font-size:16px;
+    line-height:1.5;
+    margin-bottom:18px;
     color:rgba(255,255,255,0.72);
 }
 
 .message b{
     color:#D4AF37;
-    font-weight:700;
 }
 
 h2{
     text-align:center;
     color:#D4AF37;
-    font-size:27px;
+    font-size:21px;
     font-weight:700;
     margin-bottom:12px;
 }
@@ -72,111 +89,151 @@ h2{
 .amount-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:10px;
+    gap:9px;
 }
 
 .amount-btn{
+    width:100%;
     background:rgba(212,175,55,0.055);
     color:#fff;
+
     border:1px solid rgba(212,175,55,0.25);
-    border-radius:15px;
-    padding:14px 10px;
-    font-size:27px;
+    border-radius:13px;
+
+    padding:13px 8px;
+
+    font-size:18px;
     font-weight:700;
+
     cursor:pointer;
-    transition:.3s;
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease;
 }
 
 .amount-btn:hover{
     border-color:#D4AF37;
+    transform:translateY(-1px);
 }
 
 .amount-btn.selected{
-    background:linear-gradient(135deg,#D4AF37,#A67C00);
+    background:
+        linear-gradient(
+            135deg,
+            #D4AF37,
+            #A67C00
+        );
+
     color:#0B0217;
     border-color:#D4AF37;
 }
 
 #feeDisplay{
-    margin:12px 0;
+    margin:15px 0;
+    padding:12px;
+
     text-align:center;
-    font-size:24px;
-    font-weight:400;
-    min-height:30px;
-    color:rgba(255,255,255,0.85);
+
+    font-size:15px;
+    line-height:1.4;
+
+    color:rgba(255,255,255,0.72);
+
+    background:rgba(255,255,255,0.035);
+
+    border-radius:11px;
+
+    min-height:48px;
 }
 
 #feeDisplay span{
-    font-size:27px;
-    font-weight:700;
     color:#D4AF37;
+    font-size:20px;
+    font-weight:700;
 }
 
 .continue-btn{
-    margin-top:0px;
     width:100%;
     padding:14px;
-    background:linear-gradient(135deg,#D4AF37,#A67C00);
+
+    background:
+        linear-gradient(
+            135deg,
+            #D4AF37,
+            #A67C00
+        );
+
     color:#0B0217;
+
     border:none;
-    border-radius:15px;
-    font-size:27px;
+    border-radius:13px;
+
+    font-size:19px;
     font-weight:700;
+
     cursor:pointer;
+
+    box-shadow:
+        0 10px 25px rgba(212,175,55,0.15);
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+.continue-btn:hover{
+    transform:translateY(-2px);
 }
 
 .continue-btn:disabled{
-    opacity:.7;
+    opacity:.6;
     cursor:not-allowed;
+    transform:none;
 }
 
-@media(max-height:800px){
+#flowMessage{
+    min-height:20px;
+    margin-top:10px;
+
+    text-align:center;
+
+    font-size:13px;
+    color:#D4AF37;
+}
+
+@media(max-width:360px){
 
     .container{
-        padding:8px 14px;
+        padding:10px 12px;
     }
 
-   h1{
-    font-size:30px;
-    margin-bottom:8px;
-}
+    .card{
+        padding:18px 13px;
+    }
 
-.message{
-    font-size:19px;
-    line-height:1.25;
-    margin-bottom:10px;
-}
+    h1{
+        font-size:25px;
+    }
 
-h2{
-    font-size:21px;
-    margin-bottom:10px;
-}
+    .message{
+        font-size:14px;
+    }
 
-.amount-grid{
-    gap:8px;
-}
+    h2{
+        font-size:19px;
+    }
 
-.amount-btn{
-    padding:11px 8px;
-    font-size:20px;
-}
+    .amount-btn{
+        font-size:16px;
+        padding:12px 6px;
+    }
 
-#feeDisplay{
-    margin:8px 0;
-    min-height:26px;
-    font-size:18px;
-}
+    .continue-btn{
+        font-size:18px;
+    }
 
-#feeDisplay span{
-    font-size:20px;
 }
-
-.continue-btn{
-    margin-top:0;
-    padding:12px;
-    font-size:20px;
-}
-        
 
 </style>
 
@@ -186,165 +243,369 @@ h2{
 
 <div class="container">
 
-<h1>NYOTA FUNDS KENYA</h1>
+<div class="card">
+
+<h1>NYOTA Funds</h1>
 
 <div class="message">
 
-Congratulations 🎉 <span id="applicantName"></span><br><br>
+Welcome,
+<b id="applicantName">Applicant</b>.
 
-You're eligible for <b>NYOTA Funds Limits.</b><br>
+<br><br>
 
-Kindly choose the amount you want and pay the
-<b>program processing fee</b> to continue.
+Choose the amount you would like to request and
+review the applicable service fee before continuing.
 
 </div>
 
-<h2>Select Your NYOTA FUNDS AMOUNT</h2>
+
+<h2>Select Amount</h2>
+
 
 <div class="amount-grid">
 
-<button class="amount-btn"
-onclick="selectAmount(22000,this)">
-Ksh 22,000
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="22000"
+    onclick="selectAmount(22000,this)">
+    KSh 22,000
 </button>
-
-<button class="amount-btn"
-onclick="selectAmount(30000,this)">
-Ksh 30,000
-</button>
-
-<button class="amount-btn"
-onclick="selectAmount(40000,this)">
-Ksh 40,000
-</button>
-
-<button class="amount-btn"
-onclick="selectAmount(50000,this)">
-Ksh 50,000
-</button>
-
-<button class="amount-btn"
-onclick="selectAmount(65000,this)">
-Ksh 65,000
-</button>
-
-<button class="amount-btn"
-onclick="selectAmount(75000,this)">
-Ksh 75,000
-</button>
-
-<button class="amount-btn"
-onclick="selectAmount(85000,this)">
-Ksh 85,000
-</button>
-
-<button class="amount-btn"
-onclick="selectAmount(110000,this)">
-Ksh 110,000
-</button>
-
-<button class="amount-btn"
-onclick="selectAmount(150000,this)">
-Ksh 150,000
-</button>
-
-</div>
-
-<div id="feeDisplay">
-Select an amount to see the processing fee.
-</div>
 
 <button
-class="continue-btn"
-onclick="continueNext()">
+    type="button"
+    class="amount-btn"
+    data-amount="30000"
+    onclick="selectAmount(30000,this)">
+    KSh 30,000
+</button>
 
-Continue
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="40000"
+    onclick="selectAmount(40000,this)">
+    KSh 40,000
+</button>
 
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="50000"
+    onclick="selectAmount(50000,this)">
+    KSh 50,000
+</button>
+
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="65000"
+    onclick="selectAmount(65000,this)">
+    KSh 65,000
+</button>
+
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="75000"
+    onclick="selectAmount(75000,this)">
+    KSh 75,000
+</button>
+
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="85000"
+    onclick="selectAmount(85000,this)">
+    KSh 85,000
+</button>
+
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="110000"
+    onclick="selectAmount(110000,this)">
+    KSh 110,000
+</button>
+
+<button
+    type="button"
+    class="amount-btn"
+    data-amount="150000"
+    onclick="selectAmount(150000,this)">
+    KSh 150,000
 </button>
 
 </div>
+
+
+<div id="feeDisplay">
+Select an amount to see the applicable service fee.
+</div>
+
+
+<button
+    type="button"
+    class="continue-btn"
+    id="continueBtn"
+    onclick="continueNext()">
+
+    Continue
+
+</button>
+
+<div id="flowMessage"></div>
+
+</div>
+
+</div>
+
 
 <script>
 
+/* =========================================
+   FEE TABLE
+========================================= */
+
 const fees = {
 
-22000:350,
-30000:400,
-40000:460,
-50000:520,
-65000:660,
-75000:780,
-85000:910,
-110000:1240,
-150000:1500
+    22000: 350,
+
+    30000: 400,
+
+    40000: 460,
+
+    50000: 520,
+
+    65000: 660,
+
+    75000: 780,
+
+    85000: 910,
+
+    110000: 1240,
+
+    150000: 1500
 
 };
 
+
+/* =========================================
+   APPLICANT
+========================================= */
+
+const applicant =
+    localStorage.getItem("applicantName");
+
+document.getElementById(
+    "applicantName"
+).textContent =
+    applicant || "Applicant";
+
+
+/* =========================================
+   CURRENT SELECTION
+========================================= */
+
 let selectedAmount = null;
 
-document.getElementById("applicantName").textContent =
-localStorage.getItem("applicantName") || "Applicant";
 
+/* =========================================
+   RESTORE PREVIOUS SELECTION
+========================================= */
 
-function selectAmount(amount, btn){
+const savedAmount =
+    Number(
+        localStorage.getItem(
+            "selectedAmount"
+        )
+    );
 
-selectedAmount = amount;
+if(
+    savedAmount &&
+    fees[savedAmount]
+){
 
-document
-.querySelectorAll(".amount-btn")
-.forEach(button=>{
-    button.classList.remove("selected");
-});
+    const savedButton =
+        document.querySelector(
+            `[data-amount="${savedAmount}"]`
+        );
 
-btn.classList.add("selected");
+    if(savedButton){
 
-document.getElementById("feeDisplay").innerHTML =
-"Processing Fee: <span>Ksh " +
-fees[amount].toLocaleString() +
-"</span>";
+        selectAmount(
+            savedAmount,
+            savedButton
+        );
 
-localStorage.setItem(
-    "selectedAmount",
-    amount
-);
-
-localStorage.setItem(
-    "processingFee",
-    fees[amount]
-);
+    }
 
 }
 
+
+/* =========================================
+   SELECT AMOUNT
+========================================= */
+
+function selectAmount(amount, button){
+
+    if(!fees[amount]){
+        return;
+    }
+
+    selectedAmount =
+        Number(amount);
+
+
+    /* Remove previous selection */
+
+    document
+        .querySelectorAll(".amount-btn")
+        .forEach(function(item){
+
+            item.classList.remove(
+                "selected"
+            );
+
+        });
+
+
+    /* Highlight selected */
+
+    button.classList.add(
+        "selected"
+    );
+
+
+    /* Get fee */
+
+    const processingFee =
+        fees[selectedAmount];
+
+
+    /* Display fee */
+
+    document.getElementById(
+        "feeDisplay"
+    ).innerHTML =
+
+        "Service Fee: " +
+
+        "<span>KSh " +
+
+        processingFee
+            .toLocaleString() +
+
+        "</span>";
+
+
+    /* Save amount */
+
+    localStorage.setItem(
+        "selectedAmount",
+        String(selectedAmount)
+    );
+
+
+    /* Save fee */
+
+    localStorage.setItem(
+        "processingFee",
+        String(processingFee)
+    );
+
+
+    /* Save formatted amount */
+
+    localStorage.setItem(
+        "selectedAmountFormatted",
+        "KSh " +
+        selectedAmount.toLocaleString()
+    );
+
+}
+
+
+/* =========================================
+   CONTINUE
+========================================= */
 
 function continueNext(){
 
-if(selectedAmount === null){
+    const button =
+        document.getElementById(
+            "continueBtn"
+        );
 
-alert("Please select an amount first.");
+    const message =
+        document.getElementById(
+            "flowMessage"
+        );
 
-return;
 
-}
+    /* Check selection */
 
-const button =
-document.querySelector(".continue-btn");
+    if(
+        selectedAmount === null
+    ){
 
-button.textContent =
-"Processing...";
+        message.textContent =
+            "Please select an amount first.";
 
-button.disabled = true;
+        return;
 
-button.style.opacity = "0.7";
+    }
 
-button.style.cursor =
-"not-allowed";
 
-setTimeout(() => {
+    const processingFee =
+        fees[selectedAmount];
 
-window.location.href =
-"payment.html";
 
-},1000);
+    /* Safety check */
+
+    if(!processingFee){
+
+        message.textContent =
+            "Unable to determine the service fee.";
+
+        return;
+
+    }
+
+
+    /* Save again */
+
+    localStorage.setItem(
+        "selectedAmount",
+        String(selectedAmount)
+    );
+
+    localStorage.setItem(
+        "processingFee",
+        String(processingFee)
+    );
+
+
+    /* Button state */
+
+    button.disabled = true;
+
+    button.textContent =
+        "Continue...";
+
+    message.textContent =
+        "Preparing your payment page...";
+
+
+    /* Continue */
+
+    setTimeout(function(){
+
+        window.location.href =
+            "payment.html";
+
+    },500);
 
 }
 
