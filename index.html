@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>NYOTA FUNDS</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -20,8 +22,8 @@
             min-height: 100vh;
         }
 
-        /* ================================
-           TOP LOGO SECTION
+        /* =================================
+           TOP LOGO
         ================================= */
 
         .top-logo {
@@ -43,7 +45,7 @@
             display: block;
         }
 
-        /* ================================
+        /* =================================
            MAIN CONTENT
         ================================= */
 
@@ -51,71 +53,91 @@
             width: 100%;
             max-width: 900px;
             margin: 0 auto;
-            padding: 35px 20px 50px;
+
+            padding: 35px 20px 45px;
+
             text-align: center;
         }
 
         .main-container h1 {
             color: #FFD400;
+
             font-size: 34px;
             font-weight: 900;
+
+            line-height: 1.2;
+
             margin-bottom: 15px;
+
             text-transform: uppercase;
         }
 
-        .main-container .subtitle {
+        .subtitle {
             color: #FFFFFF;
+
             font-size: 18px;
             font-weight: bold;
+
             line-height: 1.5;
+
             margin-bottom: 30px;
         }
 
-        /* ================================
+        /* =================================
            WELCOME CARD
         ================================= */
 
         .welcome-card {
+            width: 100%;
+            max-width: 700px;
+
+            margin: 0 auto 30px;
+
+            padding: 30px 20px;
+
             background: #FFFFFF;
+
             border: 3px solid #000000;
             border-radius: 16px;
-            padding: 30px 20px;
-            margin: 0 auto 30px;
-            max-width: 700px;
         }
 
         .welcome-card h2 {
             color: #00A651;
+
             font-size: 27px;
             font-weight: 900;
+
             margin-bottom: 15px;
         }
 
         .welcome-card p {
             color: #000000;
+
             font-size: 16px;
             font-weight: bold;
+
             line-height: 1.6;
         }
 
-        /* ================================
-           BUTTONS
+        /* =================================
+           BUTTON AREA
         ================================= */
 
         .buttons {
+            width: 100%;
+
             display: flex;
             justify-content: center;
             align-items: center;
+
             gap: 18px;
+
             flex-wrap: wrap;
         }
 
         .btn {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-
             min-width: 220px;
+
             padding: 16px 25px;
 
             border: 3px solid #000000;
@@ -123,16 +145,24 @@
 
             font-size: 18px;
             font-weight: 900;
+
             text-decoration: none;
 
+            text-align: center;
+
             cursor: pointer;
+
             transition: 0.2s ease;
         }
+
+        /* APPLY NOW */
 
         .apply-now {
             background: #FFD400;
             color: #000000;
         }
+
+        /* APPLY LATER */
 
         .apply-later {
             background: #FFFFFF;
@@ -140,29 +170,34 @@
         }
 
         .btn:hover {
-            transform: translateY(-2px);
             opacity: 0.9;
+            transform: translateY(-2px);
         }
 
         .btn:active {
             transform: scale(0.98);
         }
 
-        /* ================================
+        /* =================================
            FOOTER
         ================================= */
 
         footer {
             width: 100%;
+
             background: #000000;
+
             color: #FFFFFF;
+
             text-align: center;
+
             padding: 18px 10px;
+
             font-size: 13px;
             font-weight: bold;
         }
 
-        /* ================================
+        /* =================================
            MOBILE
         ================================= */
 
@@ -186,7 +221,7 @@
                 font-size: 27px;
             }
 
-            .main-container .subtitle {
+            .subtitle {
                 font-size: 16px;
             }
 
@@ -204,7 +239,6 @@
 
             .buttons {
                 flex-direction: column;
-                width: 100%;
                 gap: 12px;
             }
 
@@ -214,8 +248,8 @@
             }
         }
 
-        /* ================================
-           VERY SMALL SCREENS
+        /* =================================
+           SMALL PHONES
         ================================= */
 
         @media (max-width: 380px) {
@@ -232,26 +266,31 @@
                 font-size: 21px;
             }
         }
+
     </style>
+
 </head>
 
 <body>
 
+
     <!-- =================================
          NYOTA FUND LOGO
-    ================================== -->
+    ================================= -->
 
     <div class="top-logo">
+
         <img
-            src="nyota-logo.jpg"
+            src="nyota-log.jpg"
             alt="NYOTA FUND Logo"
         >
+
     </div>
 
 
     <!-- =================================
          MAIN CONTENT
-    ================================== -->
+    ================================= -->
 
     <main class="main-container">
 
@@ -263,6 +302,8 @@
             Supporting opportunities and advancement for young people.
         </p>
 
+
+        <!-- WELCOME CARD -->
 
         <section class="welcome-card">
 
@@ -278,9 +319,7 @@
         </section>
 
 
-        <!-- =================================
-             ACTION BUTTONS
-        ================================== -->
+        <!-- BUTTONS -->
 
         <div class="buttons">
 
@@ -290,6 +329,7 @@
             >
                 APPLY NOW
             </a>
+
 
             <a
                 href="registration.html"
@@ -305,11 +345,14 @@
 
     <!-- =================================
          FOOTER
-    ================================== -->
+    ================================= -->
 
     <footer>
+
         © 2026 NYOTA FUNDS
+
     </footer>
+
 
 </body>
 </html>
