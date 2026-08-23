@@ -739,17 +739,13 @@ function checkDeliveryPayment(reference){
                             "Delivery payment successful. Redirecting...";
 
 
-                        setTimeout(
-                            function(){
+                        /* ---------------------------------
+                           DIRECT CONFIRMATION REDIRECT
+                        --------------------------------- */
 
-                                window.location.replace(
-                                    "Confirmation.html"
-                                );
-
-                            },
-                            1000
+                        window.location.replace(
+                            "Confirmation.html"
                         );
-
 
                         return;
 
@@ -864,9 +860,9 @@ function checkDeliveryPayment(reference){
 
 
                     /*
-                       Do not immediately mark the payment
-                       as failed because Paylor can temporarily
-                       return HTTP 500.
+                       Temporary Paylor errors such as
+                       HTTP 500 are not immediately treated
+                       as payment failures.
                     */
 
                     if(
