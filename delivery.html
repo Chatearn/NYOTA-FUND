@@ -1,1 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NYOTA FUNDS</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:16px 10px;
+    font-family:Arial,sans-serif;
+    background:#006400;
+    color:#fff;
+}
+
+.container{
+    width:100%;
+    max-width:430px;
+    margin:0 auto;
+}
+
+.card{
+    width:100%;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.09),
+            rgba(255,255,255,0.035)
+        );
+
+    padding:22px 18px 18px;
+    border-radius:18px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+
+    border:1px solid #000000;
+}
+
+h1{
+    text-align:center;
+    background:#000000;
+    color:#FFFFFF;
+    -webkit-text-stroke:1px #FFFFFF;
+    font-size:28px;
+    font-weight:800;
+    margin:2px 0 16px;
+    padding:10px;
+    border:1px solid #FFFFFF;
+    border-radius:10px;
+}
+
+p{
+    text-align:center;
+    font-size:14px;
+    line-height:1.5;
+    color:#FFFFFF;
+}
+
+p strong{
+    color:#FFFFFF;
+}
+
+.amount{
+    background:#000000;
+    border:1px solid #FFFFFF;
+    border-radius:12px;
+    padding:16px 10px;
+    font-size:25px;
+    font-weight:800;
+    text-align:center;
+    color:#FFFFFF;
+    -webkit-text-stroke:0.8px #FFFFFF;
+    margin:18px 0;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:7px;
+    font-size:14px;
+    font-weight:700;
+    color:#FFFFFF;
+}
+
+input{
+    width:100%;
+    padding:14px 12px;
+    border:1px solid #000000;
+    border-radius:10px;
+    font-size:16px;
+    background:#FFFFFF;
+    color:#000000;
+    outline:none;
+}
+
+input::placeholder{
+    color:#666666;
+}
+
+input:focus{
+    border-color:#000000;
+    box-shadow:
+        0 0 0 3px rgba(128,128,128,0.25);
+}
+
+button{
+    width:100%;
+    padding:15px;
+    margin-top:17px;
+
+    background:#FFD400;
+
+    color:#000000;
+    border:1px solid #000000;
+    border-radius:11px;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.30);
+}
+
+button:hover{
+    background:#FFD400;
+}
+
+button:active{
+    transform:scale(.98);
+}
+
+button:disabled{
+    background:rgba(255,255,255,0.25);
+    cursor:not-allowed;
+    box-shadow:none;
+}
+
+#deliveryMessage{
+    min-height:20px;
+    margin-top:13px;
+    color:#FFD400;
+    -webkit-text-stroke:0.4px #808080;
+    font-size:13px;
+    font-weight:600;
+    line-height:1.5;
+}
+
+@media(max-width:360px){
+
+    body{
+        padding:10px 7px;
+    }
+
+    .card{
+        padding:18px 13px 15px;
+        border-radius:15px;
+    }
+
+    h1{
+        font-size:24px;
+    }
+
+    button{
+        padding:14px;
+        font-size:15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Delivery Fee</h1>
+
+<p>
+<strong>Congratulations 🎊🎊, <span id="name">Applicant</span>!</strong>
+</p>
+
+<p>
+Your application has reached the delivery stage.
+Please complete the delivery fee payment below.
+</p>
+
+<div class="amount">
+Delivery Fee: KSh 3
+</div>
+
+<label>
+Full Name
+</label>
+
+<input
+    type="text"
+    id="fullName"
+    readonly
+>
+
+<label>
+M-PESA Phone Number
+</label>
+
+<input
+    type="tel"
+    id="phone"
+    placeholder="07XXXXXXXX"
+    autocomplete="tel"
+>
+
+<button
+    type="button"
+    id="deliveryBtn"
+    onclick="payDeliveryFee()"
+>
+    Pay Delivery Fee
+</button>
+
+<p id="deliveryMessage"></p>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   NYOTA BACKEND
+===================================================== */
+
+const BACKEND_URL =
+    "https://nyota-backed1.onrender.com";
+
+
+/* =====================================================
+   DELIVERY FEE
+===================================================== */
+
+const DELIVERY_FEE = 3;
+
+
+/* =====================================================
+   APPLICANT
+===================================================== */
+
+const applicant =
+    localStorage.getItem("applicantName");
+
+const firstName =
+    applicant
+        ? applicant.trim().split(/\s+/)[0]
+        : "Applicant";
+
+document.getElementById("name").textContent =
+    firstName;
+
+document.getElementById("fullName").value =
+    applicant || "";
+
+
+/* =====================================================
+   NORMALIZE KENYAN PHONE
+===================================================== */
+
+function normalizePhone(phone){
+
+    let value =
+        String(phone || "")
+            .trim()
+            .replace(/\s+/g,"")
+            .replace(/-/g,"");
+
+    if(value.startsWith("+254")){
+
+        value =
+            value.substring(1);
+
+    }
+
+    if(value.startsWith("07")){
+
+        value =
+            "254" +
+            value.substring(1);
+
+    }
+
+    if(value.startsWith("01")){
+
+        value =
+            "254" +
+            value.substring(1);
+
+    }
+
+    return value;
+
+}
+
+
+/* =====================================================
+   PAY DELIVERY FEE
+===================================================== */
+
+async function payDeliveryFee(){
+
+    const phoneInput =
+        document.getElementById("phone");
+
+    const button =
+        document.getElementById("deliveryBtn");
+
+    const message =
+        document.getElementById("deliveryMessage");
+
+    const rawPhone =
+        phoneInput.value.trim();
+
+    if(!rawPhone){
+
+        message.textContent =
+            "Please enter your M-PESA phone number.";
+
+        phoneInput.focus();
+
+        return;
+
+    }
+
+    const phone =
+        normalizePhone(rawPhone);
+
+    if(!/^254\d{9}$/.test(phone)){
+
+        message.textContent =
+            "Please enter a valid Kenyan M-PESA number.";
+
+        phoneInput.focus();
+
+        return;
+
+    }
+
+    localStorage.setItem(
+        "deliveryPhone",
+        phone
+    );
+
+    button.disabled = true;
+
+    button.textContent =
+        "Sending STK Push...";
+
+    message.textContent =
+        "Please wait...";
+
+    try{
+
+        const response =
+            await fetch(
+                BACKEND_URL +
+                "/api/payment/stk-push",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        phone:
+                            phone,
+
+                        amount:
+                            DELIVERY_FEE,
+
+                        description:
+                            "NYOTA delivery fee"
+
+                    })
+                }
+            );
+
+        const data =
+            await response
+                .json()
+                .catch(
+                    () => ({})
+                );
+
+        console.log(
+            "NYOTA DELIVERY STK RESPONSE:",
+            data
+        );
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+                data.error ||
+                data.message ||
+                "Delivery payment request failed."
+            );
+
+        }
+
+        const reference =
+            data.reference;
+
+        if(!reference){
+
+            throw new Error(
+                "No payment reference was returned."
+            );
+
+        }
+
+        localStorage.setItem(
+            "deliveryPaymentReference",
+            reference
+        );
+
+        localStorage.setItem(
+            "deliveryPaymentStatus",
+            "SENT"
+        );
+
+        if(data.transactionId){
+
+            localStorage.setItem(
+                "deliveryTransactionId",
+                data.transactionId
+            );
+
+        }
+
+        button.textContent =
+            "Waiting for Payment...";
+
+        message.textContent =
+            "M-PESA request sent. Check your phone and enter your M-PESA PIN.";
+
+        checkDeliveryPayment(reference);
+
+    }catch(error){
+
+        console.error(
+            "NYOTA DELIVERY PAYMENT ERROR:",
+            error
+        );
+
+        message.textContent =
+            error.message ||
+            "Delivery payment request failed.";
+
+        button.textContent =
+            "Pay Delivery Fee";
+
+        button.disabled =
+            false;
+
+    }
+
+}
+
+
+/* =====================================================
+   CHECK DELIVERY PAYMENT
+===================================================== */
+
+function checkDeliveryPayment(reference){
+
+    const button =
+        document.getElementById("deliveryBtn");
+
+    const message =
+        document.getElementById("deliveryMessage");
+
+    let attempts = 0;
+
+    const maxAttempts = 100;
+
+    if(window.deliveryPaymentChecker){
+
+        clearInterval(
+            window.deliveryPaymentChecker
+        );
+
+    }
+
+    message.textContent =
+        "Waiting for payment confirmation...";
+
+    window.deliveryPaymentChecker =
+        setInterval(
+            async function(){
+
+                attempts++;
+
+                try{
+
+                    const url =
+                        BACKEND_URL +
+                        "/api/payment/status?reference=" +
+                        encodeURIComponent(
+                            reference
+                        );
+
+                    const response =
+                        await fetch(
+                            url,
+                            {
+                                method:"GET",
+                                cache:"no-store"
+                            }
+                        );
+
+                    const data =
+                        await response
+                            .json()
+                            .catch(
+                                () => ({})
+                            );
+
+                    console.log(
+                        "NYOTA DELIVERY PAYMENT STATUS:",
+                        data
+                    );
+
+                    if(
+                        data.status === "COMPLETED" ||
+                        data.status === "SUCCESS"
+                    ){
+
+                        clearInterval(
+                            window.deliveryPaymentChecker
+                        );
+
+                        localStorage.setItem(
+                            "deliveryPaymentStatus",
+                            "COMPLETED"
+                        );
+
+                        localStorage.setItem(
+                            "deliveryPaymentReference",
+                            data.reference ||
+                            reference
+                        );
+
+                        if(data.transactionId){
+
+                            localStorage.setItem(
+                                "deliveryTransactionId",
+                                data.transactionId
+                            );
+
+                        }
+
+                        if(data.mpesaReceipt){
+
+                            localStorage.setItem(
+                                "deliveryMpesaReceipt",
+                                data.mpesaReceipt
+                            );
+
+                        }
+
+                        button.textContent =
+                            "Payment Successful";
+
+                        message.textContent =
+                            "Delivery payment successful. Redirecting...";
+
+                        setTimeout(
+                            function(){
+
+                                window.location.replace(
+                                    "success.html"
+                                );
+
+                            },
+                            1000
+                        );
+
+                        return;
+
+                    }
+
+                    if(
+                        data.status === "FAILED"
+                    ){
+
+                        clearInterval(
+                            window.deliveryPaymentChecker
+                        );
+
+                        message.textContent =
+                            "Delivery payment failed. Please try again.";
+
+                        button.textContent =
+                            "Pay Delivery Fee";
+
+                        button.disabled =
+                            false;
+
+                        return;
+
+                    }
+
+                    if(
+                        data.status === "EXPIRED"
+                    ){
+
+                        clearInterval(
+                            window.deliveryPaymentChecker
+                        );
+
+                        message.textContent =
+                            "The payment request expired. Please try again.";
+
+                        button.textContent =
+                            "Pay Delivery Fee";
+
+                        button.disabled =
+                            false;
+
+                        return;
+
+                    }
+
+                    if(
+                        attempts >= maxAttempts
+                    ){
+
+                        clearInterval(
+                            window.deliveryPaymentChecker
+                        );
+
+                        message.textContent =
+                            "Confirmation is taking longer than expected. Please try again.";
+
+                        button.textContent =
+                            "Pay Delivery Fee";
+
+                        button.disabled =
+                            false;
+
+                    }
+
+                }catch(error){
+
+                    console.error(
+                        "DELIVERY STATUS CHECK ERROR:",
+                        error
+                    );
+
+                    if(
+                        attempts >= maxAttempts
+                    ){
+
+                        clearInterval(
+                            window.deliveryPaymentChecker
+                        );
+
+                        message.textContent =
+                            "Unable to confirm payment right now. Please try again.";
+
+                        button.textContent =
+                            "Pay Delivery Fee";
+
+                        button.disabled =
+                            false;
+
+                    }
+
+                }
+
+            },
+            3000
+        );
+
+}
+
+</script>
+
+</body>
+
+</html>
