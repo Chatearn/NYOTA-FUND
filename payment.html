@@ -100,7 +100,8 @@ input::placeholder{
 
 input:focus{
     border-color:rgba(169,72,255,0.8);
-    box-shadow:0 0 0 3px rgba(155,55,255,0.12);
+    box-shadow:
+        0 0 0 3px rgba(155,55,255,0.12);
 }
 
 button{
@@ -218,7 +219,7 @@ M-PESA Phone Number
 <input
     type="tel"
     id="phone"
-    placeholder="2547XXXXXXXX"
+    placeholder="07XXXXXXXX"
     autocomplete="tel"
 >
 
@@ -236,20 +237,20 @@ M-PESA Phone Number
 
 </div>
 
+
 <script>
 
-/* ==================================================
-   NYOTA FUNDS PAYMENT
-   BACKEND
-================================================== */
+/* =====================================================
+   NYOTA BACKEND
+===================================================== */
 
 const BACKEND_URL =
     "https://nyota-backed1.onrender.com";
 
 
-/* ==================================================
-   APPLICANT INFORMATION
-================================================== */
+/* =====================================================
+   APPLICANT
+===================================================== */
 
 const applicant =
     localStorage.getItem("applicantName");
@@ -261,24 +262,38 @@ document.getElementById("fullName").value =
     applicant || "";
 
 
-/* ==================================================
+/* =====================================================
    PROCESSING FEE
-================================================== */
+===================================================== */
+
+const storedFee =
+    localStorage.getItem("processingFee");
 
 const processingFee =
-    localStorage.getItem("processingFee") || "350";
+    Number(storedFee || 350);
 
-const numericProcessingFee =
-    Number(processingFee);
+if(
+    !Number.isFinite(processingFee) ||
+    processingFee <= 0
+){
 
-document.getElementById("feeAmount").textContent =
+    document.getElementById(
+        "stkMessage"
+    ).textContent =
+        "Invalid processing fee.";
+
+}
+
+document.getElementById(
+    "feeAmount"
+).textContent =
     "Processing Fee: KSh " +
-    numericProcessingFee.toLocaleString();
+    processingFee.toLocaleString();
 
 
-/* ==================================================
-   NORMALIZE PHONE FOR BACKEND
-================================================== */
+/* =====================================================
+   NORMALIZE KENYAN PHONE
+===================================================== */
 
 function normalizePhone(phone){
 
@@ -289,28 +304,36 @@ function normalizePhone(phone){
             .replace(/-/g,"");
 
     if(value.startsWith("+254")){
-        value = value.substring(1);
+
+        value =
+            value.substring(1);
+
     }
 
     if(value.startsWith("07")){
+
         value =
             "254" +
             value.substring(1);
+
     }
 
     if(value.startsWith("01")){
+
         value =
             "254" +
             value.substring(1);
+
     }
 
     return value;
+
 }
 
 
-/* ==================================================
+/* =====================================================
    PAY NOW
-================================================== */
+===================================================== */
 
 async function payNow(){
 
@@ -328,11 +351,11 @@ async function payNow(){
         phoneInput.value.trim();
 
 
-    /* ----------------------------------------------
-       CHECK PHONE
-    ---------------------------------------------- */
+    /* -----------------------------------------------
+       PHONE VALIDATION
+    ----------------------------------------------- */
 
-    if(rawPhone === ""){
+    if(!rawPhone){
 
         message.textContent =
             "Please enter your M-PESA phone number.";
@@ -340,6 +363,7 @@ async function payNow(){
         phoneInput.focus();
 
         return;
+
     }
 
 
@@ -350,17 +374,18 @@ async function payNow(){
     if(!/^254\d{9}$/.test(phone)){
 
         message.textContent =
-            "Please enter a valid Kenyan M-PESA phone number.";
+            "Please enter a valid Kenyan M-PESA number.";
 
         phoneInput.focus();
 
         return;
+
     }
 
 
-    /* ----------------------------------------------
-       SAVE CUSTOMER DETAILS
-    ---------------------------------------------- */
+    /* -----------------------------------------------
+       SAVE DETAILS
+    ----------------------------------------------- */
 
     localStorage.setItem(
         "phoneNumber",
@@ -369,13 +394,15 @@ async function payNow(){
 
     localStorage.setItem(
         "fullName",
-        document.getElementById("fullName").value
+        document.getElementById(
+            "fullName"
+        ).value
     );
 
 
-    /* ----------------------------------------------
-       BUTTON
-    ---------------------------------------------- */
+    /* -----------------------------------------------
+       DISABLE BUTTON
+    ----------------------------------------------- */
 
     btn.disabled = true;
 
@@ -383,14 +410,14 @@ async function payNow(){
         "Sending STK Push...";
 
     message.textContent =
-        "Please wait while we send the M-PESA payment request...";
+        "Please wait...";
 
 
     try{
 
-        /* ------------------------------------------
-           SEND STK REQUEST
-        ------------------------------------------ */
+        /* -------------------------------------------
+           SEND REQUEST TO RENDER BACKEND
+        ------------------------------------------- */
 
         const response =
             await fetch(
@@ -410,7 +437,7 @@ async function payNow(){
                             phone,
 
                         amount:
-                            numericProcessingFee,
+                            processingFee,
 
                         description:
                             "Nyota processing fee"
@@ -420,9 +447,9 @@ async function payNow(){
             );
 
 
-        /* ------------------------------------------
-           READ RESPONSE
-        ------------------------------------------ */
+        /* -------------------------------------------
+           RESPONSE
+        ------------------------------------------- */
 
         const data =
             await response
@@ -438,29 +465,24 @@ async function payNow(){
         );
 
 
-        /* ------------------------------------------
-           CHECK RESPONSE
-        ------------------------------------------ */
-
         if(
             !response.ok ||
             !data.success
         ){
 
             throw new Error(
-
                 data.error ||
                 data.message ||
                 "STK Push failed."
-
             );
 
         }
 
 
-        /* ------------------------------------------
-           MERCHANT REFERENCE
-        ------------------------------------------ */
+        /* -------------------------------------------
+           IMPORTANT:
+           USE PAYMENT REFERENCE FOR STATUS CHECK
+        ------------------------------------------- */
 
         const reference =
             data.reference;
@@ -475,28 +497,15 @@ async function payNow(){
         }
 
 
-        /* ------------------------------------------
-           PAYLOR TRANSACTION ID
-        ------------------------------------------ */
-
         const transactionId =
             data.transactionId ||
             data.checkout_request_id ||
             "";
 
 
-        if(!transactionId){
-
-            throw new Error(
-                "No Paylor transaction ID was returned."
-            );
-
-        }
-
-
-        /* ------------------------------------------
+        /* -------------------------------------------
            SAVE PAYMENT INFORMATION
-        ------------------------------------------ */
+        ------------------------------------------- */
 
         localStorage.setItem(
             "paymentReference",
@@ -514,25 +523,22 @@ async function payNow(){
         );
 
 
-        /* ------------------------------------------
-           MESSAGE
-        ------------------------------------------ */
+        /* -------------------------------------------
+           SHOW CUSTOMER MESSAGE
+        ------------------------------------------- */
 
         btn.textContent =
             "Waiting for Payment...";
 
         message.textContent =
-            "M-PESA payment request sent. Please enter your M-PESA PIN to complete the payment.";
+            "M-PESA request sent. Check your phone and enter your M-PESA PIN.";
 
 
-        /* ------------------------------------------
+        /* -------------------------------------------
            START STATUS CHECK
-        ------------------------------------------ */
+        ------------------------------------------- */
 
-        checkPayment(
-            reference,
-            transactionId
-        );
+        checkPayment(reference);
 
 
     }catch(error){
@@ -541,7 +547,6 @@ async function payNow(){
             "NYOTA PAYMENT ERROR:",
             error
         );
-
 
         message.textContent =
             error.message ||
@@ -558,14 +563,11 @@ async function payNow(){
 }
 
 
-/* ==================================================
-   CHECK PAYMENT STATUS
-================================================== */
+/* =====================================================
+   PAYMENT STATUS
+===================================================== */
 
-function checkPayment(
-    reference,
-    transactionId
-){
+function checkPayment(reference){
 
     const btn =
         document.getElementById("payBtn");
@@ -579,9 +581,9 @@ function checkPayment(
     const maxAttempts = 100;
 
 
-    /* ----------------------------------------------
+    /* -----------------------------------------------
        CLEAR PREVIOUS CHECKER
-    ---------------------------------------------- */
+    ----------------------------------------------- */
 
     if(window.paymentChecker){
 
@@ -593,12 +595,12 @@ function checkPayment(
 
 
     message.textContent =
-        "Waiting for M-PESA payment confirmation...";
+        "Waiting for payment confirmation...";
 
 
-    /* ----------------------------------------------
+    /* -----------------------------------------------
        CHECK EVERY 3 SECONDS
-    ---------------------------------------------- */
+    ----------------------------------------------- */
 
     window.paymentChecker =
         setInterval(
@@ -611,14 +613,9 @@ function checkPayment(
 
                     const url =
                         BACKEND_URL +
-                        "/api/payment/status" +
-                        "?reference=" +
+                        "/api/payment/status?reference=" +
                         encodeURIComponent(
                             reference
-                        ) +
-                        "&transactionId=" +
-                        encodeURIComponent(
-                            transactionId
                         );
 
 
@@ -660,17 +657,6 @@ function checkPayment(
                         );
 
 
-                        message.textContent =
-                            "Payment successful. Redirecting...";
-
-
-                        btn.textContent =
-                            "Payment Successful";
-
-                        btn.disabled =
-                            true;
-
-
                         localStorage.setItem(
                             "paymentStatus",
                             "COMPLETED"
@@ -704,9 +690,12 @@ function checkPayment(
                         }
 
 
-                        /* ----------------------------
-                           REDIRECT
-                        ---------------------------- */
+                        btn.textContent =
+                            "Payment Successful";
+
+                        message.textContent =
+                            "Payment successful. Redirecting...";
+
 
                         setTimeout(
                             function(){
@@ -718,6 +707,7 @@ function checkPayment(
                             },
                             1000
                         );
+
 
                         return;
 
@@ -740,13 +730,11 @@ function checkPayment(
                         message.textContent =
                             "Payment failed. Please try again.";
 
-
                         btn.textContent =
                             "Pay Processing Fee";
 
                         btn.disabled =
                             false;
-
 
                         return;
 
@@ -769,13 +757,11 @@ function checkPayment(
                         message.textContent =
                             "The payment request expired. Please try again.";
 
-
                         btn.textContent =
                             "Pay Processing Fee";
 
                         btn.disabled =
                             false;
-
 
                         return;
 
@@ -796,7 +782,7 @@ function checkPayment(
 
 
                         message.textContent =
-                            "Payment confirmation is taking longer than expected. You can try again.";
+                            "Confirmation is taking longer than expected. Please try again.";
 
                         btn.textContent =
                             "Pay Processing Fee";
@@ -810,17 +796,16 @@ function checkPayment(
                 }catch(error){
 
                     console.error(
-                        "NYOTA PAYMENT STATUS ERROR:",
+                        "STATUS CHECK ERROR:",
                         error
                     );
 
 
                     /*
-                     * Don't immediately tell the
-                     * customer the payment failed
-                     * because a temporary network
-                     * problem may have occurred.
-                     */
+                     Temporary network errors
+                     do not immediately mark
+                     the payment as failed.
+                    */
 
                     if(
                         attempts >= maxAttempts
@@ -832,7 +817,7 @@ function checkPayment(
 
 
                         message.textContent =
-                            "Unable to confirm the payment right now. Please try again.";
+                            "Unable to confirm payment right now. Please try again.";
 
                         btn.textContent =
                             "Pay Processing Fee";
