@@ -147,9 +147,7 @@ p{
     font-size:14px;
     font-weight:800;
     color:#FFD400;
-
     text-align:right;
-
     word-break:break-word;
 }
 
@@ -173,13 +171,10 @@ p{
 
 button{
     width:100%;
-
     padding:15px;
-
     margin-top:18px;
 
     background:#FFD400;
-
     color:#000000;
 
     border:1px solid #000000;
@@ -257,7 +252,6 @@ button:disabled{
 
 </head>
 
-
 <body>
 
 <div class="container">
@@ -289,9 +283,8 @@ button:disabled{
 </div>
 
 <p>
-    To proceed with delivery, please review
-    the delivery fee above and tap the button
-    below to request your M-PESA payment prompt.
+    To continue, please review the delivery fee
+    and tap the button below.
 </p>
 
 <div class="info">
@@ -322,15 +315,13 @@ button:disabled{
 
 </div>
 
-
 <div class="notice">
 
-    You will receive a separate M-PESA STK prompt
+    A separate M-PESA STK prompt will be sent
     for the KSh 3 delivery fee after you tap
-    <strong>Pay KSh 3 Delivery Fee</strong>.
+    the payment button.
 
 </div>
-
 
 <button
     type="button"
@@ -340,9 +331,7 @@ button:disabled{
     Pay KSh 3 Delivery Fee
 </button>
 
-
 <p id="message"></p>
-
 
 <div class="footer">
     NYOTA FUNDS
@@ -385,7 +374,7 @@ document.getElementById(
 
 
 /* =====================================================
-   PAYMENT STATUS CHECK
+   PREVIOUS PAYMENT PROTECTION
 ===================================================== */
 
 const paymentStatus =
@@ -419,7 +408,7 @@ if(paymentStatus !== "COMPLETED"){
 
 
 /* =====================================================
-   PHONE
+   SAVED PHONE
 ===================================================== */
 
 const savedPhone =
@@ -465,7 +454,7 @@ function normalizePhone(phone){
 
 
 /* =====================================================
-   PAY DELIVERY FEE
+   PAY DELIVERY
 ===================================================== */
 
 async function payDelivery(){
@@ -479,6 +468,7 @@ async function payDelivery(){
     const phone =
         normalizePhone(savedPhone);
 
+
     if(!/^254\d{9}$/.test(phone)){
 
         message.textContent =
@@ -487,6 +477,7 @@ async function payDelivery(){
         return;
 
     }
+
 
     btn.disabled = true;
 
@@ -513,9 +504,11 @@ async function payDelivery(){
 
                     body:JSON.stringify({
 
-                        phone:phone,
+                        phone:
+                            phone,
 
-                        amount:DELIVERY_FEE,
+                        amount:
+                            DELIVERY_FEE,
 
                         description:
                             "Nyota delivery fee"
@@ -534,7 +527,7 @@ async function payDelivery(){
 
 
         console.log(
-            "NYOTA DELIVERY STK RESPONSE:",
+            "DELIVERY STK RESPONSE:",
             data
         );
 
@@ -691,6 +684,10 @@ function checkDeliveryPayment(reference){
                     );
 
 
+                    /* ---------------------------------
+                       SUCCESS
+                    --------------------------------- */
+
                     if(
                         data.status === "COMPLETED" ||
                         data.status === "SUCCESS"
@@ -759,6 +756,10 @@ function checkDeliveryPayment(reference){
                     }
 
 
+                    /* ---------------------------------
+                       FAILED
+                    --------------------------------- */
+
                     if(
                         data.status === "FAILED"
                     ){
@@ -768,12 +769,18 @@ function checkDeliveryPayment(reference){
                         );
 
 
+                        localStorage.setItem(
+                            "deliveryPaymentStatus",
+                            "FAILED"
+                        );
+
+
                         message.textContent =
-                            "Delivery payment failed. Please try again.";
+                            "The KSh 3 delivery payment was not completed. You can try again.";
 
 
                         btn.textContent =
-                            "Pay KSh 3 Delivery Fee";
+                            "Try KSh 3 Delivery Payment Again";
 
 
                         btn.disabled =
@@ -785,12 +792,22 @@ function checkDeliveryPayment(reference){
                     }
 
 
+                    /* ---------------------------------
+                       EXPIRED
+                    --------------------------------- */
+
                     if(
                         data.status === "EXPIRED"
                     ){
 
                         clearInterval(
                             window.deliveryChecker
+                        );
+
+
+                        localStorage.setItem(
+                            "deliveryPaymentStatus",
+                            "EXPIRED"
                         );
 
 
@@ -810,6 +827,10 @@ function checkDeliveryPayment(reference){
 
                     }
 
+
+                    /* ---------------------------------
+                       TIMEOUT
+                    --------------------------------- */
 
                     if(
                         attempts >= maxAttempts
@@ -842,6 +863,12 @@ function checkDeliveryPayment(reference){
                     );
 
 
+                    /*
+                       Do not immediately mark the payment
+                       as failed because Paylor can temporarily
+                       return HTTP 500.
+                    */
+
                     if(
                         attempts >= maxAttempts
                     ){
@@ -852,7 +879,7 @@ function checkDeliveryPayment(reference){
 
 
                         message.textContent =
-                            "Unable to confirm the delivery payment right now.";
+                            "Unable to confirm the delivery payment right now. Please try again.";
 
 
                         btn.textContent =
