@@ -26,11 +26,13 @@ body{
 
 body{
     min-height:100vh;
+
+    /* CATERPILLAR GREEN BACKGROUND */
     background:
         radial-gradient(
             circle at 50% 20%,
             rgba(255,212,0,0.08),
-            rgba(0,166,81,0.035) 25%,
+            rgba(0,166,81,0.08) 25%,
             transparent 60%
         ),
         linear-gradient(
@@ -39,7 +41,8 @@ body{
             #00A651 50%,
             #00A651 100%
         );
-    color:#fff;
+
+    color:#FFFFFF;
 }
 
 .container{
@@ -62,7 +65,8 @@ body{
             rgba(255,255,255,0.025)
         );
 
-    border:1px solid rgba(255,212,0,0.16);
+    /* BLACK FRAME */
+    border:1px solid #000000;
 
     box-shadow:
         0 20px 60px rgba(0,0,0,0.65),
@@ -80,6 +84,7 @@ h1{
     font-weight:700;
     margin-bottom:6px;
 
+    /* PURE YELLOW */
     background:
         linear-gradient(
             180deg,
@@ -98,7 +103,10 @@ h1{
     text-align:center;
     font-size:15px;
     line-height:1.5;
-    color:rgba(255,255,255,0.72);
+
+    /* PURE WHITE */
+    color:#FFFFFF;
+
     margin-bottom:15px;
 }
 
@@ -108,7 +116,9 @@ label{
     margin-bottom:5px;
     font-size:15px;
     font-weight:600;
-    color:rgba(255,255,255,0.90);
+
+    /* PURE WHITE */
+    color:#FFFFFF;
 }
 
 input,
@@ -117,13 +127,17 @@ select{
     height:45px;
     padding:0 13px;
 
-    border:1px solid rgba(255,255,255,0.12);
+    /* BLACK COLUMN / INPUT FRAME */
+    border:1px solid #000000;
+
     border-radius:11px;
 
     outline:none;
 
     background:rgba(255,255,255,0.055);
-    color:#fff;
+
+    /* PURE WHITE */
+    color:#FFFFFF;
 
     font-size:14px;
 
@@ -134,12 +148,16 @@ select{
 }
 
 input::placeholder{
-    color:rgba(255,255,255,0.42);
+    color:#FFFFFF;
+    opacity:0.70;
 }
 
 input:focus,
 select:focus{
-    border-color:rgba(255,212,0,0.85);
+
+    /* BLACK FRAME REMAINS */
+    border-color:#000000;
+
     background:rgba(255,255,255,0.075);
 
     box-shadow:
@@ -154,8 +172,8 @@ select{
 }
 
 select option{
-    background:#0b0d0e;
-    color:#fff;
+    background:#000000;
+    color:#FFFFFF;
 }
 
 button{
@@ -167,6 +185,7 @@ button{
     border:none;
     border-radius:12px;
 
+    /* PURE YELLOW */
     background:
         linear-gradient(
             135deg,
@@ -176,7 +195,7 @@ button{
             #FFD400 100%
         );
 
-    color:#171100;
+    color:#000000;
 
     font-size:19px;
     font-weight:700;
@@ -215,6 +234,8 @@ button:disabled{
     margin-top:10px;
     text-align:center;
     font-size:13px;
+
+    /* PURE YELLOW */
     color:#FFD400;
 }
 
