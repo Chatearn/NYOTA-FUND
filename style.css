@@ -12,7 +12,7 @@ body {
 
 body {
     min-height: 100vh;
-    background: #050608;
+    background: #00A651;
     color: #fff;
     font-family: 'Poppins', sans-serif;
 }
@@ -38,9 +38,9 @@ body {
         ),
         linear-gradient(
             180deg,
-            #050608 0%,
-            #0a0c0d 50%,
-            #030405 100%
+            #00A651 0%,
+            #00A651 50%,
+            #00A651 100%
         );
 }
 
@@ -635,4 +635,69 @@ button:disabled {
     .subtitle {
         font-size: 14px;
 
-        margin-bottom:
+        margin-bottom: 22px;
+    }
+
+    .card {
+        width: 100%;
+
+        padding: 20px 16px;
+
+        border-radius: 19px;
+    }
+
+    input,
+    select {
+        width: 100%;
+
+        height: 50px;
+
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+
+        min-height: 52px;
+
+        font-size: 15px;
+    }
+
+    .amount-grid {
+        width: 100%;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 9px;
+    }
+
+    .amount-option {
+        padding: 14px 8px;
+
+        font-size: 14px;
+    }
+}
+
+/* =================================
+   SMALL PHONES
+================================= */
+
+@media (max-width: 360px) {
+
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .card {
+        padding: 18px 13px;
+    }
+
+    .amount-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
