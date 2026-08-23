@@ -27,12 +27,12 @@ body{
 body{
     min-height:100vh;
 
-    /* DARK GREEN BACKGROUND */
+    /* CATERPILLAR GREEN BACKGROUND */
     background:
         radial-gradient(
             circle at 50% 20%,
             rgba(255,212,0,0.08),
-            rgba(0,100,0,0.08) 25%,
+            rgba(0,166,81,0.08) 25%,
             transparent 60%
         ),
         linear-gradient(
@@ -220,3 +220,456 @@ button:hover{
 }
 
 button:active{
+    transform:translateY(0);
+}
+
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
+}
+
+#formMessage{
+    min-height:20px;
+    margin-top:10px;
+    text-align:center;
+    font-size:13px;
+
+    /* PURE YELLOW */
+    color:#FFD400;
+}
+
+@media(max-width:480px){
+
+    .container{
+        padding:8px 14px;
+    }
+
+    .card{
+        padding:18px 16px;
+    }
+
+    h1{
+        font-size:27px;
+    }
+
+}
+
+@media(max-width:360px){
+
+    .container{
+        padding-left:12px;
+        padding-right:12px;
+    }
+
+    .card{
+        padding:17px 13px;
+    }
+
+    h1{
+        font-size:24px;
+    }
+
+    input,
+    select{
+        height:41px;
+        font-size:13px;
+    }
+
+    button{
+        font-size:18px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>NYOTA Funds</h1>
+
+<p class="subtitle">
+Please complete all fields below to continue your application.
+</p>
+
+<form id="applicationForm">
+
+<label for="applicantName">
+Full Name
+</label>
+
+<input
+    type="text"
+    id="applicantName"
+    name="applicantName"
+    placeholder="Enter your full name"
+    autocomplete="name"
+    required
+>
+
+
+<label for="idNumber">
+National ID Number
+</label>
+
+<input
+    type="text"
+    id="idNumber"
+    name="idNumber"
+    placeholder="Enter your ID number"
+    inputmode="numeric"
+    autocomplete="off"
+    required
+>
+
+
+<label for="phoneNumber">
+Phone Number
+</label>
+
+<input
+    type="tel"
+    id="phoneNumber"
+    name="phoneNumber"
+    placeholder="07XXXXXXXX"
+    inputmode="tel"
+    autocomplete="tel"
+    required
+>
+
+
+<label for="county">
+County
+</label>
+
+<select
+    id="county"
+    name="county"
+    required
+>
+
+<option value="">
+Select County
+</option>
+
+<option>Baringo</option>
+<option>Bomet</option>
+<option>Bungoma</option>
+<option>Busia</option>
+<option>Elgeyo-Marakwet</option>
+<option>Embu</option>
+<option>Garissa</option>
+<option>Homa Bay</option>
+<option>Isiolo</option>
+<option>Kajiado</option>
+<option>Kakamega</option>
+<option>Kericho</option>
+<option>Kiambu</option>
+<option>Kilifi</option>
+<option>Kirinyaga</option>
+<option>Kisii</option>
+<option>Kisumu</option>
+<option>Kitui</option>
+<option>Kwale</option>
+<option>Laikipia</option>
+<option>Lamu</option>
+<option>Machakos</option>
+<option>Makueni</option>
+<option>Mandera</option>
+<option>Marsabit</option>
+<option>Meru</option>
+<option>Migori</option>
+<option>Mombasa</option>
+<option>Murang'a</option>
+<option>Nairobi</option>
+<option>Nakuru</option>
+<option>Nandi</option>
+<option>Narok</option>
+<option>Nyamira</option>
+<option>Nyandarua</option>
+<option>Nyeri</option>
+<option>Samburu</option>
+<option>Siaya</option>
+<option>Taita Taveta</option>
+<option>Tana River</option>
+<option>Tharaka-Nithi</option>
+<option>Trans Nzoia</option>
+<option>Turkana</option>
+<option>Uasin Gishu</option>
+<option>Vihiga</option>
+<option>Wajir</option>
+<option>West Pokot</option>
+
+</select>
+
+
+<label for="occupation">
+Occupation
+</label>
+
+<select
+    id="occupation"
+    name="occupation"
+    required
+>
+
+<option value="">
+Select Occupation
+</option>
+
+<option>Student</option>
+<option>Business Owner</option>
+<option>Self Employed</option>
+<option>Employed</option>
+<option>Farmer</option>
+<option>Teacher</option>
+<option>Doctor</option>
+<option>Nurse</option>
+<option>Engineer</option>
+<option>Software Developer</option>
+<option>Accountant</option>
+<option>Lawyer</option>
+<option>Driver</option>
+<option>Mechanic</option>
+<option>Electrician</option>
+<option>Plumber</option>
+<option>Carpenter</option>
+<option>Welder</option>
+<option>Tailor</option>
+<option>Hairdresser / Barber</option>
+<option>Trader</option>
+<option>Salesperson</option>
+<option>Hotel Attendant</option>
+<option>Chef / Cook</option>
+<option>Security Guard</option>
+<option>Police Officer</option>
+<option>Military Officer</option>
+<option>Journalist</option>
+<option>Graphic Designer</option>
+<option>Photographer</option>
+<option>Freelancer</option>
+<option>Content Creator</option>
+<option>Casual Worker</option>
+<option>Unemployed</option>
+<option>Retired</option>
+<option>Other</option>
+
+</select>
+
+
+<button
+    type="submit"
+    id="continueBtn"
+>
+    Continue
+</button>
+
+<p id="formMessage"></p>
+
+</form>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   APPLICATION FLOW
+========================================= */
+
+const form =
+    document.getElementById("applicationForm");
+
+const button =
+    document.getElementById("continueBtn");
+
+const message =
+    document.getElementById("formMessage");
+
+
+/* =========================================
+   SUBMIT APPLICATION
+========================================= */
+
+form.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+
+    /* -------------------------------------
+       GET VALUES
+    ------------------------------------- */
+
+    const applicantName =
+        document
+            .getElementById("applicantName")
+            .value
+            .trim();
+
+    const idNumber =
+        document
+            .getElementById("idNumber")
+            .value
+            .trim();
+
+    const phoneNumber =
+        document
+            .getElementById("phoneNumber")
+            .value
+            .trim();
+
+    const county =
+        document
+            .getElementById("county")
+            .value;
+
+    const occupation =
+        document
+            .getElementById("occupation")
+            .value;
+
+
+    /* -------------------------------------
+       BASIC VALIDATION
+    ------------------------------------- */
+
+    if(!applicantName){
+
+        message.textContent =
+            "Please enter your full name.";
+
+        return;
+    }
+
+    if(!idNumber){
+
+        message.textContent =
+            "Please enter your ID number.";
+
+        return;
+    }
+
+    if(!phoneNumber){
+
+        message.textContent =
+            "Please enter your phone number.";
+
+        return;
+    }
+
+    if(!county){
+
+        message.textContent =
+            "Please select your county.";
+
+        return;
+    }
+
+    if(!occupation){
+
+        message.textContent =
+            "Please select your occupation.";
+
+        return;
+    }
+
+
+    /* -------------------------------------
+       SAVE APPLICATION DATA
+    ------------------------------------- */
+
+    localStorage.setItem(
+        "applicantName",
+        applicantName
+    );
+
+    localStorage.setItem(
+        "idNumber",
+        idNumber
+    );
+
+    localStorage.setItem(
+        "phoneNumber",
+        phoneNumber
+    );
+
+    localStorage.setItem(
+        "county",
+        county
+    );
+
+    localStorage.setItem(
+        "occupation",
+        occupation
+    );
+
+
+    /* -------------------------------------
+       SAVE COMPLETE APPLICATION OBJECT
+    ------------------------------------- */
+
+    const application = {
+
+        applicantName:
+            applicantName,
+
+        idNumber:
+            idNumber,
+
+        phoneNumber:
+            phoneNumber,
+
+        county:
+            county,
+
+        occupation:
+            occupation,
+
+        submittedAt:
+            new Date().toISOString()
+
+    };
+
+    localStorage.setItem(
+        "nyotaApplication",
+        JSON.stringify(application)
+    );
+
+
+    /* -------------------------------------
+       BUTTON STATE
+    ------------------------------------- */
+
+    button.disabled = true;
+
+    button.textContent =
+        "Loading...";
+
+    message.textContent =
+        "Your information has been saved. Please wait...";
+
+
+    /* -------------------------------------
+       NEXT PAGE
+    ------------------------------------- */
+
+    setTimeout(function(){
+
+        window.location.href =
+            "funds.html";
+
+    }, 500);
+
+});
+
+</script>
+
+</body>
+</html>
