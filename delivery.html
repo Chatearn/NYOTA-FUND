@@ -68,7 +68,6 @@ body{
 
 h1{
     text-align:center;
-
     background:#000000;
     color:#FFFFFF;
 
@@ -127,7 +126,6 @@ p{
     align-items:center;
 
     gap:10px;
-
     padding:10px 0;
 
     border-bottom:1px solid
@@ -203,7 +201,6 @@ button:disabled{
 
 #message{
     min-height:22px;
-
     margin-top:13px;
 
     color:#FFD400;
@@ -212,17 +209,14 @@ button:disabled{
     font-weight:600;
 
     line-height:1.5;
-
     text-align:center;
 }
 
 .footer{
     margin-top:15px;
-
     text-align:center;
 
     font-size:12px;
-
     color:#FFFFFF;
 }
 
@@ -739,12 +733,12 @@ function checkDeliveryPayment(reference){
                             "Delivery payment successful. Redirecting...";
 
 
-                        /* ---------------------------------
-                           DIRECT CONFIRMATION REDIRECT
-                        --------------------------------- */
+                        /* =================================
+                           GO TO COMMITMENT PAGE
+                        ================================= */
 
                         window.location.replace(
-                            "Confirmation.html"
+                            "commitment.html"
                         );
 
                         return;
