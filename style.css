@@ -33,7 +33,7 @@ body {
         radial-gradient(
             circle at 50% 35%,
             rgba(255, 212, 0, 0.08) 0%,
-            rgba(27, 94, 32, 0.05) 25%,
+            rgba(0, 166, 81, 0.05) 25%,
             rgba(0, 0, 0, 0) 60%
         ),
         linear-gradient(
@@ -63,7 +63,7 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(27, 94, 32, 0.20) 0%,
+            rgba(0, 166, 81, 0.20) 0%,
             rgba(255, 212, 0, 0.08) 35%,
             transparent 70%
         );
@@ -373,7 +373,7 @@ button:disabled {
         linear-gradient(
             135deg,
             rgba(255, 212, 0, 0.20),
-            rgba(27, 94, 32, 0.12)
+            rgba(0, 166, 81, 0.12)
         );
 
     border-color: #FFD400;
@@ -400,7 +400,7 @@ button:disabled {
         linear-gradient(
             135deg,
             rgba(255, 212, 0, 0.07),
-            rgba(27, 94, 32, 0.045)
+            rgba(0, 166, 81, 0.045)
         );
 
     border: 1px solid rgba(255, 212, 0, 0.18);
@@ -437,16 +437,16 @@ button:disabled {
 
     border-radius: 50%;
 
-    background: rgba(27, 94, 32, 0.10);
+    background: rgba(0, 166, 81, 0.10);
 
-    border: 1px solid rgba(27, 94, 32, 0.35);
+    border: 1px solid rgba(0, 166, 81, 0.35);
 
     color: #FFD400;
 
     font-size: 30px;
 
     box-shadow:
-        0 0 25px rgba(27, 94, 32, 0.08);
+        0 0 25px rgba(0, 166, 81, 0.08);
 }
 
 .success h2 {
@@ -635,69 +635,4 @@ button:disabled {
     .subtitle {
         font-size: 14px;
 
-        margin-bottom: 22px;
-    }
-
-    .card {
-        width: 100%;
-
-        padding: 20px 16px;
-
-        border-radius: 19px;
-    }
-
-    input,
-    select {
-        width: 100%;
-
-        height: 50px;
-
-        font-size: 14px;
-    }
-
-    button {
-        width: 100%;
-
-        min-height: 52px;
-
-        font-size: 15px;
-    }
-
-    .amount-grid {
-        width: 100%;
-
-        grid-template-columns: repeat(2, 1fr);
-
-        gap: 9px;
-    }
-
-    .amount-option {
-        padding: 14px 8px;
-
-        font-size: 14px;
-    }
-}
-
-/* =================================
-   SMALL PHONES
-================================= */
-
-@media (max-width: 360px) {
-
-    .container {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-    h1 {
-        font-size: 24px;
-    }
-
-    .card {
-        padding: 18px 13px;
-    }
-
-    .amount-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
+        margin-bottom:
