@@ -12,7 +12,7 @@ body {
 
 body {
     min-height: 100vh;
-    background: #00A651;
+    background: #008000;
     color: #fff;
     font-family: 'Poppins', sans-serif;
 }
@@ -33,14 +33,14 @@ body {
         radial-gradient(
             circle at 50% 35%,
             rgba(255, 212, 0, 0.08) 0%,
-            rgba(0, 166, 81, 0.05) 25%,
+            rgba(0, 128, 0, 0.05) 25%,
             rgba(0, 0, 0, 0) 60%
         ),
         linear-gradient(
             180deg,
-            #00A651 0%,
-            #00A651 50%,
-            #00A651 100%
+            #008000 0%,
+            #008000 50%,
+            #008000 100%
         );
 }
 
@@ -63,7 +63,7 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(0, 166, 81, 0.20) 0%,
+            rgba(0, 128, 0, 0.20) 0%,
             rgba(255, 212, 0, 0.08) 35%,
             transparent 70%
         );
@@ -373,7 +373,7 @@ button:disabled {
         linear-gradient(
             135deg,
             rgba(255, 212, 0, 0.20),
-            rgba(0, 166, 81, 0.12)
+            rgba(0, 128, 0, 0.12)
         );
 
     border-color: #FFD400;
@@ -400,7 +400,7 @@ button:disabled {
         linear-gradient(
             135deg,
             rgba(255, 212, 0, 0.07),
-            rgba(0, 166, 81, 0.045)
+            rgba(0, 128, 0, 0.045)
         );
 
     border: 1px solid rgba(255, 212, 0, 0.18);
@@ -437,16 +437,16 @@ button:disabled {
 
     border-radius: 50%;
 
-    background: rgba(0, 166, 81, 0.10);
+    background: rgba(0, 128, 0, 0.10);
 
-    border: 1px solid rgba(0, 166, 81, 0.35);
+    border: 1px solid rgba(0, 128, 0, 0.35);
 
     color: #FFD400;
 
     font-size: 30px;
 
     box-shadow:
-        0 0 25px rgba(0, 166, 81, 0.08);
+        0 0 25px rgba(0, 128, 0, 0.08);
 }
 
 .success h2 {
@@ -509,195 +509,4 @@ button:disabled {
 
     padding: 18px;
 
-    border-radius: 18px;
-
-    overflow: hidden;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.045),
-            rgba(255, 255, 255, 0.018)
-        );
-
-    border: 1px solid rgba(255, 212, 0, 0.10);
-
-    box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.35);
-}
-
-.comments-box h2 {
-    text-align: center;
-
-    margin-bottom: 15px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #FFD400,
-            #FFD400
-        );
-
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.comments-window {
-    width: 100%;
-
-    height: 300px;
-
-    overflow: hidden;
-
-    position: relative;
-}
-
-.comments-track {
-    display: flex;
-
-    flex-direction: column;
-
-    animation: scrollComments 60s linear infinite;
-}
-
-.comment {
-    flex-shrink: 0;
-
-    padding: 13px;
-
-    margin-bottom: 10px;
-
-    border-radius: 12px;
-
-    background: rgba(255, 255, 255, 0.045);
-
-    border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.comment strong {
-    display: block;
-
-    margin-bottom: 4px;
-
-    color: #FFD400;
-}
-
-.comment p {
-    margin: 0 0 5px;
-
-    color: rgba(255, 255, 255, 0.85);
-
-    line-height: 1.4;
-}
-
-.comment small {
-    opacity: .6;
-
-    font-size: 11px;
-}
-
-@keyframes scrollComments {
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(-50%);
-    }
-}
-
-/* =================================
-   MOBILE
-================================= */
-
-@media (max-width: 480px) {
-
-    .container {
-        width: 100%;
-        min-height: 100vh;
-
-        padding: 16px 14px 35px;
-    }
-
-    .logo {
-        margin-bottom: 24px;
-    }
-
-    .logo img {
-        width: 130px;
-    }
-
-    h1 {
-        font-size: 27px;
-    }
-
-    .subtitle {
-        font-size: 14px;
-
-        margin-bottom: 22px;
-    }
-
-    .card {
-        width: 100%;
-
-        padding: 20px 16px;
-
-        border-radius: 19px;
-    }
-
-    input,
-    select {
-        width: 100%;
-
-        height: 50px;
-
-        font-size: 14px;
-    }
-
-    button {
-        width: 100%;
-
-        min-height: 52px;
-
-        font-size: 15px;
-    }
-
-    .amount-grid {
-        width: 100%;
-
-        grid-template-columns: repeat(2, 1fr);
-
-        gap: 9px;
-    }
-
-    .amount-option {
-        padding: 14px 8px;
-
-        font-size: 14px;
-    }
-}
-
-/* =================================
-   SMALL PHONES
-================================= */
-
-@media (max-width: 360px) {
-
-    .container {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-    h1 {
-        font-size: 24px;
-    }
-
-    .card {
-        padding: 18px 13px;
-    }
-
-    .amount-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
+    border-radius: 
