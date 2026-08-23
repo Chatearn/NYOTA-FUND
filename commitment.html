@@ -1,1 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NYOTA FUNDS - Activation</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:16px 10px;
+    font-family:Arial,sans-serif;
+    background:#006400;
+    color:#FFFFFF;
+}
+
+.container{
+    width:100%;
+    max-width:430px;
+    margin:0 auto;
+}
+
+.card{
+    width:100%;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.09),
+            rgba(255,255,255,0.035)
+        );
+
+    padding:22px 18px 20px;
+    border-radius:18px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+
+    border:1px solid #000000;
+}
+
+.icon{
+    width:70px;
+    height:70px;
+    margin:0 auto 14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#FFD400;
+    color:#000000;
+
+    border:2px solid #000000;
+    border-radius:50%;
+
+    font-size:36px;
+    font-weight:800;
+}
+
+h1{
+    text-align:center;
+
+    background:#000000;
+    color:#FFFFFF;
+
+    font-size:26px;
+    font-weight:800;
+
+    margin:2px 0 16px;
+    padding:10px;
+
+    border:1px solid #FFFFFF;
+    border-radius:10px;
+}
+
+p{
+    text-align:center;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.name{
+    color:#FFD400;
+    font-weight:800;
+}
+
+.amount{
+    background:#000000;
+    border:1px solid #FFFFFF;
+    border-radius:12px;
+
+    padding:18px 10px;
+    margin:20px 0;
+
+    text-align:center;
+
+    color:#FFD400;
+
+    font-size:28px;
+    font-weight:800;
+}
+
+.notice{
+    margin-top:18px;
+    padding:14px;
+
+    background:rgba(255,212,0,0.12);
+
+    border:1px solid #FFD400;
+    border-radius:10px;
+
+    font-size:13px;
+    line-height:1.6;
+    text-align:center;
+}
+
+.accept{
+    display:flex;
+    align-items:flex-start;
+
+    gap:10px;
+
+    margin-top:18px;
+
+    padding:13px;
+
+    background:#000000;
+
+    border:1px solid #FFFFFF;
+    border-radius:10px;
+}
+
+.accept input{
+    width:20px;
+    height:20px;
+    margin-top:2px;
+    accent-color:#FFD400;
+}
+
+.accept label{
+    font-size:13px;
+    line-height:1.5;
+    color:#FFFFFF;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    margin-top:18px;
+
+    background:#FFD400;
+    color:#000000;
+
+    border:1px solid #000000;
+    border-radius:11px;
+
+    font-size:16px;
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+button:disabled{
+    background:rgba(255,255,255,0.25);
+    color:#FFFFFF;
+    cursor:not-allowed;
+}
+
+#message{
+    min-height:22px;
+    margin-top:13px;
+
+    color:#FFD400;
+
+    font-size:13px;
+    font-weight:600;
+    text-align:center;
+}
+
+.footer{
+    margin-top:15px;
+    text-align:center;
+
+    font-size:12px;
+    color:#FFFFFF;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<div class="icon">
+    ✓
+</div>
+
+<h1>
+    Account Activation
+</h1>
+
+<p>
+    Welcome,
+    <span class="name" id="name">
+        Applicant
+    </span>
+</p>
+
+<p>
+    Your application has reached the activation
+    stage.
+</p>
+
+<div class="amount">
+    Activation Fee: KSh 2
+</div>
+
+<div class="notice">
+
+    The activation fee is clearly displayed above.
+    Please review the amount before deciding
+    whether to continue.
+
+</div>
+
+
+<div class="accept">
+
+    <input
+        type="checkbox"
+        id="acceptFee"
+        onchange="updateButton()"
+    >
+
+    <label for="acceptFee">
+        I have reviewed and accept the
+        KSh 2 activation fee and want to continue.
+    </label>
+
+</div>
+
+
+<button
+    type="button"
+    id="activateBtn"
+    disabled
+    onclick="acceptActivation()"
+>
+    Accept & Continue
+</button>
+
+
+<p id="message"></p>
+
+
+<div class="footer">
+    NYOTA FUNDS
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   APPLICANT
+===================================================== */
+
+const applicant =
+    localStorage.getItem("applicantName") ||
+    localStorage.getItem("fullName") ||
+    "Applicant";
+
+document.getElementById(
+    "name"
+).textContent = applicant;
+
+
+/* =====================================================
+   ENABLE BUTTON
+===================================================== */
+
+function updateButton(){
+
+    const checkbox =
+        document.getElementById("acceptFee");
+
+    const button =
+        document.getElementById("activateBtn");
+
+    button.disabled =
+        !checkbox.checked;
+
+}
+
+
+/* =====================================================
+   ACCEPT ACTIVATION
+===================================================== */
+
+function acceptActivation(){
+
+    const checkbox =
+        document.getElementById("acceptFee");
+
+    const button =
+        document.getElementById("activateBtn");
+
+    const message =
+        document.getElementById("message");
+
+
+    if(!checkbox.checked){
+
+        message.textContent =
+            "Please confirm that you accept the KSh 2 activation fee.";
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "activationAccepted",
+        "YES"
+    );
+
+    localStorage.setItem(
+        "activationFee",
+        "2"
+    );
+
+    localStorage.setItem(
+        "activationAcceptedAt",
+        new Date().toISOString()
+    );
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Activation Accepted";
+
+    message.textContent =
+        "Your activation acceptance has been recorded.";
+
+}
+
+</script>
+
+</body>
+
+</html>
