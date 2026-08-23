@@ -74,7 +74,9 @@ body{
 
 h1{
     text-align:center;
-    color:#000000;
+
+    color:#FFD400;
+
     font-size:30px;
     font-weight:700;
     margin-bottom:10px;
@@ -85,16 +87,19 @@ h1{
     font-size:16px;
     line-height:1.5;
     margin-bottom:18px;
+
     color:#FFFFFF;
 }
 
 .message b{
-    color:#000000;
+    color:#FFD400;
 }
 
 h2{
     text-align:center;
-    color:#000000;
+
+    color:#FFD400;
+
     font-size:21px;
     font-weight:700;
     margin-bottom:12px;
@@ -109,10 +114,15 @@ h2{
 .amount-btn{
     width:100%;
 
-    background:rgba(0,0,0,0.10);
+    /* GREEN BEFORE CLICK */
+    background:#00A651;
+
+    /* WHITE TEXT */
     color:#FFFFFF;
 
+    /* BLACK FRAME */
     border:1px solid #000000;
+
     border-radius:13px;
 
     padding:13px 8px;
@@ -129,13 +139,23 @@ h2{
 }
 
 .amount-btn:hover{
+    /* STAYS GREEN BEFORE SELECTION */
+    background:#00A651;
+
+    /* BLACK FRAME */
     border-color:#000000;
+
     transform:translateY(-1px);
 }
 
 .amount-btn.selected{
+    /* YELLOW ONLY AFTER CLICK */
     background:#FFD400;
+
+    /* BLACK TEXT */
     color:#000000;
+
+    /* BLACK FRAME */
     border-color:#000000;
 }
 
@@ -153,13 +173,15 @@ h2{
     background:rgba(0,0,0,0.10);
 
     border:1px solid #000000;
+
     border-radius:11px;
 
     min-height:48px;
 }
 
 #feeDisplay span{
-    color:#000000;
+    color:#FFD400;
+
     font-size:20px;
     font-weight:700;
 }
@@ -169,9 +191,11 @@ h2{
     padding:14px;
 
     background:#FFD400;
+
     color:#000000;
 
     border:1px solid #000000;
+
     border-radius:13px;
 
     font-size:19px;
@@ -204,7 +228,8 @@ h2{
     text-align:center;
 
     font-size:13px;
-    color:#000000;
+
+    color:#FFD400;
 }
 
 @media(max-width:360px){
@@ -264,7 +289,9 @@ review the applicable service fee before continuing.
 
 </div>
 
+
 <h2>Select Amount</h2>
+
 
 <div class="amount-grid">
 
@@ -342,15 +369,17 @@ review the applicable service fee before continuing.
 
 </div>
 
+
 <div id="feeDisplay">
 Select an amount to see the applicable service fee.
 </div>
+
 
 <button
     type="button"
     class="continue-btn"
     id="continueBtn"
-    onclick="continueNext">
+    onclick="continueNext()">
 
     Continue
 
@@ -361,6 +390,7 @@ Select an amount to see the applicable service fee.
 </div>
 
 </div>
+
 
 <script>
 
@@ -457,6 +487,9 @@ function selectAmount(amount, button){
     selectedAmount =
         Number(amount);
 
+
+    /* Remove previous selection */
+
     document
         .querySelectorAll(".amount-btn")
         .forEach(function(item){
@@ -467,12 +500,21 @@ function selectAmount(amount, button){
 
         });
 
+
+    /* Highlight selected */
+
     button.classList.add(
         "selected"
     );
 
+
+    /* Get fee */
+
     const processingFee =
         fees[selectedAmount];
+
+
+    /* Display fee */
 
     document.getElementById(
         "feeDisplay"
@@ -487,15 +529,24 @@ function selectAmount(amount, button){
 
         "</span>";
 
+
+    /* Save amount */
+
     localStorage.setItem(
         "selectedAmount",
         String(selectedAmount)
     );
 
+
+    /* Save fee */
+
     localStorage.setItem(
         "processingFee",
         String(processingFee)
     );
+
+
+    /* Save formatted amount */
 
     localStorage.setItem(
         "selectedAmountFormatted",
@@ -522,6 +573,9 @@ function continueNext(){
             "flowMessage"
         );
 
+
+    /* Check selection */
+
     if(
         selectedAmount === null
     ){
@@ -533,8 +587,12 @@ function continueNext(){
 
     }
 
+
     const processingFee =
         fees[selectedAmount];
+
+
+    /* Safety check */
 
     if(!processingFee){
 
@@ -544,6 +602,9 @@ function continueNext(){
         return;
 
     }
+
+
+    /* Save again */
 
     localStorage.setItem(
         "selectedAmount",
@@ -555,6 +616,9 @@ function continueNext(){
         String(processingFee)
     );
 
+
+    /* Button state */
+
     button.disabled = true;
 
     button.textContent =
@@ -562,6 +626,9 @@ function continueNext(){
 
     message.textContent =
         "Preparing your payment page...";
+
+
+    /* Continue */
 
     setTimeout(function(){
 
