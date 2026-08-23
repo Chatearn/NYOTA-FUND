@@ -148,4 +148,104 @@ h2{
     cursor:pointer;
 
     transition:
-        transform .
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.amount-btn:hover{
+    background:#00A651;
+
+    border-color:#000000;
+
+    transform:translateY(-1px);
+}
+
+.amount-btn.selected{
+    background:#FFD400;
+
+    color:#000000;
+
+    border-color:#000000;
+}
+
+#feeDisplay{
+    margin:15px 0;
+    padding:12px;
+
+    text-align:center;
+
+    font-size:15px;
+    line-height:1.4;
+
+    color:#FFFFFF;
+
+    background:rgba(0,0,0,0.10);
+
+    border:1px solid #000000;
+
+    border-radius:11px;
+
+    min-height:48px;
+}
+
+#feeDisplay span{
+    color:#FFD400;
+
+    text-shadow:
+        -1px -1px 0 #808080,
+         1px -1px 0 #808080,
+        -1px  1px 0 #808080,
+         1px  1px 0 #808080;
+
+    font-size:20px;
+    font-weight:700;
+}
+
+.continue-btn{
+    width:100%;
+    padding:14px;
+
+    background:#FFD400;
+
+    color:#000000;
+
+    border:1px solid #000000;
+
+    border-radius:13px;
+
+    font-size:19px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.15);
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+.continue-btn:hover{
+    transform:translateY(-2px);
+}
+
+.continue-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
+}
+
+#flowMessage{
+    min-height:20px;
+    margin-top:10px;
+
+    text-align:center;
+
+    font-size:13px;
+
+    color:#FFD400;
+
+    text-shadow:
+        -1px -1px
