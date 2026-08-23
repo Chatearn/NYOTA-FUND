@@ -12,7 +12,7 @@ body {
 
 body {
     min-height: 100vh;
-    background: #0B2E13;
+    background: #021F16;
     color: #fff;
     font-family: 'Poppins', sans-serif;
 }
@@ -32,20 +32,20 @@ body {
     background:
         radial-gradient(
             circle at 50% 35%,
-            rgba(255, 212, 0, 0.12) 0%,
-            rgba(27, 94, 32, 0.20) 25%,
+            rgba(244, 197, 66, 0.10) 0%,
+            rgba(6, 59, 42, 0.35) 25%,
             rgba(0, 0, 0, 0) 60%
         ),
         linear-gradient(
             180deg,
-            #0B2E13 0%,
-            #1B5E20 50%,
-            #06200B 100%
+            #021F16 0%,
+            #063B2A 50%,
+            #01150F 100%
         );
 }
 
 /* =================================
-   YELLOW / GREEN BOTTOM GLOW
+   GOLD / GREEN BOTTOM GLOW
 ================================= */
 
 .hero::before {
@@ -63,8 +63,8 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(27, 94, 32, 0.40) 0%,
-            rgba(255, 212, 0, 0.16) 35%,
+            rgba(6, 59, 42, 0.45) 0%,
+            rgba(244, 197, 66, 0.18) 35%,
             transparent 70%
         );
 
@@ -117,7 +117,587 @@ body {
 
     filter:
         drop-shadow(0 8px 18px rgba(0, 0, 0, 0.7))
-        drop-shadow(0 0 12px rgba(255, 212, 0, 0.12));
+        drop-shadow(0 0 12px rgba(244, 197, 66, 0.12));
 }
 
 /* =================================
+   HEADINGS
+================================= */
+
+h1 {
+    text-align: center;
+
+    font-size: 32px;
+    line-height: 1.2;
+    font-weight: 800;
+
+    margin-bottom: 12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #FFF3AD 0%,
+            #F4C542 25%,
+            #D4AF37 55%,
+            #A87913 100%
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.subtitle {
+    width: 100%;
+    max-width: 700px;
+
+    margin: 0 auto 28px;
+
+    text-align: center;
+
+    font-size: 15px;
+    line-height: 1.6;
+
+    color: rgba(255, 255, 255, 0.72);
+}
+
+/* =================================
+   CARD
+================================= */
+
+.card {
+    width: 100%;
+
+    padding: 24px 20px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.075),
+            rgba(255, 255, 255, 0.025)
+        );
+
+    border: 1px solid rgba(244, 197, 66, 0.22);
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.65),
+        0 0 35px rgba(244, 197, 66, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+/* =================================
+   FORM
+================================= */
+
+.form-group {
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: rgba(255, 255, 255, 0.88);
+}
+
+input,
+select {
+    width: 100%;
+    height: 52px;
+
+    padding: 0 15px;
+
+    border: 1px solid rgba(244, 197, 66, 0.18);
+
+    border-radius: 13px;
+
+    outline: none;
+
+    background: rgba(2, 31, 22, 0.65);
+
+    color: #fff;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    transition: 0.25s ease;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.42);
+}
+
+input:focus,
+select:focus {
+    border-color: rgba(244, 197, 66, 0.8);
+
+    background: rgba(6, 59, 42, 0.75);
+
+    box-shadow:
+        0 0 0 3px rgba(244, 197, 66, 0.10),
+        0 0 18px rgba(244, 197, 66, 0.08);
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+
+    cursor: pointer;
+}
+
+select option {
+    background: #063B2A;
+    color: #fff;
+}
+
+/* =================================
+   BUTTON
+================================= */
+
+button {
+    width: 100%;
+    min-height: 54px;
+    padding: 15px;
+    margin-top: 25px;
+
+    border: none;
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #FFF3AD 0%,
+            #F4C542 25%,
+            #D4AF37 60%,
+            #A87913 100%
+        );
+
+    color: #021F16;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(244, 197, 66, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.55);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 35px rgba(244, 197, 66, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* =================================
+   AMOUNT GRID
+================================= */
+
+.amount-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 12px;
+
+    width: 100%;
+
+    margin-top: 10px;
+}
+
+.amount-option {
+    width: 100%;
+
+    padding: 16px 10px;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(244, 197, 66, 0.16);
+
+    background: rgba(6, 59, 42, 0.55);
+
+    text-align: center;
+
+    color: #fff;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.amount-option:hover {
+    background: rgba(244, 197, 66, 0.10);
+
+    border-color: rgba(244, 197, 66, 0.55);
+
+    transform: translateY(-1px);
+}
+
+.amount-option.active {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(244, 197, 66, 0.20),
+            rgba(6, 59, 42, 0.40)
+        );
+
+    border-color: #D4AF37;
+
+    box-shadow:
+        0 0 20px rgba(244, 197, 66, 0.12),
+        inset 0 0 15px rgba(244, 197, 66, 0.03);
+}
+
+/* =================================
+   INFORMATION BOX
+================================= */
+
+.info-box {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(244, 197, 66, 0.09),
+            rgba(6, 59, 42, 0.35)
+        );
+
+    border: 1px solid rgba(244, 197, 66, 0.22);
+}
+
+.info-box p {
+    font-size: 13px;
+    line-height: 1.6;
+
+    color: rgba(255, 255, 255, 0.70);
+}
+
+/* =================================
+   SUCCESS
+================================= */
+
+.success {
+    width: 100%;
+
+    text-align: center;
+
+    padding: 25px 10px;
+}
+
+.success-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: rgba(244, 197, 66, 0.10);
+
+    border: 1px solid rgba(244, 197, 66, 0.35);
+
+    color: #F4C542;
+
+    font-size: 30px;
+
+    box-shadow:
+        0 0 25px rgba(244, 197, 66, 0.08);
+}
+
+.success h2 {
+    font-size: 25px;
+
+    margin-bottom: 10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #FFF1A0,
+            #D4AF37
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.success p {
+    color: rgba(255, 255, 255, 0.70);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+/* =================================
+   FOOTER
+================================= */
+
+.footer {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: rgba(255, 255, 255, 0.40);
+
+    font-size: 12px;
+}
+
+.footer a {
+    color: #D4AF37;
+    text-decoration: none;
+}
+
+/* =================================
+   LIVE COMMENTS
+================================= */
+
+.comments-box {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 18px;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(6, 59, 42, 0.60),
+            rgba(2, 31, 22, 0.75)
+        );
+
+    border: 1px solid rgba(244, 197, 66, 0.16);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.comments-box h2 {
+    text-align: center;
+
+    margin-bottom: 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #FFF1A0,
+            #D4AF37
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.comments-window {
+    width: 100%;
+
+    height: 300px;
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+.comments-track {
+    display: flex;
+
+    flex-direction: column;
+
+    animation: scrollComments 60s linear infinite;
+}
+
+.comment {
+    flex-shrink: 0;
+
+    padding: 13px;
+
+    margin-bottom: 10px;
+
+    border-radius: 12px;
+
+    background: rgba(6, 59, 42, 0.55);
+
+    border: 1px solid rgba(244, 197, 66, 0.10);
+}
+
+.comment strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #F4C542;
+}
+
+.comment p {
+    margin: 0 0 5px;
+
+    color: rgba(255, 255, 255, 0.85);
+
+    line-height: 1.4;
+}
+
+.comment small {
+    opacity: .6;
+
+    font-size: 11px;
+}
+
+@keyframes scrollComments {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 480px) {
+
+    .container {
+        width: 100%;
+        min-height: 100vh;
+
+        padding: 16px 14px 35px;
+    }
+
+    .logo {
+        margin-bottom: 24px;
+    }
+
+    .logo img {
+        width: 130px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+
+        margin-bottom: 22px;
+    }
+
+    .card {
+        width: 100%;
+
+        padding: 20px 16px;
+
+        border-radius: 19px;
+    }
+
+    input,
+    select {
+        width: 100%;
+
+        height: 50px;
+
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+
+        min-height: 52px;
+
+        font-size: 15px;
+    }
+
+    .amount-grid {
+        width: 100%;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 9px;
+    }
+
+    .amount-option {
+        padding: 14px 8px;
+
+        font-size: 14px;
+    }
+}
+
+/* =================================
+   SMALL PHONES
+================================= */
+
+@media (max-width: 360px) {
+
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .card {
+        padding: 18px 13px;
+    }
+
+    .amount-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
