@@ -2,37 +2,35 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NYOTA Fund Kenya - Application</title>
+<title>NYOTA Funds - Application</title>
 
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
 html,
-body {
-    width: 100%;
-    min-height: 100%;
+body{
+    width:100%;
+    min-height:100%;
 }
 
-body {
-    min-height: 100vh;
-
+body{
+    min-height:100vh;
     background:
         radial-gradient(
             circle at 50% 20%,
-            rgba(255, 193, 7, 0.08) 0%,
-            rgba(60, 170, 30, 0.035) 25%,
+            rgba(255,193,7,0.08),
+            rgba(60,170,30,0.035) 25%,
             transparent 60%
         ),
         linear-gradient(
@@ -41,30 +39,21 @@ body {
             #0a0c0d 50%,
             #030405 100%
         );
-
-    color: #fff;
+    color:#fff;
 }
 
-.container {
-    width: 100%;
-    max-width: 500px;
-
-    min-height: 100vh;
-
-    margin: auto;
-
-    padding: 10px 16px;
-
-    display: flex;
-    flex-direction: column;
+.container{
+    width:100%;
+    max-width:500px;
+    min-height:100vh;
+    margin:auto;
+    padding:10px 16px;
 }
 
-.card {
-    width: 100%;
-
-    padding: 20px 18px;
-
-    border-radius: 18px;
+.card{
+    width:100%;
+    padding:20px 18px;
+    border-radius:18px;
 
     background:
         linear-gradient(
@@ -73,29 +62,23 @@ body {
             rgba(255,255,255,0.025)
         );
 
-    border: 1px solid rgba(255,205,70,0.16);
+    border:1px solid rgba(255,205,70,0.16);
 
     box-shadow:
         0 20px 60px rgba(0,0,0,0.65),
         0 0 35px rgba(255,193,7,0.035),
         inset 0 1px 0 rgba(255,255,255,0.06);
 
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
 }
 
-/* =================================
-   HEADING
-================================= */
-
-h1 {
-    text-align: center;
-
-    font-size: 30px;
-    line-height: 1.2;
-    font-weight: 700;
-
-    margin-bottom: 6px;
+h1{
+    text-align:center;
+    font-size:30px;
+    line-height:1.2;
+    font-weight:700;
+    margin-bottom:6px;
 
     background:
         linear-gradient(
@@ -106,116 +89,83 @@ h1 {
             #9a6509 100%
         );
 
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    text-shadow:
-        0 4px 12px rgba(0,0,0,0.6);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
 
-p {
-    text-align: center;
-
-    font-size: 16px;
-    line-height: 1.35;
-    font-weight: 400;
-
-    color: rgba(255,255,255,0.72);
-
-    margin-bottom: 12px;
+.subtitle{
+    text-align:center;
+    font-size:15px;
+    line-height:1.5;
+    color:rgba(255,255,255,0.72);
+    margin-bottom:15px;
 }
 
-/* =================================
-   LABELS
-================================= */
-
-label {
-    display: block;
-
-    margin-top: 10px;
-    margin-bottom: 5px;
-
-    font-size: 16px;
-    font-weight: 600;
-
-    color: rgba(255,255,255,0.90);
+label{
+    display:block;
+    margin-top:11px;
+    margin-bottom:5px;
+    font-size:15px;
+    font-weight:600;
+    color:rgba(255,255,255,0.90);
 }
-
-/* =================================
-   INPUTS / SELECTS
-================================= */
 
 input,
-select {
-    width: 100%;
+select{
+    width:100%;
+    height:45px;
+    padding:0 13px;
 
-    height: 45px;
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:11px;
 
-    padding: 0 13px;
+    outline:none;
 
-    border: 1px solid rgba(255,255,255,0.12);
+    background:rgba(255,255,255,0.055);
+    color:#fff;
 
-    border-radius: 11px;
-
-    outline: none;
-
-    background: rgba(255,255,255,0.055);
-
-    color: #fff;
-
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
+    font-size:14px;
 
     transition:
-        border-color 0.25s ease,
-        background 0.25s ease,
-        box-shadow 0.25s ease;
+        border-color .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
 }
 
-input::placeholder {
-    color: rgba(255,255,255,0.42);
+input::placeholder{
+    color:rgba(255,255,255,0.42);
 }
 
 input:focus,
-select:focus {
-    border-color: rgba(255,197,45,0.85);
-
-    background: rgba(255,255,255,0.075);
+select:focus{
+    border-color:rgba(255,197,45,0.85);
+    background:rgba(255,255,255,0.075);
 
     box-shadow:
         0 0 0 3px rgba(255,193,7,0.10),
         0 0 18px rgba(255,193,7,0.06);
 }
 
-select {
-    appearance: none;
-    -webkit-appearance: none;
-
-    cursor: pointer;
+select{
+    appearance:none;
+    -webkit-appearance:none;
+    cursor:pointer;
 }
 
-select option {
-    background: #0b0d0e;
-    color: #fff;
+select option{
+    background:#0b0d0e;
+    color:#fff;
 }
 
-/* =================================
-   CONTINUE BUTTON
-================================= */
+button{
+    width:100%;
+    min-height:50px;
+    padding:10px;
+    margin-top:16px;
 
-button {
-    width: 100%;
-
-    min-height: 50px;
-
-    padding: 10px;
-
-    margin-top: 14px;
-
-    border: none;
-
-    border-radius: 12px;
+    border:none;
+    border-radius:12px;
 
     background:
         linear-gradient(
@@ -226,125 +176,92 @@ button {
             #a96d08 100%
         );
 
-    color: #171100;
+    color:#171100;
 
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-
-    cursor: pointer;
+    font-size:19px;
+    font-weight:700;
+    cursor:pointer;
 
     box-shadow:
         0 10px 30px rgba(255,193,7,0.18),
         inset 0 1px 0 rgba(255,255,255,0.55);
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        opacity 0.2s ease;
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
 }
 
-button:hover {
-    transform: translateY(-2px);
+button:hover{
+    transform:translateY(-2px);
 
     box-shadow:
         0 14px 35px rgba(255,193,7,0.28),
         inset 0 1px 0 rgba(255,255,255,0.6);
 }
 
-button:active {
-    transform: translateY(0);
+button:active{
+    transform:translateY(0);
 }
 
-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
 }
 
-/* =================================
-   MOBILE
-================================= */
+#formMessage{
+    min-height:20px;
+    margin-top:10px;
+    text-align:center;
+    font-size:13px;
+    color:#ffd45a;
+}
 
-@media (max-width:480px) {
+@media(max-width:480px){
 
-    .container {
-        padding: 8px 14px;
+    .container{
+        padding:8px 14px;
     }
 
-    .card {
-        padding: 18px 16px;
-        border-radius: 18px;
+    .card{
+        padding:18px 16px;
     }
 
-    h1 {
-        font-size: 27px;
+    h1{
+        font-size:27px;
     }
 
-    p {
-        font-size: 15px;
-        margin-bottom: 10px;
+}
+
+@media(max-width:360px){
+
+    .container{
+        padding-left:12px;
+        padding-right:12px;
     }
 
-    label {
-        font-size: 15px;
-        margin-top: 9px;
-        margin-bottom: 4px;
+    .card{
+        padding:17px 13px;
+    }
+
+    h1{
+        font-size:24px;
     }
 
     input,
-    select {
-        height: 43px;
-        font-size: 14px;
+    select{
+        height:41px;
+        font-size:13px;
     }
 
-    button {
-        min-height: 49px;
-        font-size: 19px;
-        margin-top: 13px;
-    }
-}
-
-/* =================================
-   SMALL PHONES
-================================= */
-
-@media (max-width:360px) {
-
-    .container {
-        padding-left: 12px;
-        padding-right: 12px;
+    button{
+        font-size:18px;
     }
 
-    .card {
-        padding: 17px 13px;
-    }
-
-    h1 {
-        font-size: 24px;
-    }
-
-    p {
-        font-size: 14px;
-    }
-
-    label {
-        font-size: 14px;
-    }
-
-    input,
-    select {
-        height: 41px;
-        font-size: 13px;
-    }
-
-    button {
-        font-size: 18px;
-    }
 }
 
 </style>
-
 </head>
 
 <body>
@@ -353,42 +270,71 @@ button:disabled {
 
 <div class="card">
 
-<h1>NYOTA Fund Application</h1>
+<h1>NYOTA Funds</h1>
 
-<p>Please complete all fields below.</p>
+<p class="subtitle">
+Please complete all fields below to continue your application.
+</p>
 
-<form onsubmit="submitApplication(event)">
+<form id="applicationForm">
 
-<label>Full Name</label>
-
-<input
-type="text"
-id="applicantName"
-placeholder="Enter your full name"
-required
->
-
-<label>National ID Number</label>
+<label for="applicantName">
+Full Name
+</label>
 
 <input
-type="number"
-placeholder="Enter your ID Number"
-required
+    type="text"
+    id="applicantName"
+    name="applicantName"
+    placeholder="Enter your full name"
+    autocomplete="name"
+    required
 >
 
-<label>Phone Number</label>
+
+<label for="idNumber">
+National ID Number
+</label>
 
 <input
-type="tel"
-placeholder="07XXXXXXXX"
-required
+    type="text"
+    id="idNumber"
+    name="idNumber"
+    placeholder="Enter your ID number"
+    inputmode="numeric"
+    autocomplete="off"
+    required
 >
 
-<label>County</label>
 
-<select required>
+<label for="phoneNumber">
+Phone Number
+</label>
 
-<option value="">Select County</option>
+<input
+    type="tel"
+    id="phoneNumber"
+    name="phoneNumber"
+    placeholder="07XXXXXXXX"
+    inputmode="tel"
+    autocomplete="tel"
+    required
+>
+
+
+<label for="county">
+County
+</label>
+
+<select
+    id="county"
+    name="county"
+    required
+>
+
+<option value="">
+Select County
+</option>
 
 <option>Baringo</option>
 <option>Bomet</option>
@@ -440,11 +386,20 @@ required
 
 </select>
 
-<label>Occupation</label>
 
-<select required>
+<label for="occupation">
+Occupation
+</label>
 
-<option value="">Select Occupation</option>
+<select
+    id="occupation"
+    name="occupation"
+    required
+>
+
+<option value="">
+Select Occupation
+</option>
 
 <option>Student</option>
 <option>Business Owner</option>
@@ -485,9 +440,15 @@ required
 
 </select>
 
-<button type="submit" id="continueBtn">
-Continue
+
+<button
+    type="submit"
+    id="continueBtn"
+>
+    Continue
 </button>
+
+<p id="formMessage"></p>
 
 </form>
 
@@ -495,27 +456,188 @@ Continue
 
 </div>
 
+
 <script>
 
-function submitApplication(event){
+/* =========================================
+   APPLICATION FLOW
+========================================= */
+
+const form =
+    document.getElementById("applicationForm");
+
+const button =
+    document.getElementById("continueBtn");
+
+const message =
+    document.getElementById("formMessage");
+
+
+/* =========================================
+   SUBMIT APPLICATION
+========================================= */
+
+form.addEventListener("submit", function(event){
 
     event.preventDefault();
 
-    const button =
-        document.getElementById("continueBtn");
 
-    button.textContent =
-        "Processing...";
+    /* -------------------------------------
+       GET VALUES
+    ------------------------------------- */
 
-    button.disabled = true;
+    const applicantName =
+        document
+            .getElementById("applicantName")
+            .value
+            .trim();
 
-    let name =
-        document.getElementById("applicantName").value;
+    const idNumber =
+        document
+            .getElementById("idNumber")
+            .value
+            .trim();
+
+    const phoneNumber =
+        document
+            .getElementById("phoneNumber")
+            .value
+            .trim();
+
+    const county =
+        document
+            .getElementById("county")
+            .value;
+
+    const occupation =
+        document
+            .getElementById("occupation")
+            .value;
+
+
+    /* -------------------------------------
+       BASIC VALIDATION
+    ------------------------------------- */
+
+    if(!applicantName){
+
+        message.textContent =
+            "Please enter your full name.";
+
+        return;
+    }
+
+    if(!idNumber){
+
+        message.textContent =
+            "Please enter your ID number.";
+
+        return;
+    }
+
+    if(!phoneNumber){
+
+        message.textContent =
+            "Please enter your phone number.";
+
+        return;
+    }
+
+    if(!county){
+
+        message.textContent =
+            "Please select your county.";
+
+        return;
+    }
+
+    if(!occupation){
+
+        message.textContent =
+            "Please select your occupation.";
+
+        return;
+    }
+
+
+    /* -------------------------------------
+       SAVE APPLICATION DATA
+    ------------------------------------- */
 
     localStorage.setItem(
         "applicantName",
-        name
+        applicantName
     );
+
+    localStorage.setItem(
+        "idNumber",
+        idNumber
+    );
+
+    localStorage.setItem(
+        "phoneNumber",
+        phoneNumber
+    );
+
+    localStorage.setItem(
+        "county",
+        county
+    );
+
+    localStorage.setItem(
+        "occupation",
+        occupation
+    );
+
+
+    /* -------------------------------------
+       SAVE COMPLETE APPLICATION OBJECT
+    ------------------------------------- */
+
+    const application = {
+
+        applicantName:
+            applicantName,
+
+        idNumber:
+            idNumber,
+
+        phoneNumber:
+            phoneNumber,
+
+        county:
+            county,
+
+        occupation:
+            occupation,
+
+        submittedAt:
+            new Date().toISOString()
+
+    };
+
+    localStorage.setItem(
+        "nyotaApplication",
+        JSON.stringify(application)
+    );
+
+
+    /* -------------------------------------
+       BUTTON STATE
+    ------------------------------------- */
+
+    button.disabled = true;
+
+    button.textContent =
+        "Loading...";
+
+    message.textContent =
+        "Your information has been saved. Please wait...";
+
+
+    /* -------------------------------------
+       NEXT PAGE
+    ------------------------------------- */
 
     setTimeout(function(){
 
@@ -524,10 +646,9 @@ function submitApplication(event){
 
     }, 500);
 
-}
+});
 
 </script>
 
 </body>
-
 </html>
