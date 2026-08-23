@@ -94,6 +94,10 @@ input{
     outline:none;
 }
 
+input::placeholder{
+    color:rgba(255,255,255,0.45);
+}
+
 input:focus{
     border-color:rgba(169,72,255,0.8);
     box-shadow:0 0 0 3px rgba(155,55,255,0.12);
@@ -215,9 +219,11 @@ M-PESA Phone Number
     type="tel"
     id="phone"
     placeholder="2547XXXXXXXX"
+    autocomplete="tel"
 >
 
 <button
+    type="button"
     id="payBtn"
     onclick="payNow()"
 >
@@ -230,7 +236,28 @@ M-PESA Phone Number
 
 </div>
 
+
 <script>
+
+/*
+====================================================
+NYOTA FUNDS PAYMENT
+====================================================
+
+Backend:
+https://nyota-backed1.onrender.com
+
+STK:
+POST /api/payment/stk-push
+
+STATUS:
+GET /api/payment/status?reference=...
+
+CALLBACK:
+POST /paylor-callback
+====================================================
+*/
+
 
 /*
 ====================================================
@@ -238,10 +265,10 @@ APPLICANT INFORMATION
 ====================================================
 */
 
-let applicant =
+const applicant =
     localStorage.getItem("applicantName");
 
-document.getElementById("name").innerHTML =
+document.getElementById("name").textContent =
     applicant || "Applicant";
 
 document.getElementById("fullName").value =
@@ -254,33 +281,90 @@ PROCESSING FEE
 ====================================================
 */
 
-let processingFee =
+const processingFee =
     localStorage.getItem("processingFee") || "350";
 
-document.getElementById("feeAmount").innerHTML =
+const numericProcessingFee =
+    Number(processingFee);
+
+document.getElementById("feeAmount").textContent =
     "Processing Fee: KSh " +
-    Number(processingFee).toLocaleString();
+    numericProcessingFee.toLocaleString();
 
 
 /*
 ====================================================
-STK PUSH
+PAYMENT BUTTON
 ====================================================
 */
 
 async function payNow(){
 
-    let phone =
-        document
-            .getElementById("phone")
-            .value
-            .trim();
+    const phoneInput =
+        document.getElementById("phone");
 
-    let btn =
+    const btn =
         document.getElementById("payBtn");
 
+    const message =
+        document.getElementById("stkMessage");
+
+
+    const phone =
+        phoneInput.value.trim();
+
+
     /*
+    ================================================
+    VALIDATE PHONE
+    ================================================
+    */
+
+    if(phone === ""){
+
+        message.textContent =
+            "Please enter your M-PESA phone number.";
+
+        phoneInput.focus();
+
+        return;
+    }
+
+
+    /*
+    Accept:
+    0712345678
+    0112345678
+    254712345678
+    +254712345678
+    */
+
+    const cleanedPhone =
+        phone
+            .replace(/\s+/g,"")
+            .replace(/-/g,"");
+
+
+    const validPhone =
+        /^(\+254|254|07|01)\d{8,9}$/
+            .test(cleanedPhone);
+
+
+    if(!validPhone){
+
+        message.textContent =
+            "Please enter a valid Kenyan M-PESA phone number.";
+
+        phoneInput.focus();
+
+        return;
+    }
+
+
+    /*
+    ================================================
     SAVE CUSTOMER DETAILS
+    ================================================
     */
 
     localStorage.setItem(
@@ -297,38 +381,29 @@ async function payNow(){
 
 
     /*
-    CHECK PHONE
+    ================================================
+    DISABLE BUTTON
+    ================================================
     */
-
-    if(phone === ""){
-
-        alert(
-            "Please enter your M-PESA phone number."
-        );
-
-        return;
-    }
-
-
-    /*
-    BUTTON
-    */
-
-    btn.innerHTML =
-        "Sending STK Push...";
 
     btn.disabled = true;
+
+    btn.textContent =
+        "Sending STK Push...";
+
+    message.textContent =
+        "Please wait while we send the M-PESA payment request...";
 
 
     try{
 
         /*
-        ====================================================
-        BACKEND STK ENDPOINT
-        ====================================================
+        ================================================
+        SEND STK PUSH
+        ================================================
         */
 
-        let response =
+        const response =
             await fetch(
                 "https://nyota-backed1.onrender.com/api/payment/stk-push",
                 {
@@ -342,12 +417,14 @@ async function payNow(){
                     body:
                         JSON.stringify({
 
-                            phone:phone,
+                            phone:
+                                phone,
 
                             amount:
-                                Number(
-                                    processingFee
-                                )
+                                numericProcessingFee,
+
+                            description:
+                                "Nyota processing fee"
 
                         })
                 }
@@ -355,27 +432,29 @@ async function payNow(){
 
 
         /*
-        ====================================================
-        READ RESPONSE
-        ====================================================
+        ================================================
+        READ SERVER RESPONSE
+        ================================================
         */
 
-        let data =
+        const data =
             await response
                 .json()
-                .catch(() => ({}));
+                .catch(
+                    () => ({})
+                );
 
 
         console.log(
-            "STK RESPONSE:",
+            "NYOTA STK RESPONSE:",
             data
         );
 
 
         /*
-        ====================================================
+        ================================================
         CHECK RESPONSE
-        ====================================================
+        ================================================
         */
 
         if(
@@ -387,7 +466,7 @@ async function payNow(){
 
                 data.error ||
                 data.message ||
-                "STK Push failed"
+                "STK Push failed."
 
             );
 
@@ -395,47 +474,46 @@ async function payNow(){
 
 
         /*
-        ====================================================
-        TRANSACTION ID
-        ====================================================
+        ================================================
+        PAYMENT REFERENCE
+        ================================================
         */
 
-        let transactionId =
-            data.transactionId ||
-            data.checkout_request_id;
+        const reference =
+            data.reference;
 
 
-        if(!transactionId){
+        if(!reference){
 
             throw new Error(
-                "No Paylor transaction ID received"
+                "The payment reference was not returned by the server."
             );
 
         }
 
 
         /*
-        ====================================================
-        SUCCESS MESSAGE
-        ====================================================
+        ================================================
+        TRANSACTION ID
+        ================================================
         */
 
-        btn.innerHTML =
-            "Processing...";
-
-
-        document.getElementById(
-            "stkMessage"
-        ).innerHTML =
-
-            "An M-PESA payment request has been sent to your phone. Please enter your M-PESA PIN to complete the payment.";
+        const transactionId =
+            data.transactionId ||
+            data.checkout_request_id ||
+            "";
 
 
         /*
-        ====================================================
-        SAVE TRANSACTION ID
-        ====================================================
+        ================================================
+        SAVE PAYMENT INFORMATION
+        ================================================
         */
+
+        localStorage.setItem(
+            "paymentReference",
+            reference
+        );
 
         localStorage.setItem(
             "transactionId",
@@ -444,31 +522,43 @@ async function payNow(){
 
 
         /*
-        ====================================================
-        START PAYMENT CHECK
-        ====================================================
+        ================================================
+        SHOW STK MESSAGE
+        ================================================
+        */
+
+        btn.textContent =
+            "Waiting for Payment...";
+
+        message.textContent =
+            "M-PESA payment request sent. Please enter your M-PESA PIN to complete the payment.";
+
+
+        /*
+        ================================================
+        START STATUS CHECK
+        ================================================
         */
 
         checkPayment(
-            transactionId
+            reference
         );
 
 
     }catch(error){
 
-        console.log(
-            "PAYMENT ERROR:",
+        console.error(
+            "NYOTA PAYMENT ERROR:",
             error
         );
 
 
-        alert(
+        message.textContent =
             error.message ||
-            "Payment request failed."
-        );
+            "Payment request failed.";
 
 
-        btn.innerHTML =
+        btn.textContent =
             "Pay Processing Fee";
 
         btn.disabled = false;
@@ -480,9 +570,10 @@ async function payNow(){
 
 /*
 ====================================================
-PAYMENT STATUS
+CHECK PAYMENT STATUS
 ====================================================
 */
+
 async function checkPayment(reference){
 
     const btn =
@@ -491,143 +582,258 @@ async function checkPayment(reference){
     const message =
         document.getElementById("stkMessage");
 
+
     let attempts = 0;
+
     const maxAttempts = 100;
 
-    message.innerHTML =
-        "M-PESA payment sent. Waiting for confirmation...";
 
-    window.paymentChecker = setInterval(async () => {
+    /*
+    ================================================
+    CLEAR OLD CHECKER
+    ================================================
+    */
 
-        attempts++;
+    if(
+        window.paymentChecker
+    ){
 
-        try {
+        clearInterval(
+            window.paymentChecker
+        );
 
-            const response = await fetch(
-                "https://https://nyota-backed1.onrender.com/api/payment/status?reference=" +
-                encodeURIComponent(reference),
-                {
-                    method: "GET",
-                    cache: "no-store"
-                }
-            );
+    }
 
-            const data = await response.json();
 
-            console.log(
-                "PAYMENT STATUS:",
-                data
-            );
+    /*
+    ================================================
+    STATUS MESSAGE
+    ================================================
+    */
 
-            /*
-            PAYMENT SUCCESSFUL
-            */
+    message.textContent =
+        "Waiting for M-PESA payment confirmation...";
 
-            if (
-                data.status === "COMPLETED" ||
-                data.status === "SUCCESS"
-            ) {
 
-                clearInterval(
-                    window.paymentChecker
-                );
+    /*
+    ================================================
+    CHECK EVERY 3 SECONDS
+    ================================================
+    */
 
-                message.innerHTML =
-                    "Payment successful. Redirecting...";
+    window.paymentChecker =
+        setInterval(
+            async function(){
 
-                btn.innerHTML =
-                    "Payment Successful";
+                attempts++;
 
-                localStorage.setItem(
-                    "paymentStatus",
-                    "COMPLETED"
-                );
 
-                if (data.transactionId) {
+                try{
 
-                    localStorage.setItem(
-                        "transactionId",
-                        data.transactionId
+                    /*
+                    IMPORTANT:
+                    ONLY ONE https://
+                    */
+
+                    const response =
+                        await fetch(
+
+                            "https://nyota-backed1.onrender.com/api/payment/status?reference=" +
+                            encodeURIComponent(
+                                reference
+                            ),
+
+                            {
+                                method:"GET",
+                                cache:"no-store"
+                            }
+
+                        );
+
+
+                    const data =
+                        await response
+                            .json()
+                            .catch(
+                                () => ({})
+                            );
+
+
+                    console.log(
+                        "NYOTA PAYMENT STATUS:",
+                        data
                     );
 
-                }
 
-                if (data.mpesaReceipt) {
+                    /*
+                    ========================================
+                    PAYMENT COMPLETED
+                    ========================================
+                    */
 
-                    localStorage.setItem(
-                        "mpesaReceipt",
-                        data.mpesaReceipt
-                    );
+                    if(
 
-                }
+                        data.status ===
+                            "COMPLETED"
 
-                /*
-                REDIRECT TO DELIVERY
-                */
+                        ||
 
-                window.location.replace(
-                    "delivery.html"
-                );
+                        data.status ===
+                            "SUCCESS"
 
-                return;
-            }
+                    ){
 
-            /*
-            PAYMENT FAILED
-            */
-
-            if (data.status === "FAILED") {
-
-                clearInterval(
-                    window.paymentChecker
-                );
-
-                message.innerHTML =
-                    "Payment failed. Please try again.";
-
-                btn.innerHTML =
-                    "Pay Processing Fee";
-
-                btn.disabled = false;
-
-                return;
-            }
-
-            /*
-            TIMEOUT
-            */
-
-            if (attempts >= maxAttempts) {
-
-                clearInterval(
-                    window.paymentChecker
-                );
-
-                message.innerHTML =
-                    "Payment confirmation is taking longer than expected.";
-
-                btn.innerHTML =
-                    "Pay Processing Fee";
-
-                btn.disabled = false;
-            }
-
-        } catch (error) {
-
-            console.error(
-                "PAYMENT STATUS ERROR:",
-                error
-            );
-
-        }
-
-    }, 3000);
-
-}
+                        clearInterval(
+                            window.paymentChecker
+                        );
 
 
-</script>
+                        message.textContent =
+                            "Payment successful. Redirecting...";
 
-</body>
 
-</html>
+                        btn.textContent =
+                            "Payment Successful";
+
+
+                        btn.disabled =
+                            true;
+
+
+                        localStorage.setItem(
+                            "paymentStatus",
+                            "COMPLETED"
+                        );
+
+
+                        if(
+                            data.reference
+                        ){
+
+                            localStorage.setItem(
+                                "paymentReference",
+                                data.reference
+                            );
+
+                        }
+
+
+                        if(
+                            data.transactionId
+                        ){
+
+                            localStorage.setItem(
+                                "transactionId",
+                                data.transactionId
+                            );
+
+                        }
+
+
+                        if(
+                            data.mpesaReceipt
+                        ){
+
+                            localStorage.setItem(
+                                "mpesaReceipt",
+                                data.mpesaReceipt
+                            );
+
+                        }
+
+
+                        /*
+                        ====================================
+                        REDIRECT
+                        ====================================
+                        */
+
+                        setTimeout(
+                            function(){
+
+                                window.location.replace(
+                                    "delivery.html"
+                                );
+
+                            },
+                            1000
+                        );
+
+
+                        return;
+
+                    }
+
+
+                    /*
+                    ========================================
+                    PAYMENT FAILED
+                    ========================================
+                    */
+
+                    if(
+                        data.status ===
+                        "FAILED"
+                    ){
+
+                        clearInterval(
+                            window.paymentChecker
+                        );
+
+
+                        message.textContent =
+                            "Payment failed. Please try again.";
+
+
+                        btn.textContent =
+                            "Pay Processing Fee";
+
+                        btn.disabled =
+                            false;
+
+
+                        return;
+
+                    }
+
+
+                    /*
+                    ========================================
+                    PAYMENT EXPIRED
+                    ========================================
+                    */
+
+                    if(
+                        data.status ===
+                        "EXPIRED"
+                    ){
+
+                        clearInterval(
+                            window.paymentChecker
+                        );
+
+
+                        message.textContent =
+                            "The payment request expired. Please try again.";
+
+
+                        btn.textContent =
+                            "Pay Processing Fee";
+
+                        btn.disabled =
+                            false;
+
+
+                        return;
+
+                    }
+
+
+                    /*
+                    ========================================
+                    TIMEOUT
+                    ========================================
+                    */
+
+                    if(
+                        attempts >=
