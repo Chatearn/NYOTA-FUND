@@ -47,13 +47,18 @@ body{
     border:1px solid #000000;
 }
 
+/* PROCESSING FEE HEADING ONLY */
 h1{
     text-align:center;
-    color:#FFD400;
-    -webkit-text-stroke:1px #808080;
-    font-size:22px;
-    font-weight:700;
+    background:#000000;
+    color:#FFFFFF;
+    -webkit-text-stroke:1px #FFFFFF;
+    font-size:28px;
+    font-weight:800;
     margin:2px 0 16px;
+    padding:10px;
+    border:1px solid #FFFFFF;
+    border-radius:10px;
 }
 
 p{
@@ -64,15 +69,15 @@ p{
 }
 
 .amount{
-    background:#00A651;
-    border:1px solid #000000;
+    background:#000000;
+    border:1px solid #FFFFFF;
     border-radius:12px;
-    padding:14px 10px;
-    font-size:20px;
-    font-weight:700;
+    padding:16px 10px;
+    font-size:25px;
+    font-weight:800;
     text-align:center;
-    color:#FFD400;
-    -webkit-text-stroke:0.7px #808080;
+    color:#FFFFFF;
+    -webkit-text-stroke:0.8px #FFFFFF;
     margin:18px 0;
 }
 
@@ -160,7 +165,7 @@ button:disabled{
     }
 
     h1{
-        font-size:20px;
+        font-size:24px;
     }
 
     button{
@@ -339,10 +344,8 @@ async function payNow(){
     const message =
         document.getElementById("stkMessage");
 
-
     const rawPhone =
         phoneInput.value.trim();
-
 
     if(!rawPhone){
 
@@ -355,10 +358,8 @@ async function payNow(){
 
     }
 
-
     const phone =
         normalizePhone(rawPhone);
-
 
     if(!/^254\d{9}$/.test(phone)){
 
@@ -370,7 +371,6 @@ async function payNow(){
         return;
 
     }
-
 
     localStorage.setItem(
         "phoneNumber",
@@ -384,7 +384,6 @@ async function payNow(){
         ).value
     );
 
-
     btn.disabled = true;
 
     btn.textContent =
@@ -392,7 +391,6 @@ async function payNow(){
 
     message.textContent =
         "Please wait...";
-
 
     try{
 
@@ -423,7 +421,6 @@ async function payNow(){
                 }
             );
 
-
         const data =
             await response
                 .json()
@@ -431,12 +428,10 @@ async function payNow(){
                     () => ({})
                 );
 
-
         console.log(
             "NYOTA STK RESPONSE:",
             data
         );
-
 
         if(
             !response.ok ||
@@ -451,10 +446,8 @@ async function payNow(){
 
         }
 
-
         const reference =
             data.reference;
-
 
         if(!reference){
 
@@ -464,12 +457,10 @@ async function payNow(){
 
         }
 
-
         const transactionId =
             data.transactionId ||
             data.checkout_request_id ||
             "";
-
 
         localStorage.setItem(
             "paymentReference",
@@ -486,16 +477,13 @@ async function payNow(){
             "SENT"
         );
 
-
         btn.textContent =
             "Waiting for Payment...";
 
         message.textContent =
             "M-PESA request sent. Check your phone and enter your M-PESA PIN.";
 
-
         checkPayment(reference);
-
 
     }catch(error){
 
@@ -531,11 +519,9 @@ function checkPayment(reference){
     const message =
         document.getElementById("stkMessage");
 
-
     let attempts = 0;
 
     const maxAttempts = 100;
-
 
     if(window.paymentChecker){
 
@@ -545,17 +531,14 @@ function checkPayment(reference){
 
     }
 
-
     message.textContent =
         "Waiting for payment confirmation...";
-
 
     window.paymentChecker =
         setInterval(
             async function(){
 
                 attempts++;
-
 
                 try{
 
@@ -566,7 +549,6 @@ function checkPayment(reference){
                             reference
                         );
 
-
                     const response =
                         await fetch(
                             url,
@@ -576,7 +558,6 @@ function checkPayment(reference){
                             }
                         );
 
-
                     const data =
                         await response
                             .json()
@@ -584,12 +565,10 @@ function checkPayment(reference){
                                 () => ({})
                             );
 
-
                     console.log(
                         "NYOTA PAYMENT STATUS:",
                         data
                     );
-
 
                     if(
                         data.status === "COMPLETED" ||
@@ -600,19 +579,16 @@ function checkPayment(reference){
                             window.paymentChecker
                         );
 
-
                         localStorage.setItem(
                             "paymentStatus",
                             "COMPLETED"
                         );
-
 
                         localStorage.setItem(
                             "paymentReference",
                             data.reference ||
                             reference
                         );
-
 
                         if(data.transactionId){
 
@@ -623,7 +599,6 @@ function checkPayment(reference){
 
                         }
 
-
                         if(data.mpesaReceipt){
 
                             localStorage.setItem(
@@ -633,13 +608,11 @@ function checkPayment(reference){
 
                         }
 
-
                         btn.textContent =
                             "Payment Successful";
 
                         message.textContent =
                             "Payment successful. Redirecting...";
-
 
                         setTimeout(
                             function(){
@@ -652,11 +625,9 @@ function checkPayment(reference){
                             1000
                         );
 
-
                         return;
 
                     }
-
 
                     if(
                         data.status === "FAILED"
@@ -665,7 +636,6 @@ function checkPayment(reference){
                         clearInterval(
                             window.paymentChecker
                         );
-
 
                         message.textContent =
                             "Payment failed. Please try again.";
@@ -680,7 +650,6 @@ function checkPayment(reference){
 
                     }
 
-
                     if(
                         data.status === "EXPIRED"
                     ){
@@ -688,7 +657,6 @@ function checkPayment(reference){
                         clearInterval(
                             window.paymentChecker
                         );
-
 
                         message.textContent =
                             "The payment request expired. Please try again.";
@@ -703,7 +671,6 @@ function checkPayment(reference){
 
                     }
 
-
                     if(
                         attempts >= maxAttempts
                     ){
@@ -711,7 +678,6 @@ function checkPayment(reference){
                         clearInterval(
                             window.paymentChecker
                         );
-
 
                         message.textContent =
                             "Confirmation is taking longer than expected. Please try again.";
@@ -724,14 +690,12 @@ function checkPayment(reference){
 
                     }
 
-
                 }catch(error){
 
                     console.error(
                         "STATUS CHECK ERROR:",
                         error
                     );
-
 
                     if(
                         attempts >= maxAttempts
@@ -740,7 +704,6 @@ function checkPayment(reference){
                         clearInterval(
                             window.paymentChecker
                         );
-
 
                         message.textContent =
                             "Unable to confirm payment right now. Please try again.";
