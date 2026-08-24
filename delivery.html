@@ -302,7 +302,7 @@ button:disabled{
         </div>
 
         <div class="value">
-            KSh 3
+            KSh 500
         </div>
 
     </div>
@@ -312,7 +312,7 @@ button:disabled{
 <div class="notice">
 
     A separate M-PESA STK prompt will be sent
-    for the KSh 3 delivery fee after you tap
+    for the KSh 500 delivery fee after you tap
     the payment button.
 
 </div>
@@ -322,7 +322,7 @@ button:disabled{
     id="payBtn"
     onclick="payDelivery()"
 >
-    Pay KSh 3 Delivery Fee
+    Pay KSh 500 Delivery Fee
 </button>
 
 <p id="message"></p>
@@ -350,7 +350,7 @@ const BACKEND_URL =
    DELIVERY FEE
 ===================================================== */
 
-const DELIVERY_FEE = 3;
+const DELIVERY_FEE = 500;
 
 
 /* =====================================================
@@ -580,7 +580,7 @@ async function payDelivery(){
 
 
         message.textContent =
-            "M-PESA prompt sent. Enter your M-PESA PIN to complete the KSh 3 delivery fee.";
+            "M-PESA prompt sent. Enter your M-PESA PIN to complete the KSh 500 delivery fee.";
 
 
         checkDeliveryPayment(reference);
@@ -600,7 +600,7 @@ async function payDelivery(){
 
 
         btn.textContent =
-            "Pay KSh 3 Delivery Fee";
+            "Pay KSh 500 Delivery Fee";
 
 
         btn.disabled =
