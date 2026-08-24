@@ -342,7 +342,7 @@ button:disabled{
     <div class="notice">
 
         A separate M-PESA STK prompt will be
-        sent for the KSh 2 commitment fee
+        sent for the KSh 950 commitment fee
         after you tap the payment button.
 
     </div>
@@ -378,7 +378,7 @@ const BACKEND_URL =
    COMMITMENT FEE
 ===================================================== */
 
-const COMMITMENT_FEE = 2;
+const COMMITMENT_FEE = 950;
 
 
 /* =====================================================
@@ -442,7 +442,7 @@ if(deliveryStatus !== "COMPLETED"){
         </h1>
 
         <p>
-            Your KSh 3 delivery payment
+            Your KSh 500 delivery payment
             has not been confirmed yet.
         </p>
 
@@ -627,7 +627,7 @@ async function payCommitment(){
             "Waiting for Payment...";
 
         messageElement.textContent =
-            "M-PESA prompt sent. Enter your M-PESA PIN to complete the KSh 2 commitment fee.";
+            "M-PESA prompt sent. Enter your M-PESA PIN to complete the KSh 950 commitment fee.";
 
         checkCommitmentPayment(
             reference
@@ -646,7 +646,7 @@ async function payCommitment(){
             "Unable to send commitment payment request.";
 
         payButton.textContent =
-            "Pay KSh 2 Commitment Fee";
+            "Pay KSh 950 Commitment Fee";
 
         payButton.disabled =
             false;
